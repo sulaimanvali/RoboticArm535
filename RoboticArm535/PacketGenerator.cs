@@ -28,9 +28,7 @@ namespace RoboticArm535
 
         public static byte[] GenerateFor(ControlTriggered control, bool isPressed)
         {
-            byte byte0 = 0;
-            byte byte1 = 0;
-            byte byte2 = 0;
+            byte byte0 = 0, byte1 = 0, byte2 = 0;
 
             if (isPressed)
             {
