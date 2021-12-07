@@ -47,6 +47,7 @@ namespace RoboticArm535
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.linkLabel_Reconnect = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@ namespace RoboticArm535
             this.button_GripOpen.Location = new System.Drawing.Point(86, 53);
             this.button_GripOpen.Name = "button_GripOpen";
             this.button_GripOpen.Size = new System.Drawing.Size(79, 36);
-            this.button_GripOpen.TabIndex = 0;
+            this.button_GripOpen.TabIndex = 2;
             this.button_GripOpen.Text = "Open";
             this.button_GripOpen.UseVisualStyleBackColor = true;
             // 
@@ -79,7 +80,7 @@ namespace RoboticArm535
             this.button_GripClose.Location = new System.Drawing.Point(171, 53);
             this.button_GripClose.Name = "button_GripClose";
             this.button_GripClose.Size = new System.Drawing.Size(79, 36);
-            this.button_GripClose.TabIndex = 0;
+            this.button_GripClose.TabIndex = 3;
             this.button_GripClose.Text = "Close";
             this.button_GripClose.UseVisualStyleBackColor = true;
             // 
@@ -101,7 +102,7 @@ namespace RoboticArm535
             this.button_WristUp.Location = new System.Drawing.Point(117, 108);
             this.button_WristUp.Name = "button_WristUp";
             this.button_WristUp.Size = new System.Drawing.Size(95, 38);
-            this.button_WristUp.TabIndex = 0;
+            this.button_WristUp.TabIndex = 4;
             this.button_WristUp.Text = "Up";
             this.button_WristUp.UseVisualStyleBackColor = true;
             // 
@@ -111,7 +112,7 @@ namespace RoboticArm535
             this.button_WristDown.Location = new System.Drawing.Point(117, 152);
             this.button_WristDown.Name = "button_WristDown";
             this.button_WristDown.Size = new System.Drawing.Size(95, 38);
-            this.button_WristDown.TabIndex = 0;
+            this.button_WristDown.TabIndex = 5;
             this.button_WristDown.Text = "Down";
             this.button_WristDown.UseVisualStyleBackColor = true;
             // 
@@ -133,7 +134,7 @@ namespace RoboticArm535
             this.button_ElbowUp.Location = new System.Drawing.Point(117, 209);
             this.button_ElbowUp.Name = "button_ElbowUp";
             this.button_ElbowUp.Size = new System.Drawing.Size(95, 38);
-            this.button_ElbowUp.TabIndex = 0;
+            this.button_ElbowUp.TabIndex = 6;
             this.button_ElbowUp.Text = "Up";
             this.button_ElbowUp.UseVisualStyleBackColor = true;
             // 
@@ -143,7 +144,7 @@ namespace RoboticArm535
             this.button_ElbowDown.Location = new System.Drawing.Point(117, 253);
             this.button_ElbowDown.Name = "button_ElbowDown";
             this.button_ElbowDown.Size = new System.Drawing.Size(95, 38);
-            this.button_ElbowDown.TabIndex = 0;
+            this.button_ElbowDown.TabIndex = 7;
             this.button_ElbowDown.Text = "Down";
             this.button_ElbowDown.UseVisualStyleBackColor = true;
             // 
@@ -165,7 +166,7 @@ namespace RoboticArm535
             this.button_StemBack.Location = new System.Drawing.Point(117, 384);
             this.button_StemBack.Name = "button_StemBack";
             this.button_StemBack.Size = new System.Drawing.Size(95, 64);
-            this.button_StemBack.TabIndex = 0;
+            this.button_StemBack.TabIndex = 11;
             this.button_StemBack.Text = "Stem Back";
             this.button_StemBack.UseVisualStyleBackColor = true;
             // 
@@ -175,7 +176,7 @@ namespace RoboticArm535
             this.button_StemAhead.Location = new System.Drawing.Point(117, 314);
             this.button_StemAhead.Name = "button_StemAhead";
             this.button_StemAhead.Size = new System.Drawing.Size(95, 64);
-            this.button_StemAhead.TabIndex = 0;
+            this.button_StemAhead.TabIndex = 10;
             this.button_StemAhead.Text = "Stem Ahead";
             this.button_StemAhead.UseVisualStyleBackColor = true;
             // 
@@ -187,7 +188,7 @@ namespace RoboticArm535
             this.button_BaseLeft.Location = new System.Drawing.Point(25, 353);
             this.button_BaseLeft.Name = "button_BaseLeft";
             this.button_BaseLeft.Size = new System.Drawing.Size(86, 61);
-            this.button_BaseLeft.TabIndex = 0;
+            this.button_BaseLeft.TabIndex = 8;
             this.button_BaseLeft.Text = "Base Left";
             this.button_BaseLeft.UseVisualStyleBackColor = true;
             // 
@@ -198,7 +199,7 @@ namespace RoboticArm535
             this.button_BaseRight.Location = new System.Drawing.Point(218, 353);
             this.button_BaseRight.Name = "button_BaseRight";
             this.button_BaseRight.Size = new System.Drawing.Size(86, 61);
-            this.button_BaseRight.TabIndex = 0;
+            this.button_BaseRight.TabIndex = 9;
             this.button_BaseRight.Text = "Base Right";
             this.button_BaseRight.UseVisualStyleBackColor = true;
             // 
@@ -214,9 +215,9 @@ namespace RoboticArm535
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label6.Location = new System.Drawing.Point(3, 481);
+            this.label6.Location = new System.Drawing.Point(12, 481);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(337, 31);
+            this.label6.Size = new System.Drawing.Size(328, 31);
             this.label6.TabIndex = 5;
             this.label6.Text = "Connect via USB. Ensure device has working batteries inside and is powered on.";
             // 
@@ -231,11 +232,24 @@ namespace RoboticArm535
     "35";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // linkLabel_Reconnect
+            // 
+            this.linkLabel_Reconnect.AutoSize = true;
+            this.linkLabel_Reconnect.Location = new System.Drawing.Point(12, 9);
+            this.linkLabel_Reconnect.Name = "linkLabel_Reconnect";
+            this.linkLabel_Reconnect.Size = new System.Drawing.Size(63, 15);
+            this.linkLabel_Reconnect.TabIndex = 0;
+            this.linkLabel_Reconnect.TabStop = true;
+            this.linkLabel_Reconnect.Text = "Reconnect";
+            this.linkLabel_Reconnect.VisitedLinkColor = System.Drawing.Color.Blue;
+            this.linkLabel_Reconnect.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Reconnect_LinkClicked);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(897, 521);
+            this.Controls.Add(this.linkLabel_Reconnect);
             this.Controls.Add(this.button_StemBack);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_BaseRight);
@@ -258,7 +272,7 @@ namespace RoboticArm535
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -284,6 +298,7 @@ namespace RoboticArm535
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.LinkLabel linkLabel_Reconnect;
     }
 }
 

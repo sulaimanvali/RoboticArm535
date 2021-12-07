@@ -8,6 +8,8 @@ namespace RoboticArm535
 {
     public class PacketGenerator
     {
+        public const int CommandLength = 3;
+
         // byte 0
         private const byte STOP_GRIP_WRIST_ELBOW_BASE = 0x00;
         private const byte GRIP_CLOSE                 = 0x01;

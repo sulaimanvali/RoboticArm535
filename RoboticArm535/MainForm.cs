@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LibUsbDotNet;
+using LibUsbDotNet.Info;
 using LibUsbDotNet.LibUsb;
 using LibUsbDotNet.Main;
 using Microsoft.Extensions.Logging;
@@ -17,12 +18,11 @@ namespace RoboticArm535
 {
     public partial class MainForm : Form
     {
-        private const int ProductId = 0x0000;
-        private const int VendorId = 0x1267;
-        private const int CommandLength = 3;
         IUsbDevice usbDevice = null;
-        readonly UsbSetupPacket setupPacket = new UsbSetupPacket(0x40, 6, 0x100, 0, CommandLength);
-        private Button[] buttons;
+        private const int VendorId = 0x1267;
+        private const int ProductId = 0x0000;
+        readonly UsbSetupPacket setupPacket = new UsbSetupPacket(
+            bRequestType: 0x40, bRequest: 6, wValue: 0x100, wIndex: 0, wlength: PacketGenerator.CommandLength);
 
         public MainForm()
         {
@@ -30,7 +30,7 @@ namespace RoboticArm535
 
             this.Text = Application.ProductName;
 
-            buttons = new Button[] {
+            var buttons = new Button[] {
                 button_GripOpen , button_GripClose,
                 button_WristUp  , button_WristDown,
                 button_ElbowUp  , button_ElbowDown,
@@ -54,6 +54,7 @@ namespace RoboticArm535
                 button.MouseUp += Button_MouseUp;
             }
         }
+
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
         {
             sendCommand(ControlTriggered.Led, checkBox_LED.Checked);
@@ -70,27 +71,26 @@ namespace RoboticArm535
         }
 
         private void sendCommand(ControlTriggered controlTriggered, bool isPressed)
-        {            
-            if (usbDevice == null)
-            {
-                MessageBox.Show("USB device not connected", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        {
+            if (usbDevice == null && !tryConnect())
                 return;
-            }
 
             try
             {
                 var buffer = PacketGenerator.GenerateFor(controlTriggered, isPressed);
                 var bytesSent = usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
-                Debug.WriteLine("Bytes sent: " + bytesSent);
+                Debug.WriteLine($"Bytes sent: {bytesSent}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to send USB control transfer packet:\r\n" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Failed to send USB control transfer packet:\r\n" + ex.Message,
+                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
-        private void connect()
+        private bool tryConnect()
         {
+            bool result = false;
             try
             {
                 using (var context = new UsbContext())
@@ -98,32 +98,47 @@ namespace RoboticArm535
                     context.SetDebugLevel(LibUsbDotNet.LogLevel.Info);
 
                     //Get a list of all connected devices
-                    var usbDeviceCollection = context.List();
+                    usbDevice = context.Find(d => d.VendorId == VendorId && d.ProductId == ProductId);
 
-                    //Narrow down the device by vendor and pid
-                    usbDevice = usbDeviceCollection.FirstOrDefault(d => d.ProductId == ProductId && d.VendorId == VendorId);
-
-                    if (usbDevice != null)
+                    if (usbDevice == null)
+                    {
+                        MessageBox.Show($"Unable to find USB device: VID:0x{VendorId:X4} PID:0x{ProductId:X4}.",
+                            Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        result = false;
+                    }
+                    else
                     {
                         //Open the device
                         usbDevice.Open();
 
                         //Get the first config number of the interface
                         usbDevice.ClaimInterface(usbDevice.Configs[0].Interfaces[0].Number);
+
+                        sendCommand(ControlTriggered.Led, false);
+
+                        result = true;
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to connect to USB device:\r\n" + ex.Message,
+                MessageBox.Show($"Unable to connect to USB device:\r\n{ex.Message}.",
                     Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                result = false;
             }
+
+            return result;
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void linkLabel_Reconnect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            connect();
+            tryConnect();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (usbDevice != null && usbDevice.IsOpen)
+                usbDevice.Close();
         }
     }
 }
