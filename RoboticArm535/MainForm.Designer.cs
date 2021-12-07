@@ -227,8 +227,8 @@ namespace RoboticArm535
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(420, 41);
             this.label4.TabIndex = 5;
-            this.label4.Text = "Developed by Sulaiman.Vali@gmail.com\r\nCode will soon be on Github for you to down" +
-    "load and learn from.";
+            this.label4.Text = "Developed by Sulaiman.Vali@gmail.com\r\nhttps://github.com/sulaimanvali/RoboticArm5" +
+    "35";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MainForm
