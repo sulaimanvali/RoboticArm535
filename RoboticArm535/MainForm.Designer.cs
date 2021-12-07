@@ -197,7 +197,7 @@ namespace RoboticArm535
             this.button_BaseRight.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.button_BaseRight.Location = new System.Drawing.Point(218, 353);
             this.button_BaseRight.Name = "button_BaseRight";
-            this.button_BaseRight.Size = new System.Drawing.Size(95, 61);
+            this.button_BaseRight.Size = new System.Drawing.Size(86, 61);
             this.button_BaseRight.TabIndex = 0;
             this.button_BaseRight.Text = "Base Right";
             this.button_BaseRight.UseVisualStyleBackColor = true;
