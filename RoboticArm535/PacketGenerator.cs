@@ -9,15 +9,15 @@ namespace RoboticArm535
     public class PacketGenerator
     {
         // byte 0
-        private const byte STOP_GRIP_WRIST_ELBOW_SHOULDER = 0x00;
-        private const byte GRIP_CLOSE                     = 0x01;
-        private const byte GRIP_OPEN                      = 0x02;
-        private const byte WRIST_UP                       = 0x04;
-        private const byte WRIST_DOWN                     = 0x08;
-        private const byte ELBOW_UP                       = 0x10;
-        private const byte ELBOW_DOWN                     = 0x20;
-        private const byte STEM_BACKWARD                  = 0x40;
-        private const byte STEM_FORWARD                   = 0x80;
+        private const byte STOP_GRIP_WRIST_ELBOW_BASE = 0x00;
+        private const byte GRIP_CLOSE                 = 0x01;
+        private const byte GRIP_OPEN                  = 0x02;
+        private const byte WRIST_UP                   = 0x04;
+        private const byte WRIST_DOWN                 = 0x08;
+        private const byte ELBOW_UP                   = 0x10;
+        private const byte ELBOW_DOWN                 = 0x20;
+        private const byte STEM_BACKWARD              = 0x40;
+        private const byte STEM_FORWARD               = 0x80;
         // byte 1
         private const byte BASE_STOP          = 0x00;
         private const byte BASE_CLOCKWISE     = 0x01;
@@ -66,7 +66,7 @@ namespace RoboticArm535
                     case ControlTriggered.ElbowDown: 
                     case ControlTriggered.StemBack:  
                     case ControlTriggered.StemAhead:
-                        byte0 = STOP_GRIP_WRIST_ELBOW_SHOULDER;
+                        byte0 = STOP_GRIP_WRIST_ELBOW_BASE;
                         break;
                     // byte 1
                     case ControlTriggered.BaseRight:
