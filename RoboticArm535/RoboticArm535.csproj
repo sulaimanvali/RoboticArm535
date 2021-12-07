@@ -11,6 +11,8 @@
     <PackageIcon>robotic_arm_96.png</PackageIcon>
     <PackageIconUrl />
     <SignAssembly>false</SignAssembly>
+    <Version>1.0.1</Version>
+    <PackageProjectUrl>https://github.com/sulaimanvali/RoboticArm535</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
