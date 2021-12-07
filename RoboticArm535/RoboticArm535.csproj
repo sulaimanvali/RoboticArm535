@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>images\robotic_arm_96_i5D_icon.ico</ApplicationIcon>
+    <Authors>Sulaiman Vali</Authors>
+    <Description>Controls the OWI-535 Robotic Arm Edge via USB interface.</Description>
+    <Copyright>Sulaiman Vali</Copyright>
+    <PackageIcon>robotic_arm_96.png</PackageIcon>
+    <PackageIconUrl />
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\robotic_arm.png" />
+    <None Include="images\robotic_arm_96.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="images\robotic_arm.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LibUsb.Common" Version="2.2.18" />
+    <PackageReference Include="LibUsbDotNet" Version="3.0.97-alpha" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
