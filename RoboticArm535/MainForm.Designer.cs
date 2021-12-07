@@ -54,7 +54,7 @@ namespace RoboticArm535
             // button_GripOpen
             // 
             this.button_GripOpen.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_GripOpen.Location = new System.Drawing.Point(86, 53);
+            this.button_GripOpen.Location = new System.Drawing.Point(109, 53);
             this.button_GripOpen.Name = "button_GripOpen";
             this.button_GripOpen.Size = new System.Drawing.Size(79, 36);
             this.button_GripOpen.TabIndex = 2;
@@ -66,7 +66,7 @@ namespace RoboticArm535
             this.checkBox_LED.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.checkBox_LED.AutoSize = true;
             this.checkBox_LED.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBox_LED.Location = new System.Drawing.Point(149, 18);
+            this.checkBox_LED.Location = new System.Drawing.Point(172, 18);
             this.checkBox_LED.Name = "checkBox_LED";
             this.checkBox_LED.Size = new System.Drawing.Size(63, 29);
             this.checkBox_LED.TabIndex = 1;
@@ -77,7 +77,7 @@ namespace RoboticArm535
             // button_GripClose
             // 
             this.button_GripClose.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_GripClose.Location = new System.Drawing.Point(171, 53);
+            this.button_GripClose.Location = new System.Drawing.Point(194, 53);
             this.button_GripClose.Name = "button_GripClose";
             this.button_GripClose.Size = new System.Drawing.Size(79, 36);
             this.button_GripClose.TabIndex = 3;
@@ -89,7 +89,7 @@ namespace RoboticArm535
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(34, 59);
+            this.label1.Location = new System.Drawing.Point(57, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 25);
             this.label1.TabIndex = 2;
@@ -99,7 +99,7 @@ namespace RoboticArm535
             // button_WristUp
             // 
             this.button_WristUp.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_WristUp.Location = new System.Drawing.Point(117, 108);
+            this.button_WristUp.Location = new System.Drawing.Point(140, 108);
             this.button_WristUp.Name = "button_WristUp";
             this.button_WristUp.Size = new System.Drawing.Size(95, 38);
             this.button_WristUp.TabIndex = 4;
@@ -109,7 +109,7 @@ namespace RoboticArm535
             // button_WristDown
             // 
             this.button_WristDown.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_WristDown.Location = new System.Drawing.Point(117, 152);
+            this.button_WristDown.Location = new System.Drawing.Point(140, 152);
             this.button_WristDown.Name = "button_WristDown";
             this.button_WristDown.Size = new System.Drawing.Size(95, 38);
             this.button_WristDown.TabIndex = 5;
@@ -121,7 +121,7 @@ namespace RoboticArm535
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(55, 136);
+            this.label2.Location = new System.Drawing.Point(78, 136);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 25);
             this.label2.TabIndex = 2;
@@ -131,7 +131,7 @@ namespace RoboticArm535
             // button_ElbowUp
             // 
             this.button_ElbowUp.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_ElbowUp.Location = new System.Drawing.Point(117, 209);
+            this.button_ElbowUp.Location = new System.Drawing.Point(140, 209);
             this.button_ElbowUp.Name = "button_ElbowUp";
             this.button_ElbowUp.Size = new System.Drawing.Size(95, 38);
             this.button_ElbowUp.TabIndex = 6;
@@ -141,7 +141,7 @@ namespace RoboticArm535
             // button_ElbowDown
             // 
             this.button_ElbowDown.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_ElbowDown.Location = new System.Drawing.Point(117, 253);
+            this.button_ElbowDown.Location = new System.Drawing.Point(140, 253);
             this.button_ElbowDown.Name = "button_ElbowDown";
             this.button_ElbowDown.Size = new System.Drawing.Size(95, 38);
             this.button_ElbowDown.TabIndex = 7;
@@ -153,7 +153,7 @@ namespace RoboticArm535
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(48, 236);
+            this.label3.Location = new System.Drawing.Point(71, 236);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 25);
             this.label3.TabIndex = 2;
@@ -163,7 +163,7 @@ namespace RoboticArm535
             // button_StemBack
             // 
             this.button_StemBack.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_StemBack.Location = new System.Drawing.Point(117, 384);
+            this.button_StemBack.Location = new System.Drawing.Point(140, 384);
             this.button_StemBack.Name = "button_StemBack";
             this.button_StemBack.Size = new System.Drawing.Size(95, 64);
             this.button_StemBack.TabIndex = 11;
@@ -173,7 +173,7 @@ namespace RoboticArm535
             // button_StemAhead
             // 
             this.button_StemAhead.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_StemAhead.Location = new System.Drawing.Point(117, 314);
+            this.button_StemAhead.Location = new System.Drawing.Point(140, 314);
             this.button_StemAhead.Name = "button_StemAhead";
             this.button_StemAhead.Size = new System.Drawing.Size(95, 64);
             this.button_StemAhead.TabIndex = 10;
@@ -185,7 +185,7 @@ namespace RoboticArm535
             this.button_BaseLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_BaseLeft.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_BaseLeft.Location = new System.Drawing.Point(25, 353);
+            this.button_BaseLeft.Location = new System.Drawing.Point(48, 353);
             this.button_BaseLeft.Name = "button_BaseLeft";
             this.button_BaseLeft.Size = new System.Drawing.Size(86, 61);
             this.button_BaseLeft.TabIndex = 8;
@@ -196,7 +196,7 @@ namespace RoboticArm535
             // 
             this.button_BaseRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button_BaseRight.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_BaseRight.Location = new System.Drawing.Point(218, 353);
+            this.button_BaseRight.Location = new System.Drawing.Point(241, 353);
             this.button_BaseRight.Name = "button_BaseRight";
             this.button_BaseRight.Size = new System.Drawing.Size(86, 61);
             this.button_BaseRight.TabIndex = 9;
