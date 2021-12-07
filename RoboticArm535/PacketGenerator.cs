@@ -19,9 +19,9 @@ namespace RoboticArm535
         private const byte STEM_BACKWARD              = 0x40;
         private const byte STEM_FORWARD               = 0x80;
         // byte 1
-        private const byte BASE_STOP          = 0x00;
-        private const byte BASE_CLOCKWISE     = 0x01;
-        private const byte BASE_ANTICLOCKWISE = 0x02;
+        private const byte BASE_STOP  = 0x00;
+        private const byte BASE_RIGHT = 0x01;
+        private const byte BASE_LEFT  = 0x02;
         // byte 2
         private const byte LED_OFF = 0x00;
         private const byte LED_ON  = 0x01;
@@ -46,8 +46,8 @@ namespace RoboticArm535
                     case ControlTriggered.StemBack : byte0 = STEM_BACKWARD; break;
                     case ControlTriggered.StemAhead: byte0 = STEM_FORWARD; break;
                     // byte 1
-                    case ControlTriggered.BaseRight: byte1 = BASE_CLOCKWISE; break;
-                    case ControlTriggered.BaseLeft:  byte1 = BASE_ANTICLOCKWISE; break;
+                    case ControlTriggered.BaseRight: byte1 = BASE_RIGHT; break;
+                    case ControlTriggered.BaseLeft:  byte1 = BASE_LEFT; break;
                     // byte 2
                     case ControlTriggered.Led:       byte2 = LED_ON; break;
                     default: throw new NotSupportedException();
