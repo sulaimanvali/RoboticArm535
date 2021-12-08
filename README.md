@@ -7,6 +7,4 @@ Feel free to take the code, modify it, learn from it, make the robotic arm progr
 Please be warned though, that there are no feedback sensors in the robotic arm. 
 You have to send the appropriate command to stop the motors in time before they reach their limits and start clicking or break!
 
-![alt text](https://github.com/sulaimanvali/RoboticArm535/blob/master/RoboticArm535/images/robotic_arm.png)
-
 ![alt text](https://github.com/sulaimanvali/RoboticArm535/blob/master/RoboticArm535/images/Screenshot1.png)
