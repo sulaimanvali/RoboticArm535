@@ -8,48 +8,33 @@ namespace RoboticArm535
 {
     public class PacketGenerator
     {
-        public const int CommandLength = 3;
-
-        // byte 0
-        private const byte STOP_GRIP_WRIST_ELBOW_BASE = 0x00;
-        private const byte GRIP_CLOSE                 = 0x01;
-        private const byte GRIP_OPEN                  = 0x02;
-        private const byte WRIST_UP                   = 0x04;
-        private const byte WRIST_DOWN                 = 0x08;
-        private const byte ELBOW_UP                   = 0x10;
-        private const byte ELBOW_DOWN                 = 0x20;
-        private const byte STEM_BACKWARD              = 0x40;
-        private const byte STEM_FORWARD               = 0x80;
-        // byte 1
-        private const byte BASE_STOP  = 0x00;
-        private const byte BASE_RIGHT = 0x01;
-        private const byte BASE_LEFT  = 0x02;
-        // byte 2
-        private const byte LED_OFF = 0x00;
-        private const byte LED_ON  = 0x01;
-
-        public static byte[] GenerateFor(ControlTriggered control, bool isPressed)
+        public static byte[] GenSinglePress(ControlTriggered control, bool isPressed)
         {
-            byte byte0 = 0, byte1 = 0, byte2 = 0;
+            var ledOn = false;
+            var grip      = Motors.Grip.Stop;
+            var wrist     = Motors.Wrist.Stop;
+            var elbow     = Motors.Elbow.Stop;
+            var stem      = Motors.Stem.Stop;
+            var baseMotor = Motors.Base.Stop;
 
             if (isPressed)
             {
                 switch (control)
                 {
                     // byte 0
-                    case ControlTriggered.GripClose: byte0 = GRIP_CLOSE; break;
-                    case ControlTriggered.GripOpen : byte0 = GRIP_OPEN; break;
-                    case ControlTriggered.WristUp  : byte0 = WRIST_UP; break;
-                    case ControlTriggered.WristDown: byte0 = WRIST_DOWN; break;
-                    case ControlTriggered.ElbowUp  : byte0 = ELBOW_UP; break;
-                    case ControlTriggered.ElbowDown: byte0 = ELBOW_DOWN; break;
-                    case ControlTriggered.StemBack : byte0 = STEM_BACKWARD; break;
-                    case ControlTriggered.StemAhead: byte0 = STEM_FORWARD; break;
+                    case ControlTriggered.GripClose: grip =  Motors.Grip.Close; break;
+                    case ControlTriggered.GripOpen:  grip =  Motors.Grip.Open; break;
+                    case ControlTriggered.WristUp:   wrist = Motors.Wrist.Up; break;
+                    case ControlTriggered.WristDown: wrist = Motors.Wrist.Down; break;
+                    case ControlTriggered.ElbowUp:   elbow = Motors.Elbow.Up; break;
+                    case ControlTriggered.ElbowDown: elbow = Motors.Elbow.Down; break;
+                    case ControlTriggered.StemBack:  stem =  Motors.Stem.Back; break;
+                    case ControlTriggered.StemAhead: stem =  Motors.Stem.Ahead; break;
                     // byte 1
-                    case ControlTriggered.BaseRight: byte1 = BASE_RIGHT; break;
-                    case ControlTriggered.BaseLeft:  byte1 = BASE_LEFT; break;
+                    case ControlTriggered.BaseRight: baseMotor = Motors.Base.Right; break;
+                    case ControlTriggered.BaseLeft:  baseMotor = Motors.Base.Left; break;
                     // byte 2
-                    case ControlTriggered.Led:       byte2 = LED_ON; break;
+                    case ControlTriggered.Led: ledOn = true; break;
                     default: throw new NotSupportedException();
                 }
             }
@@ -58,30 +43,52 @@ namespace RoboticArm535
                 switch (control)
                 {
                     // byte 0
-                    case ControlTriggered.GripClose: 
-                    case ControlTriggered.GripOpen:  
-                    case ControlTriggered.WristUp:   
-                    case ControlTriggered.WristDown: 
-                    case ControlTriggered.ElbowUp:   
-                    case ControlTriggered.ElbowDown: 
-                    case ControlTriggered.StemBack:  
+                    case ControlTriggered.GripClose:
+                    case ControlTriggered.GripOpen:
+                    case ControlTriggered.WristUp:
+                    case ControlTriggered.WristDown:
+                    case ControlTriggered.ElbowUp:
+                    case ControlTriggered.ElbowDown:
+                    case ControlTriggered.StemBack:
                     case ControlTriggered.StemAhead:
-                        byte0 = STOP_GRIP_WRIST_ELBOW_BASE;
+                        grip  = Motors.Grip.Stop;
+                        wrist = Motors.Wrist.Stop;
+                        elbow = Motors.Elbow.Stop;
+                        stem  = Motors.Stem.Stop;
                         break;
                     // byte 1
                     case ControlTriggered.BaseRight:
                     case ControlTriggered.BaseLeft:
-                        byte1 = BASE_STOP;
+                        baseMotor = Motors.Base.Stop;
                         break;
                     // byte 2
                     case ControlTriggered.Led:
-                        byte2 = LED_OFF;
+                        ledOn = false;
                         break;
                     default:
                         throw new NotSupportedException();
                 }
             }
-            return new byte[] { byte0, byte1, byte2 };
+            return GenMultiPress(ledOn, grip, wrist, elbow, stem, baseMotor);
+        }
+
+        public static byte[] GenMultiPress(bool ledOn,
+                                         Motors.Grip grip,
+                                         Motors.Wrist wrist,
+                                         Motors.Elbow elbow,
+                                         Motors.Stem stem,
+                                         Motors.Base baseMotor)
+        {
+            var bytes = new byte[Packet.CommandLength];
+
+            bytes[0] = (byte)grip;
+             bytes[0] |= (byte)wrist;
+             bytes[0] |= (byte)elbow;
+             bytes[0] |= (byte)stem;
+            bytes[1] = (byte)baseMotor;
+            bytes[2] = (byte)(ledOn ? Packet.Byte2.LedOn : Packet.Byte2.LedOff);
+
+            return bytes;
         }
     }
 }
