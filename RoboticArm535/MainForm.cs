@@ -8,11 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LibUsbDotNet;
-using LibUsbDotNet.Info;
-using LibUsbDotNet.LibUsb;
-using LibUsbDotNet.Main;
-using Microsoft.Extensions.Logging;
 using RoboticArm535Library;
 
 namespace RoboticArm535

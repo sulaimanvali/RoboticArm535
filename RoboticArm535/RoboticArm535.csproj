@@ -28,12 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LibUsb.Common" Version="2.2.18" />
-    <PackageReference Include="LibUsbDotNet" Version="3.0.97-alpha" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\RoboticArm535Library\RoboticArm535Library.csproj" />
   </ItemGroup>
 
