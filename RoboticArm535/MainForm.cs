@@ -48,6 +48,8 @@ namespace RoboticArm535
             {
                 button.MouseDown += Button_MouseDown;
                 button.MouseUp += Button_MouseUp;
+                button.KeyDown += Button_KeyDown;
+                button.KeyUp += Button_KeyUp;
             }
         }
 
@@ -62,6 +64,16 @@ namespace RoboticArm535
         }
 
         private void Button_MouseDown(object sender, MouseEventArgs e)
+        {
+            usbComms.SendCommand((ControlTriggered)(sender as Button).Tag, isPressed: true);
+        }
+
+        private void Button_KeyUp(object sender, KeyEventArgs e)
+        {
+            usbComms.SendCommand((ControlTriggered)(sender as Button).Tag, isPressed: false);
+        }
+
+        private void Button_KeyDown(object sender, KeyEventArgs e)
         {
             usbComms.SendCommand((ControlTriggered)(sender as Button).Tag, isPressed: true);
         }
