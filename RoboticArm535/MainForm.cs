@@ -43,22 +43,24 @@ namespace RoboticArm535
             foreach (var button in buttons)
             {
                 button.MouseDown += Button_MouseDown;
-                button.MouseUp += Button_MouseUp;
-                button.KeyDown += Button_KeyDown;
-                button.KeyUp += Button_KeyUp;
+                button.MouseUp   += Button_MouseUp;
+                button.KeyDown   += Button_KeyDown;
+                button.KeyUp     += Button_KeyUp;
             }
         }
 
-        private void sendCommand(ControlTriggered control, bool isPressed)
+        private bool sendCommand(ControlTriggered control, bool isPressed)
         {
             try
             {
                 usbComms.SendCommand(control, isPressed);
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to send USB control transfer packet:\r\n" + ex.Message,
                     Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
         }
 
