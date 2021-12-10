@@ -13,6 +13,7 @@ using LibUsbDotNet.Info;
 using LibUsbDotNet.LibUsb;
 using LibUsbDotNet.Main;
 using Microsoft.Extensions.Logging;
+using RoboticArm535Library;
 
 namespace RoboticArm535
 {
@@ -53,34 +54,55 @@ namespace RoboticArm535
             }
         }
 
+        private void sendCommand(ControlTriggered control, bool isPressed)
+        {
+            try
+            {
+                usbComms.SendCommand(control, isPressed);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to send USB control transfer packet:\r\n" + ex.Message,
+                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
         {
-            usbComms.SendCommand(ControlTriggered.Led, checkBox_LED.Checked);
+            sendCommand(ControlTriggered.Led, checkBox_LED.Checked);
         }
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
         {
-            usbComms.SendCommand((ControlTriggered)(sender as Button).Tag, isPressed: false);
+            sendCommand((ControlTriggered)(sender as Button).Tag, isPressed: false);
         }
 
         private void Button_MouseDown(object sender, MouseEventArgs e)
         {
-            usbComms.SendCommand((ControlTriggered)(sender as Button).Tag, isPressed: true);
+            sendCommand((ControlTriggered)(sender as Button).Tag, isPressed: true);
         }
 
         private void Button_KeyUp(object sender, KeyEventArgs e)
         {
-            usbComms.SendCommand((ControlTriggered)(sender as Button).Tag, isPressed: false);
+            sendCommand((ControlTriggered)(sender as Button).Tag, isPressed: false);
         }
 
         private void Button_KeyDown(object sender, KeyEventArgs e)
         {
-            usbComms.SendCommand((ControlTriggered)(sender as Button).Tag, isPressed: true);
+            sendCommand((ControlTriggered)(sender as Button).Tag, isPressed: true);
         }
 
         private void linkLabel_Reconnect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            usbComms.TryConnect();
+            try
+            {
+                usbComms.TryConnect();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to connect to USB device:\r\n" + ex.Message,
+                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -1,4 +1,4 @@
-﻿namespace RoboticArm535
+﻿namespace RoboticArm535Library
 {
     public enum ControlTriggered
     {

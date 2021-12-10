@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoboticArm535
+namespace RoboticArm535Library
 {
     public class Packet
     {

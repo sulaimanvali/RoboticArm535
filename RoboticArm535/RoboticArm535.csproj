@@ -34,6 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RoboticArm535Library\RoboticArm535Library.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
