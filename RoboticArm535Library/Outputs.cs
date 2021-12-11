@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace RoboticArm535Library
 {
-    public class Motors
+    public class Outputs
     {
+        public enum Led : byte
+        {
+            Off = Packet.Byte2.LedOff,
+            On  = Packet.Byte2.LedOn
+        }
+
         public enum Grip : byte
         {
             Stop  = Packet.Byte0.ArmStop,

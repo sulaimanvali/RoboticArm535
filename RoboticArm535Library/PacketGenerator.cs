@@ -17,28 +17,28 @@ namespace RoboticArm535Library
         public static byte[] GenSinglePress(ControlTriggered control, bool isPressed)
         {
             var ledOn = false;
-            var grip      = Motors.Grip.Stop;
-            var wrist     = Motors.Wrist.Stop;
-            var elbow     = Motors.Elbow.Stop;
-            var stem      = Motors.Stem.Stop;
-            var baseMotor = Motors.Base.Stop;
+            var grip      = Outputs.Grip.Stop;
+            var wrist     = Outputs.Wrist.Stop;
+            var elbow     = Outputs.Elbow.Stop;
+            var stem      = Outputs.Stem.Stop;
+            var baseMotor = Outputs.Base.Stop;
 
             if (isPressed)
             {
                 switch (control)
                 {
                     // byte 0
-                    case ControlTriggered.GripClose: grip =  Motors.Grip.Close; break;
-                    case ControlTriggered.GripOpen:  grip =  Motors.Grip.Open; break;
-                    case ControlTriggered.WristUp:   wrist = Motors.Wrist.Up; break;
-                    case ControlTriggered.WristDown: wrist = Motors.Wrist.Down; break;
-                    case ControlTriggered.ElbowUp:   elbow = Motors.Elbow.Up; break;
-                    case ControlTriggered.ElbowDown: elbow = Motors.Elbow.Down; break;
-                    case ControlTriggered.StemBack:  stem =  Motors.Stem.Back; break;
-                    case ControlTriggered.StemAhead: stem =  Motors.Stem.Ahead; break;
+                    case ControlTriggered.GripClose: grip =  Outputs.Grip.Close; break;
+                    case ControlTriggered.GripOpen:  grip =  Outputs.Grip.Open; break;
+                    case ControlTriggered.WristUp:   wrist = Outputs.Wrist.Up; break;
+                    case ControlTriggered.WristDown: wrist = Outputs.Wrist.Down; break;
+                    case ControlTriggered.ElbowUp:   elbow = Outputs.Elbow.Up; break;
+                    case ControlTriggered.ElbowDown: elbow = Outputs.Elbow.Down; break;
+                    case ControlTriggered.StemBack:  stem =  Outputs.Stem.Back; break;
+                    case ControlTriggered.StemAhead: stem =  Outputs.Stem.Ahead; break;
                     // byte 1
-                    case ControlTriggered.BaseRight: baseMotor = Motors.Base.Right; break;
-                    case ControlTriggered.BaseLeft:  baseMotor = Motors.Base.Left; break;
+                    case ControlTriggered.BaseRight: baseMotor = Outputs.Base.Right; break;
+                    case ControlTriggered.BaseLeft:  baseMotor = Outputs.Base.Left; break;
                     // byte 2
                     case ControlTriggered.Led: ledOn = true; break;
                     default: throw new NotSupportedException();
@@ -57,15 +57,15 @@ namespace RoboticArm535Library
                     case ControlTriggered.ElbowDown:
                     case ControlTriggered.StemBack:
                     case ControlTriggered.StemAhead:
-                        grip  = Motors.Grip.Stop;
-                        wrist = Motors.Wrist.Stop;
-                        elbow = Motors.Elbow.Stop;
-                        stem  = Motors.Stem.Stop;
+                        grip  = Outputs.Grip.Stop;
+                        wrist = Outputs.Wrist.Stop;
+                        elbow = Outputs.Elbow.Stop;
+                        stem  = Outputs.Stem.Stop;
                         break;
                     // byte 1
                     case ControlTriggered.BaseRight:
                     case ControlTriggered.BaseLeft:
-                        baseMotor = Motors.Base.Stop;
+                        baseMotor = Outputs.Base.Stop;
                         break;
                     // byte 2
                     case ControlTriggered.Led:
@@ -89,11 +89,11 @@ namespace RoboticArm535Library
         /// <param name="baseMotor"></param>
         /// <returns></returns>
         public static byte[] GenMultiPress(bool ledOn,
-                                         Motors.Grip grip,
-                                         Motors.Wrist wrist,
-                                         Motors.Elbow elbow,
-                                         Motors.Stem stem,
-                                         Motors.Base baseMotor)
+                                         Outputs.Grip grip,
+                                         Outputs.Wrist wrist,
+                                         Outputs.Elbow elbow,
+                                         Outputs.Stem stem,
+                                         Outputs.Base baseMotor)
         {
             var bytes = new byte[Packet.CommandLength];
 

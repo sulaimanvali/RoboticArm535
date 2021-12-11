@@ -26,7 +26,7 @@ namespace RoboticArm535Library
         /// <param name="isPressed"></param>
         public void SendCommand(ControlTriggered controlTriggered, bool isPressed)
         {
-            if (usbDevice == null || usbDevice.IsOpen)
+            if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
             var buffer = PacketGenerator.GenSinglePress(controlTriggered, isPressed);
@@ -43,10 +43,10 @@ namespace RoboticArm535Library
         /// <param name="elbow"></param>
         /// <param name="stem"></param>
         /// <param name="baseMotor"></param>
-        public void SendCommandMulti(bool ledOn, Motors.Grip grip, Motors.Wrist wrist, Motors.Elbow elbow,
-                                                 Motors.Stem stem, Motors.Base baseMotor)
+        public void SendCommandMulti(bool ledOn, Outputs.Grip grip, Outputs.Wrist wrist, Outputs.Elbow elbow,
+                                                 Outputs.Stem stem, Outputs.Base baseMotor)
         {
-            if (usbDevice == null || usbDevice.IsOpen)
+            if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
             var buffer = PacketGenerator.GenMultiPress(ledOn, grip, wrist, elbow, stem, baseMotor);

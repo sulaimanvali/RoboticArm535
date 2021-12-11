@@ -64,6 +64,22 @@ namespace RoboticArm535
             }
         }
 
+        private void connectUSB()
+        {
+            try
+            {
+                var errorCode = usbComms.Connect();
+                if (errorCode != UsbConnErrorCode.NoError)
+                    MessageBox.Show("Failed to connect to USB device:\r\n" + errorCode,
+                        Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to connect to USB device:\r\n" + ex.Message,
+                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
         {
             sendCommand(ControlTriggered.Led, checkBox_LED.Checked);
@@ -91,18 +107,12 @@ namespace RoboticArm535
 
         private void linkLabel_Reconnect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                var errorCode = usbComms.Connect();
-                if (errorCode != UsbConnErrorCode.NoError)
-                    MessageBox.Show("Failed to connect to USB device:\r\n" + errorCode,
-                        Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to connect to USB device:\r\n" + ex.Message,
-                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            connectUSB();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            connectUSB();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
