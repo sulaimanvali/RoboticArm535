@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace RoboticArm535Library
 {
-    public class Outputs
+    public class Out
     {
-        public enum Led : byte
-        {
-            Off = Packet.Byte2.LedOff,
-            On  = Packet.Byte2.LedOn
-        }
-
         public enum Grip : byte
         {
             Stop  = Packet.Byte0.ArmStop,
@@ -47,6 +41,11 @@ namespace RoboticArm535Library
             Stop  = Packet.Byte1.BaseStop,
             Right = Packet.Byte1.BaseRight,
             Left  = Packet.Byte1.BaseLeft
+        }
+        public enum Led : byte
+        {
+            Off = Packet.Byte2.LedOff,
+            On  = Packet.Byte2.LedOn
         }
     }
 }

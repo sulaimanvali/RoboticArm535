@@ -16,31 +16,31 @@ namespace RoboticArm535Library
         /// <returns></returns>
         public static byte[] GenSinglePress(ControlTriggered control, bool isPressed)
         {
-            var led       = Outputs.Led.Off;
-            var grip      = Outputs.Grip.Stop;
-            var wrist     = Outputs.Wrist.Stop;
-            var elbow     = Outputs.Elbow.Stop;
-            var stem      = Outputs.Stem.Stop;
-            var baseMotor = Outputs.Base.Stop;
+            var led       = Out.Led.Off;
+            var grip      = Out.Grip.Stop;
+            var wrist     = Out.Wrist.Stop;
+            var elbow     = Out.Elbow.Stop;
+            var stem      = Out.Stem.Stop;
+            var baseMotor = Out.Base.Stop;
 
             if (isPressed)
             {
                 switch (control)
                 {
                     // byte 0
-                    case ControlTriggered.GripClose: grip =  Outputs.Grip.Close; break;
-                    case ControlTriggered.GripOpen:  grip =  Outputs.Grip.Open; break;
-                    case ControlTriggered.WristUp:   wrist = Outputs.Wrist.Up; break;
-                    case ControlTriggered.WristDown: wrist = Outputs.Wrist.Down; break;
-                    case ControlTriggered.ElbowUp:   elbow = Outputs.Elbow.Up; break;
-                    case ControlTriggered.ElbowDown: elbow = Outputs.Elbow.Down; break;
-                    case ControlTriggered.StemBack:  stem =  Outputs.Stem.Back; break;
-                    case ControlTriggered.StemAhead: stem =  Outputs.Stem.Ahead; break;
+                    case ControlTriggered.GripClose: grip =  Out.Grip.Close; break;
+                    case ControlTriggered.GripOpen:  grip =  Out.Grip.Open; break;
+                    case ControlTriggered.WristUp:   wrist = Out.Wrist.Up; break;
+                    case ControlTriggered.WristDown: wrist = Out.Wrist.Down; break;
+                    case ControlTriggered.ElbowUp:   elbow = Out.Elbow.Up; break;
+                    case ControlTriggered.ElbowDown: elbow = Out.Elbow.Down; break;
+                    case ControlTriggered.StemBack:  stem =  Out.Stem.Back; break;
+                    case ControlTriggered.StemAhead: stem =  Out.Stem.Ahead; break;
                     // byte 1
-                    case ControlTriggered.BaseRight: baseMotor = Outputs.Base.Right; break;
-                    case ControlTriggered.BaseLeft:  baseMotor = Outputs.Base.Left; break;
+                    case ControlTriggered.BaseRight: baseMotor = Out.Base.Right; break;
+                    case ControlTriggered.BaseLeft:  baseMotor = Out.Base.Left; break;
                     // byte 2
-                    case ControlTriggered.Led: led = Outputs.Led.On; break;
+                    case ControlTriggered.Led: led = Out.Led.On; break;
                     default: throw new NotSupportedException();
                 }
             }
@@ -57,19 +57,19 @@ namespace RoboticArm535Library
                     case ControlTriggered.ElbowDown:
                     case ControlTriggered.StemBack:
                     case ControlTriggered.StemAhead:
-                        grip  = Outputs.Grip.Stop;
-                        wrist = Outputs.Wrist.Stop;
-                        elbow = Outputs.Elbow.Stop;
-                        stem  = Outputs.Stem.Stop;
+                        grip  = Out.Grip.Stop;
+                        wrist = Out.Wrist.Stop;
+                        elbow = Out.Elbow.Stop;
+                        stem  = Out.Stem.Stop;
                         break;
                     // byte 1
                     case ControlTriggered.BaseRight:
                     case ControlTriggered.BaseLeft:
-                        baseMotor = Outputs.Base.Stop;
+                        baseMotor = Out.Base.Stop;
                         break;
                     // byte 2
                     case ControlTriggered.Led:
-                        led = Outputs.Led.Off;
+                        led = Out.Led.Off;
                         break;
                     default:
                         throw new NotSupportedException();
@@ -88,12 +88,12 @@ namespace RoboticArm535Library
         /// <param name="stem"></param>
         /// <param name="baseMotor"></param>
         /// <returns></returns>
-        public static byte[] GenMultiPress(Outputs.Led led,
-                                           Outputs.Grip grip,
-                                           Outputs.Wrist wrist,
-                                           Outputs.Elbow elbow,
-                                           Outputs.Stem stem,
-                                           Outputs.Base baseMotor)
+        public static byte[] GenMultiPress(Out.Led led,
+                                           Out.Grip grip,
+                                           Out.Wrist wrist,
+                                           Out.Elbow elbow,
+                                           Out.Stem stem,
+                                           Out.Base baseMotor)
         {
             var bytes = new byte[Packet.CommandLength];
 

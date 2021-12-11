@@ -43,8 +43,8 @@ namespace RoboticArm535Library
         /// <param name="elbow"></param>
         /// <param name="stem"></param>
         /// <param name="baseMotor"></param>
-        public void Cmd(Outputs.Led led, Outputs.Grip grip, Outputs.Wrist wrist,
-                        Outputs.Elbow elbow, Outputs.Stem stem, Outputs.Base baseMotor)
+        public void Cmd(Out.Led led, Out.Grip grip, Out.Wrist wrist,
+                        Out.Elbow elbow, Out.Stem stem, Out.Base baseMotor)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");

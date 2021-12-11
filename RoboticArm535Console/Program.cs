@@ -20,20 +20,20 @@ namespace RoboticArm535Console
             Console.WriteLine("Press any key to abort script");
 
             // demonstrates a simple script controlling multiple outputs 
-            usb.Cmd(Outputs.Led.On, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
             wait(500);
-            usb.Cmd(Outputs.Led.Off, Outputs.Grip.Open, Outputs.Wrist.Up, Outputs.Elbow.Up, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Out.Led.Off, Out.Grip.Open, Out.Wrist.Up, Out.Elbow.Up, Out.Stem.Stop, Out.Base.Stop);
             wait(3000);
-            usb.Cmd(Outputs.Led.On, Outputs.Grip.Stop, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Up, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
             wait(500);
-            usb.Cmd(Outputs.Led.Off, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
             wait(500);
 
             for (int i = 0; i < 7; i++)
             {
-                usb.Cmd(Outputs.Led.On, Outputs.Grip.Open, Outputs.Wrist.Down, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+                usb.Cmd(Out.Led.On, Out.Grip.Open, Out.Wrist.Down, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
                 wait(800);
-                usb.Cmd(Outputs.Led.Off, Outputs.Grip.Close, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+                usb.Cmd(Out.Led.Off, Out.Grip.Close, Out.Wrist.Up, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
                 wait(800);
             }
             stopAll();
@@ -53,7 +53,7 @@ namespace RoboticArm535Console
 
         private static void stopAll()
         {
-            usb.Cmd(Outputs.Led.Off, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
         }
     }
 }
