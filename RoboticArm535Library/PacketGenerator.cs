@@ -16,7 +16,7 @@ namespace RoboticArm535Library
         /// <returns></returns>
         public static byte[] GenSinglePress(ControlTriggered control, bool isPressed)
         {
-            var ledOn = false;
+            var led       = Outputs.Led.Off;
             var grip      = Outputs.Grip.Stop;
             var wrist     = Outputs.Wrist.Stop;
             var elbow     = Outputs.Elbow.Stop;
@@ -40,7 +40,7 @@ namespace RoboticArm535Library
                     case ControlTriggered.BaseRight: baseMotor = Outputs.Base.Right; break;
                     case ControlTriggered.BaseLeft:  baseMotor = Outputs.Base.Left; break;
                     // byte 2
-                    case ControlTriggered.Led: ledOn = true; break;
+                    case ControlTriggered.Led: led = Outputs.Led.On; break;
                     default: throw new NotSupportedException();
                 }
             }
@@ -69,31 +69,31 @@ namespace RoboticArm535Library
                         break;
                     // byte 2
                     case ControlTriggered.Led:
-                        ledOn = false;
+                        led = Outputs.Led.Off;
                         break;
                     default:
                         throw new NotSupportedException();
                 }
             }
-            return GenMultiPress(ledOn, grip, wrist, elbow, stem, baseMotor);
+            return GenMultiPress(led, grip, wrist, elbow, stem, baseMotor);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="ledOn"></param>
+        /// <param name="led"></param>
         /// <param name="grip"></param>
         /// <param name="wrist"></param>
         /// <param name="elbow"></param>
         /// <param name="stem"></param>
         /// <param name="baseMotor"></param>
         /// <returns></returns>
-        public static byte[] GenMultiPress(bool ledOn,
-                                         Outputs.Grip grip,
-                                         Outputs.Wrist wrist,
-                                         Outputs.Elbow elbow,
-                                         Outputs.Stem stem,
-                                         Outputs.Base baseMotor)
+        public static byte[] GenMultiPress(Outputs.Led led,
+                                           Outputs.Grip grip,
+                                           Outputs.Wrist wrist,
+                                           Outputs.Elbow elbow,
+                                           Outputs.Stem stem,
+                                           Outputs.Base baseMotor)
         {
             var bytes = new byte[Packet.CommandLength];
 
@@ -102,7 +102,7 @@ namespace RoboticArm535Library
              bytes[0] |= (byte)elbow;
              bytes[0] |= (byte)stem;
             bytes[1] = (byte)baseMotor;
-            bytes[2] = (byte)(ledOn ? Packet.Byte2.LedOn : Packet.Byte2.LedOff);
+            bytes[2] = (byte)led;
 
             return bytes;
         }

@@ -37,19 +37,19 @@ namespace RoboticArm535Library
         /// Sends command to start or stop multiple motors simultaneously.
         /// This can be used in a script or even a user interface that supports multiple button presses.
         /// </summary>
-        /// <param name="ledOn"></param>
+        /// <param name="led"></param>
         /// <param name="grip"></param>
         /// <param name="wrist"></param>
         /// <param name="elbow"></param>
         /// <param name="stem"></param>
         /// <param name="baseMotor"></param>
-        public void SendCommandMulti(bool ledOn, Outputs.Grip grip, Outputs.Wrist wrist, Outputs.Elbow elbow,
-                                                 Outputs.Stem stem, Outputs.Base baseMotor)
+        public void SendCommandMulti(Outputs.Led led, Outputs.Grip grip, Outputs.Wrist wrist,
+                                     Outputs.Elbow elbow, Outputs.Stem stem, Outputs.Base baseMotor)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
-            var buffer = PacketGenerator.GenMultiPress(ledOn, grip, wrist, elbow, stem, baseMotor);
+            var buffer = PacketGenerator.GenMultiPress(led, grip, wrist, elbow, stem, baseMotor);
             usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
         }
 

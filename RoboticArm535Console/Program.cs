@@ -17,23 +17,23 @@ namespace RoboticArm535Console
             }
 
             // demonstrates a simple script controlling multiple outputs 
-            usbComms.SendCommandMulti(true, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usbComms.SendCommandMulti(Outputs.Led.On, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
             Thread.Sleep(500);
-            usbComms.SendCommandMulti(false, Outputs.Grip.Open, Outputs.Wrist.Stop, Outputs.Elbow.Up, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usbComms.SendCommandMulti(Outputs.Led.Off, Outputs.Grip.Open, Outputs.Wrist.Stop, Outputs.Elbow.Up, Outputs.Stem.Stop, Outputs.Base.Stop);
             Thread.Sleep(500);
-            usbComms.SendCommandMulti(true, Outputs.Grip.Stop, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usbComms.SendCommandMulti(Outputs.Led.On, Outputs.Grip.Stop, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
             Thread.Sleep(500);
-            usbComms.SendCommandMulti(false, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usbComms.SendCommandMulti(Outputs.Led.Off, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
             Thread.Sleep(500);
 
             for (int i = 0; i < 3; i++)
             {
-                usbComms.SendCommandMulti(true, Outputs.Grip.Open, Outputs.Wrist.Down, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+                usbComms.SendCommandMulti(Outputs.Led.On, Outputs.Grip.Open, Outputs.Wrist.Down, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
                 Thread.Sleep(3000);
-                usbComms.SendCommandMulti(false, Outputs.Grip.Close, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+                usbComms.SendCommandMulti(Outputs.Led.Off, Outputs.Grip.Close, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
                 Thread.Sleep(3000);
             }
-            usbComms.SendCommandMulti(false, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usbComms.SendCommandMulti(Outputs.Led.Off, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
         }
     }
 }
