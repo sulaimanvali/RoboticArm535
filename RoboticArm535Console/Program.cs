@@ -19,11 +19,17 @@ namespace RoboticArm535Console
 
             Console.WriteLine("Press any key to abort script");
 
-            // demonstrates a simple script controlling multiple outputs 
+            // demonstrates a simple script controlling multiple outputs simultaneously
+            sendCommandsByOutputs();
+            //sendCommandsByBytes();
+        }
+
+        private static void sendCommandsByOutputs()
+        {
             usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
             wait(500);
             usb.Cmd(Out.Led.Off, Out.Grip.Open, Out.Wrist.Up, Out.Elbow.Up, Out.Stem.Stop, Out.Base.Stop);
-            wait(3000);
+            wait(2000);
             usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Up, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
             wait(500);
             usb.Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
@@ -38,7 +44,25 @@ namespace RoboticArm535Console
             }
             stopAll();
         }
-        
+
+        private static void sendCommandsByBytes()
+        {
+            usb.Cmd(Packet.Byte0.ArmStop, Packet.Byte1.BaseStop, Packet.Byte2.LedOn);
+            wait(500);
+            usb.Cmd(Packet.Byte0.GripOpen | Packet.Byte0.WristUp | Packet.Byte0.ElbowUp, Packet.Byte1.BaseStop, Packet.Byte2.LedOff);
+            wait(1500);
+            usb.Cmd(Packet.Byte0.ArmStop, Packet.Byte1.BaseStop, Packet.Byte2.LedOn);
+            wait(500);
+
+            for (int i = 0; i < 7; i++)
+            {
+                usb.Cmd(Packet.Byte0.GripOpen | Packet.Byte0.WristUp | Packet.Byte0.ElbowUp, Packet.Byte1.BaseStop, Packet.Byte2.LedOff);
+                wait(800);
+                usb.Cmd(Packet.Byte0.GripClose | Packet.Byte0.WristDown | Packet.Byte0.ElbowDown, Packet.Byte1.BaseStop, Packet.Byte2.LedOn);
+                wait(800);
+            }
+            stopAll();
+        }
 
         private static void wait(int durationMs)
         {
