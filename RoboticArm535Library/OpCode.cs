@@ -1,6 +1,6 @@
 ﻿namespace RoboticArm535Library
 {
-    public enum ControlTriggered
+    public enum OpCode
     {
         Led,
         GripOpen,  GripClose,

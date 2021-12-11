@@ -29,16 +29,16 @@ namespace RoboticArm535
                 button_StemAhead, button_StemBack,
                 button_BaseLeft , button_BaseRight };
 
-            button_GripOpen.Tag  = ControlTriggered.GripOpen;
-            button_GripClose.Tag = ControlTriggered.GripClose;
-            button_WristUp.Tag   = ControlTriggered.WristUp;
-            button_WristDown.Tag = ControlTriggered.WristDown;
-            button_ElbowUp.Tag   = ControlTriggered.ElbowUp;
-            button_ElbowDown.Tag = ControlTriggered.ElbowDown;
-            button_StemAhead.Tag = ControlTriggered.StemAhead;
-            button_StemBack.Tag  = ControlTriggered.StemBack;
-            button_BaseLeft.Tag  = ControlTriggered.BaseLeft;
-            button_BaseRight.Tag = ControlTriggered.BaseRight;
+            button_GripOpen.Tag  = OpCode.GripOpen;
+            button_GripClose.Tag = OpCode.GripClose;
+            button_WristUp.Tag   = OpCode.WristUp;
+            button_WristDown.Tag = OpCode.WristDown;
+            button_ElbowUp.Tag   = OpCode.ElbowUp;
+            button_ElbowDown.Tag = OpCode.ElbowDown;
+            button_StemAhead.Tag = OpCode.StemAhead;
+            button_StemBack.Tag  = OpCode.StemBack;
+            button_BaseLeft.Tag  = OpCode.BaseLeft;
+            button_BaseRight.Tag = OpCode.BaseRight;
 
             foreach (var button in buttons)
             {
@@ -49,7 +49,7 @@ namespace RoboticArm535
             }
         }
 
-        private bool sendCommand(ControlTriggered control, bool isPressed)
+        private bool sendCommand(OpCode control, bool isPressed)
         {
             try
             {
@@ -82,27 +82,27 @@ namespace RoboticArm535
 
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
         {
-            sendCommand(ControlTriggered.Led, checkBox_LED.Checked);
+            sendCommand(OpCode.Led, checkBox_LED.Checked);
         }
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
         {
-            sendCommand((ControlTriggered)(sender as Button).Tag, isPressed: false);
+            sendCommand((OpCode)(sender as Button).Tag, isPressed: false);
         }
 
         private void Button_MouseDown(object sender, MouseEventArgs e)
         {
-            sendCommand((ControlTriggered)(sender as Button).Tag, isPressed: true);
+            sendCommand((OpCode)(sender as Button).Tag, isPressed: true);
         }
 
         private void Button_KeyUp(object sender, KeyEventArgs e)
         {
-            sendCommand((ControlTriggered)(sender as Button).Tag, isPressed: false);
+            sendCommand((OpCode)(sender as Button).Tag, isPressed: false);
         }
 
         private void Button_KeyDown(object sender, KeyEventArgs e)
         {
-            sendCommand((ControlTriggered)(sender as Button).Tag, isPressed: true);
+            sendCommand((OpCode)(sender as Button).Tag, isPressed: true);
         }
 
         private void linkLabel_Reconnect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -14,7 +14,7 @@ namespace RoboticArm535Library
         /// <param name="control"></param>
         /// <param name="isPressed"></param>
         /// <returns></returns>
-        public static byte[] GenSinglePress(ControlTriggered control, bool isPressed)
+        public static byte[] GenSinglePress(OpCode control, bool isPressed)
         {
             var led       = Out.Led.Off;
             var grip      = Out.Grip.Stop;
@@ -28,19 +28,19 @@ namespace RoboticArm535Library
                 switch (control)
                 {
                     // byte 0
-                    case ControlTriggered.GripClose: grip =  Out.Grip.Close; break;
-                    case ControlTriggered.GripOpen:  grip =  Out.Grip.Open; break;
-                    case ControlTriggered.WristUp:   wrist = Out.Wrist.Up; break;
-                    case ControlTriggered.WristDown: wrist = Out.Wrist.Down; break;
-                    case ControlTriggered.ElbowUp:   elbow = Out.Elbow.Up; break;
-                    case ControlTriggered.ElbowDown: elbow = Out.Elbow.Down; break;
-                    case ControlTriggered.StemBack:  stem =  Out.Stem.Back; break;
-                    case ControlTriggered.StemAhead: stem =  Out.Stem.Ahead; break;
+                    case OpCode.GripClose: grip =  Out.Grip.Close; break;
+                    case OpCode.GripOpen:  grip =  Out.Grip.Open; break;
+                    case OpCode.WristUp:   wrist = Out.Wrist.Up; break;
+                    case OpCode.WristDown: wrist = Out.Wrist.Down; break;
+                    case OpCode.ElbowUp:   elbow = Out.Elbow.Up; break;
+                    case OpCode.ElbowDown: elbow = Out.Elbow.Down; break;
+                    case OpCode.StemBack:  stem =  Out.Stem.Back; break;
+                    case OpCode.StemAhead: stem =  Out.Stem.Ahead; break;
                     // byte 1
-                    case ControlTriggered.BaseRight: baseMotor = Out.Base.Right; break;
-                    case ControlTriggered.BaseLeft:  baseMotor = Out.Base.Left; break;
+                    case OpCode.BaseRight: baseMotor = Out.Base.Right; break;
+                    case OpCode.BaseLeft:  baseMotor = Out.Base.Left; break;
                     // byte 2
-                    case ControlTriggered.Led: led = Out.Led.On; break;
+                    case OpCode.Led: led = Out.Led.On; break;
                     default: throw new NotSupportedException();
                 }
             }
@@ -49,26 +49,26 @@ namespace RoboticArm535Library
                 switch (control)
                 {
                     // byte 0
-                    case ControlTriggered.GripClose:
-                    case ControlTriggered.GripOpen:
-                    case ControlTriggered.WristUp:
-                    case ControlTriggered.WristDown:
-                    case ControlTriggered.ElbowUp:
-                    case ControlTriggered.ElbowDown:
-                    case ControlTriggered.StemBack:
-                    case ControlTriggered.StemAhead:
+                    case OpCode.GripClose:
+                    case OpCode.GripOpen:
+                    case OpCode.WristUp:
+                    case OpCode.WristDown:
+                    case OpCode.ElbowUp:
+                    case OpCode.ElbowDown:
+                    case OpCode.StemBack:
+                    case OpCode.StemAhead:
                         grip  = Out.Grip.Stop;
                         wrist = Out.Wrist.Stop;
                         elbow = Out.Elbow.Stop;
                         stem  = Out.Stem.Stop;
                         break;
                     // byte 1
-                    case ControlTriggered.BaseRight:
-                    case ControlTriggered.BaseLeft:
+                    case OpCode.BaseRight:
+                    case OpCode.BaseLeft:
                         baseMotor = Out.Base.Stop;
                         break;
                     // byte 2
-                    case ControlTriggered.Led:
+                    case OpCode.Led:
                         led = Out.Led.Off;
                         break;
                     default:

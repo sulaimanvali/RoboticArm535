@@ -66,14 +66,14 @@ namespace RoboticArm535Library
         /// Sends command to start or stop motors individually.
         /// This can be used for button down or up events.
         /// </summary>
-        /// <param name="controlTriggered"></param>
-        /// <param name="isPressed"></param>
-        public void CmdSingle(ControlTriggered controlTriggered, bool isPressed)
+        /// <param name="opCode"></param>
+        /// <param name="isPressed">True when button press is starting, false when it is being released</param>
+        public void CmdSingle(OpCode opCode, bool isPressed)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
-            var buffer = PacketGenerator.GenSinglePress(controlTriggered, isPressed);
+            var buffer = PacketGenerator.GenSinglePress(opCode, isPressed);
             usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
         }
 
