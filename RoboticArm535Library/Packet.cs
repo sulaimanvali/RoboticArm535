@@ -10,6 +10,7 @@ namespace RoboticArm535Library
     {
         public const int CommandLength = 3;
 
+        [Flags]
         public enum Byte0
         {
             ArmStop    = 0x00,
@@ -23,6 +24,7 @@ namespace RoboticArm535Library
             StempAhead = 0x80
         }
 
+        [Flags]
         public enum Byte1
         {
             BaseStop  = 0x00,
@@ -30,6 +32,7 @@ namespace RoboticArm535Library
             BaseLeft  = 0x02
         }
 
+        [Flags]
         public enum Byte2
         {
             LedOff = 0x00,

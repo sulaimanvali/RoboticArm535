@@ -8,6 +8,12 @@ namespace RoboticArm535Library
 {
     public class PacketGenerator
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="control"></param>
+        /// <param name="isPressed"></param>
+        /// <returns></returns>
         public static byte[] GenSinglePress(ControlTriggered control, bool isPressed)
         {
             var ledOn = false;
@@ -72,6 +78,16 @@ namespace RoboticArm535Library
             return GenMultiPress(ledOn, grip, wrist, elbow, stem, baseMotor);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ledOn"></param>
+        /// <param name="grip"></param>
+        /// <param name="wrist"></param>
+        /// <param name="elbow"></param>
+        /// <param name="stem"></param>
+        /// <param name="baseMotor"></param>
+        /// <returns></returns>
         public static byte[] GenMultiPress(bool ledOn,
                                          Motors.Grip grip,
                                          Motors.Wrist wrist,
