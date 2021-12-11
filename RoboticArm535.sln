@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboticArm535", "RoboticArm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoboticArm535Library", "RoboticArm535Library\RoboticArm535Library.csproj", "{AF40D651-D22C-4032-8582-FCF5B891E9E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoboticArm535Console", "RoboticArm535Console\RoboticArm535Console.csproj", "{0B548BDA-9EF5-4F1A-94CA-398B6BD14D69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AF40D651-D22C-4032-8582-FCF5B891E9E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF40D651-D22C-4032-8582-FCF5B891E9E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF40D651-D22C-4032-8582-FCF5B891E9E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B548BDA-9EF5-4F1A-94CA-398B6BD14D69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B548BDA-9EF5-4F1A-94CA-398B6BD14D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B548BDA-9EF5-4F1A-94CA-398B6BD14D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B548BDA-9EF5-4F1A-94CA-398B6BD14D69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
