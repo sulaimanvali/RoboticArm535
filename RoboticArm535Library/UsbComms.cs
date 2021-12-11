@@ -18,6 +18,7 @@ namespace RoboticArm535Library
         readonly UsbSetupPacket setupPacket = new UsbSetupPacket(
             bRequestType: 0x40, bRequest: 6, wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
 
+        #region Motor and LED control commands
         /// <summary>
         /// Sends command to start or stop motors individually.
         /// This can be used for button down or up events.
@@ -52,6 +53,24 @@ namespace RoboticArm535Library
             var buffer = PacketGenerator.GenMultiPress(led, grip, wrist, elbow, stem, baseMotor);
             usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
         }
+
+        /// <summary>
+        /// Sends command to start or stop multiple motors simultaneously.
+        /// This can be used in a script or app.
+        /// Each byte argument can be a bitmask of multiple enum values or'ed together.
+        /// </summary>
+        /// <param name="byte0"></param>
+        /// <param name="byte1"></param>
+        /// <param name="byte2"></param>
+        public void Cmd(Packet.Byte0 byte0, Packet.Byte1 byte1, Packet.Byte2 byte2)
+        {
+            if (usbDevice == null || !usbDevice.IsOpen)
+                throw new Exception("USB device not connected.");
+
+            var buffer = new byte[] { (byte)byte0, (byte)byte1, (byte)byte2 };
+            usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
+        }
+        #endregion
 
         /// <summary>
         /// Connects to USB device.
