@@ -40,15 +40,24 @@ namespace RoboticArm535Console
         }
         
 
-        private static void wait(int millisecondsTimeout)
+        private static void wait(int durationMs)
         {
-            if (Console.KeyAvailable)
+            int intervalsMs = 200;
+            int sleepTime = 0;
+            while (sleepTime < durationMs)
             {
-                stopAll();
-                Environment.Exit(0);
-            }
+                if (Console.KeyAvailable)
+                {
+                    stopAll();
+                    Environment.Exit(0);
+                    return;
+                }
 
-            Thread.Sleep(millisecondsTimeout);
+                if (sleepTime + intervalsMs > durationMs)
+                    intervalsMs = durationMs - sleepTime;
+                sleepTime += intervalsMs;
+                Thread.Sleep(intervalsMs);
+            }
         }
 
         private static void stopAll()
