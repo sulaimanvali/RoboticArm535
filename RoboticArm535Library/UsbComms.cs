@@ -18,6 +18,49 @@ namespace RoboticArm535Library
         readonly UsbSetupPacket setupPacket = new UsbSetupPacket(
             bRequestType: 0x40, bRequest: 6, wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
 
+        #region
+        /// <summary>
+        /// Connects to USB device.
+        /// </summary>
+        /// <returns></returns>
+        public UsbConnErrorCode Connect()
+        {
+            UsbConnErrorCode errorCode = UsbConnErrorCode.NoError;
+            using (var context = new UsbContext())
+            {
+                context.SetDebugLevel(LibUsbDotNet.LogLevel.Info);
+
+                //Get a list of all connected devices
+                usbDevice = context.Find(d => d.VendorId == VendorId && d.ProductId == ProductId);
+
+                if (usbDevice == null)
+                {
+                    Debug.WriteLine($"Unable to find USB device: VID:0x{VendorId:X4} PID:0x{ProductId:X4}.");
+                    errorCode = UsbConnErrorCode.DeviceNotFound;
+                }
+                else
+                {
+                    usbDevice.Open();
+
+                    //Get the first config number of the interface
+                    usbDevice.ClaimInterface(usbDevice.Configs[0].Interfaces[0].Number);
+                }
+            }
+
+            return errorCode;
+        }
+
+        /// <summary>
+        /// Closes USB device if open.
+        /// </summary>
+        public void Close()
+        {
+            if (usbDevice != null && usbDevice.IsOpen)
+                usbDevice.Close();
+        }
+        #endregion
+
+
         #region Motor and LED control commands
         /// <summary>
         /// Sends command to start or stop motors individually.
@@ -71,45 +114,5 @@ namespace RoboticArm535Library
             usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
         }
         #endregion
-
-        /// <summary>
-        /// Connects to USB device.
-        /// </summary>
-        /// <returns></returns>
-        public UsbConnErrorCode Connect()
-        {
-            UsbConnErrorCode errorCode = UsbConnErrorCode.NoError;
-            using (var context = new UsbContext())
-            {
-                context.SetDebugLevel(LibUsbDotNet.LogLevel.Info);
-
-                //Get a list of all connected devices
-                usbDevice = context.Find(d => d.VendorId == VendorId && d.ProductId == ProductId);
-
-                if (usbDevice == null)
-                {
-                    Debug.WriteLine($"Unable to find USB device: VID:0x{VendorId:X4} PID:0x{ProductId:X4}.");
-                    errorCode = UsbConnErrorCode.DeviceNotFound;
-                }
-                else
-                {
-                    usbDevice.Open();
-
-                    //Get the first config number of the interface
-                    usbDevice.ClaimInterface(usbDevice.Configs[0].Interfaces[0].Number);
-                }
-            }
-
-            return errorCode;
-        }
-
-        /// <summary>
-        /// Closes USB device if open.
-        /// </summary>
-        public void Close()
-        {
-            if (usbDevice != null && usbDevice.IsOpen)
-                usbDevice.Close();
-        }
     }
 }
