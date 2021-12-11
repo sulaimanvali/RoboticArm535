@@ -58,7 +58,7 @@ namespace RoboticArm535
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to send USB control transfer packet:\r\n" + ex.Message,
+                MessageBox.Show("Failed to send USB command:\r\n" + ex.Message,
                     Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
