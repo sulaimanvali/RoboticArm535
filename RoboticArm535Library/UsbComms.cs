@@ -27,6 +27,16 @@ namespace RoboticArm535Library
             usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
         }
 
+        public void SendCommandMulti(bool ledOn, Motors.Grip grip, Motors.Wrist wrist, Motors.Elbow elbow,
+                                                 Motors.Stem stem, Motors.Base baseMotor)
+        {
+            if (usbDevice == null && !TryConnect())
+                return;
+
+            var buffer = PacketGenerator.GenMultiPress(ledOn, grip, wrist, elbow, stem, baseMotor);
+            usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
+        }
+
         public bool TryConnect()
         {
             bool result = false;
