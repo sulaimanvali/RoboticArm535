@@ -24,7 +24,7 @@ namespace RoboticArm535Library
         /// </summary>
         /// <param name="controlTriggered"></param>
         /// <param name="isPressed"></param>
-        public void SendCommand(ControlTriggered controlTriggered, bool isPressed)
+        public void CmdSingle(ControlTriggered controlTriggered, bool isPressed)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
@@ -43,8 +43,8 @@ namespace RoboticArm535Library
         /// <param name="elbow"></param>
         /// <param name="stem"></param>
         /// <param name="baseMotor"></param>
-        public void SendCommandMulti(Outputs.Led led, Outputs.Grip grip, Outputs.Wrist wrist,
-                                     Outputs.Elbow elbow, Outputs.Stem stem, Outputs.Base baseMotor)
+        public void Cmd(Outputs.Led led, Outputs.Grip grip, Outputs.Wrist wrist,
+                        Outputs.Elbow elbow, Outputs.Stem stem, Outputs.Base baseMotor)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");

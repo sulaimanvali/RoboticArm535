@@ -6,11 +6,11 @@ namespace RoboticArm535Console
 {
     class Program
     {
-        static readonly UsbComms usbComms = new UsbComms();
+        static readonly UsbComms usb = new UsbComms();
 
         static void Main(string[] args)
         {
-            if (usbComms.Connect() != UsbConnErrorCode.NoError)
+            if (usb.Connect() != UsbConnErrorCode.NoError)
             {
                 Console.WriteLine("Unable to connect to USB device.");
                 Console.ReadKey();
@@ -20,20 +20,20 @@ namespace RoboticArm535Console
             Console.WriteLine("Press any key to abort script");
 
             // demonstrates a simple script controlling multiple outputs 
-            usbComms.SendCommandMulti(Outputs.Led.On, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Outputs.Led.On, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
             wait(500);
-            usbComms.SendCommandMulti(Outputs.Led.Off, Outputs.Grip.Open, Outputs.Wrist.Up, Outputs.Elbow.Up, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Outputs.Led.Off, Outputs.Grip.Open, Outputs.Wrist.Up, Outputs.Elbow.Up, Outputs.Stem.Stop, Outputs.Base.Stop);
             wait(3000);
-            usbComms.SendCommandMulti(Outputs.Led.On, Outputs.Grip.Stop, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Outputs.Led.On, Outputs.Grip.Stop, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
             wait(500);
-            usbComms.SendCommandMulti(Outputs.Led.Off, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Outputs.Led.Off, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
             wait(500);
 
             for (int i = 0; i < 7; i++)
             {
-                usbComms.SendCommandMulti(Outputs.Led.On, Outputs.Grip.Open, Outputs.Wrist.Down, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+                usb.Cmd(Outputs.Led.On, Outputs.Grip.Open, Outputs.Wrist.Down, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
                 wait(800);
-                usbComms.SendCommandMulti(Outputs.Led.Off, Outputs.Grip.Close, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+                usb.Cmd(Outputs.Led.Off, Outputs.Grip.Close, Outputs.Wrist.Up, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
                 wait(800);
             }
             stopAll();
@@ -53,7 +53,7 @@ namespace RoboticArm535Console
 
         private static void stopAll()
         {
-            usbComms.SendCommandMulti(Outputs.Led.Off, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
+            usb.Cmd(Outputs.Led.Off, Outputs.Grip.Stop, Outputs.Wrist.Stop, Outputs.Elbow.Stop, Outputs.Stem.Stop, Outputs.Base.Stop);
         }
     }
 }

@@ -53,7 +53,7 @@ namespace RoboticArm535
         {
             try
             {
-                usbComms.SendCommand(control, isPressed);
+                usbComms.CmdSingle(control, isPressed);
                 return true;
             }
             catch (Exception ex)
