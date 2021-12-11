@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RoboticArm535Library
 {
+    public enum UsbConnErrorCode {  NoError, DeviceNotFound }
+
     public class UsbComms
     {
         IUsbDevice usbDevice = null;
@@ -17,29 +18,48 @@ namespace RoboticArm535Library
         readonly UsbSetupPacket setupPacket = new UsbSetupPacket(
             bRequestType: 0x40, bRequest: 6, wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
 
-
+        /// <summary>
+        /// Sends command to start or stop motors individually.
+        /// This can be used for button down or up events.
+        /// </summary>
+        /// <param name="controlTriggered"></param>
+        /// <param name="isPressed"></param>
         public void SendCommand(ControlTriggered controlTriggered, bool isPressed)
         {
-            if (usbDevice == null && !TryConnect())
-                return;
+            if (usbDevice == null || usbDevice.IsOpen)
+                throw new Exception("USB device not connected.");
 
             var buffer = PacketGenerator.GenSinglePress(controlTriggered, isPressed);
             usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
         }
 
+        /// <summary>
+        /// Sends command to start or stop multiple motors simultaneously.
+        /// This can be used in a script or even a user interface that supports multiple button presses.
+        /// </summary>
+        /// <param name="ledOn"></param>
+        /// <param name="grip"></param>
+        /// <param name="wrist"></param>
+        /// <param name="elbow"></param>
+        /// <param name="stem"></param>
+        /// <param name="baseMotor"></param>
         public void SendCommandMulti(bool ledOn, Motors.Grip grip, Motors.Wrist wrist, Motors.Elbow elbow,
                                                  Motors.Stem stem, Motors.Base baseMotor)
         {
-            if (usbDevice == null && !TryConnect())
-                return;
+            if (usbDevice == null || usbDevice.IsOpen)
+                throw new Exception("USB device not connected.");
 
             var buffer = PacketGenerator.GenMultiPress(ledOn, grip, wrist, elbow, stem, baseMotor);
             usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
         }
 
-        public bool TryConnect()
+        /// <summary>
+        /// Connects to USB device.
+        /// </summary>
+        /// <returns></returns>
+        public UsbConnErrorCode Connect()
         {
-            bool result = false;
+            UsbConnErrorCode errorCode = UsbConnErrorCode.NoError;
             using (var context = new UsbContext())
             {
                 context.SetDebugLevel(LibUsbDotNet.LogLevel.Info);
@@ -49,23 +69,24 @@ namespace RoboticArm535Library
 
                 if (usbDevice == null)
                 {
-                    throw new Exception($"Unable to find USB device: VID:0x{VendorId:X4} PID:0x{ProductId:X4}.");
+                    Debug.WriteLine($"Unable to find USB device: VID:0x{VendorId:X4} PID:0x{ProductId:X4}.");
+                    errorCode = UsbConnErrorCode.DeviceNotFound;
                 }
                 else
                 {
-                    //Open the device
                     usbDevice.Open();
 
                     //Get the first config number of the interface
                     usbDevice.ClaimInterface(usbDevice.Configs[0].Interfaces[0].Number);
-
-                    result = true;
                 }
             }
 
-            return result;
+            return errorCode;
         }
 
+        /// <summary>
+        /// Closes USB device if open.
+        /// </summary>
         public void Close()
         {
             if (usbDevice != null && usbDevice.IsOpen)

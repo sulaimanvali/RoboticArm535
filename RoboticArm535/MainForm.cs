@@ -93,12 +93,15 @@ namespace RoboticArm535
         {
             try
             {
-                usbComms.TryConnect();
+                var errorCode = usbComms.Connect();
+                if (errorCode != UsbConnErrorCode.NoError)
+                    MessageBox.Show("Failed to connect to USB device:\r\n" + errorCode,
+                        Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to connect to USB device:\r\n" + ex.Message,
-                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
