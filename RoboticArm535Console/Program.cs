@@ -24,8 +24,8 @@ namespace RoboticArm535Console
             //sendCommandsByOutputs();
             //sendCommandsByBytes();
             //sendCommandsByTimedOpCodeMasks();
-            //sendCommandsByScriptInAppConfig();
-            sendCommandsByScriptInString();
+            sendCommandsByScriptInAppConfig();
+            //sendCommandsByScriptInString();
         }
 
         private static void sendCommandsByOutputs()
@@ -89,12 +89,8 @@ namespace RoboticArm535Console
         {
             try
             {
-                var lines = Properties.Resources.script1_roundOfApplause.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    var action = TimedAction.Parse(lines[i]);
+                foreach (var action in TimedAction.ParseLines(Properties.Resources.script1_roundOfApplause))
                     usb.Cmd(action.OpCode, action.DurationSecs);
-                }
             }
             catch (Exception ex)
             {
@@ -126,12 +122,8 @@ ElbowDown 0.77";
 
             try
             {
-                var lines = script.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    var action = TimedAction.Parse(lines[i]);
+                foreach (var action in TimedAction.ParseLines(script))
                     usb.Cmd(action.OpCode, action.DurationSecs);
-                }
             }
             catch (Exception ex)
             {

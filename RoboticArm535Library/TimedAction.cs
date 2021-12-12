@@ -26,6 +26,16 @@ namespace RoboticArm535Library
             return new TimedAction(Enum.Parse<OpCode>(elems[0]), float.Parse(elems[1]));
         }
 
+        public static TimedAction[] ParseLines(string script)
+        {
+            var lines = script.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            var result = new TimedAction[lines.Length];
+            for (int i = 0; i < lines.Length; i++)
+                result[i] = TimedAction.Parse(lines[i]);
+
+            return result;
+        }
+
         public override string ToString()
         {
             return $"{OpCode} {DurationSecs:F2}";
