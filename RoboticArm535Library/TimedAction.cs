@@ -20,7 +20,7 @@ namespace RoboticArm535Library
 
         public static TimedAction Parse(string opCodeAndDuration)
         {
-            var elems = opCodeAndDuration.Trim().Split();
+            var elems = opCodeAndDuration.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (elems.Length != 2)
                 throw new Exception($"Unable to parse {opCodeAndDuration}. Expected 2 elements.");
             return new TimedAction(Enum.Parse<OpCode>(elems[0]), float.Parse(elems[1]));
@@ -28,7 +28,7 @@ namespace RoboticArm535Library
 
         public static TimedAction[] ParseLines(string script)
         {
-            var lines = script.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            var lines = script.Trim().Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             var result = new TimedAction[lines.Length];
             for (int i = 0; i < lines.Length; i++)
                 result[i] = TimedAction.Parse(lines[i]);
