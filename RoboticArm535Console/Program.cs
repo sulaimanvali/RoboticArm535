@@ -1,5 +1,6 @@
 ﻿using RoboticArm535Library;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace RoboticArm535Console
@@ -22,7 +23,9 @@ namespace RoboticArm535Console
             // demonstrates a simple script controlling multiple outputs simultaneously in different ways
             //sendCommandsByOutputs();
             //sendCommandsByBytes();
-            sendCommandsByTimedOpCodeMasks();
+            //sendCommandsByTimedOpCodeMasks();
+            //sendCommandsByScriptInAppConfig();
+            sendCommandsByScriptInString();
         }
 
         private static void sendCommandsByOutputs()
@@ -80,6 +83,61 @@ namespace RoboticArm535Console
             }
             usb.Cmd(OpCode.WristDown | OpCode.ElbowDown, 1.0f);
             stopAll();
+        }
+
+        private static void sendCommandsByScriptInAppConfig()
+        {
+            try
+            {
+                var lines = Properties.Resources.script1_roundOfApplause.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    var action = TimedAction.Parse(lines[i]);
+                    usb.Cmd(action.OpCode, action.DurationSecs);
+                }
+            }
+            catch (Exception ex)
+            {
+                stopAll();
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private static void sendCommandsByScriptInString()
+        {
+            var script =
+@"LedOn 0.00
+WristUp 0.65
+ElbowUp 1.05
+GripOpen 0.92
+AllOff 0.00
+GripClose 0.85
+LedOn 0.00
+GripOpen 0.92
+AllOff 0.00
+GripClose 0.94
+LedOn 0.00
+GripOpen 0.92
+AllOff 0.00
+GripClose 0.94
+AllOff 0.00
+WristDown 0.80
+ElbowDown 0.77";
+
+            try
+            {
+                var lines = script.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    var action = TimedAction.Parse(lines[i]);
+                    usb.Cmd(action.OpCode, action.DurationSecs);
+                }
+            }
+            catch (Exception ex)
+            {
+                stopAll();
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private static void wait(int durationMs)
