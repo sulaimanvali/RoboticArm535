@@ -1,6 +1,6 @@
 ﻿namespace RoboticArm535Library
 {
-    public enum OpCode : int
+    public enum OpCode : uint
     {
         GripClose  = 0x000001,
         GripOpen   = 0x000002,

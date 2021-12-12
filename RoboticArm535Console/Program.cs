@@ -18,8 +18,6 @@ namespace RoboticArm535Console
                 return;
             }
 
-            Console.WriteLine("Press any key to abort script");
-
             // demonstrates a simple script controlling multiple outputs simultaneously in different ways
             //sendCommandsByOutputs();
             //sendCommandsByBytes();
@@ -30,6 +28,7 @@ namespace RoboticArm535Console
 
         private static void sendCommandsByOutputs()
         {
+            Console.WriteLine("Press any key to abort script");
             usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
             wait(500);
             usb.Cmd(Out.Led.Off, Out.Grip.Open, Out.Wrist.Up, Out.Elbow.Up, Out.Stem.Stop, Out.Base.Stop);
@@ -51,6 +50,7 @@ namespace RoboticArm535Console
 
         private static void sendCommandsByBytes()
         {
+            Console.WriteLine("Press any key to abort script");
             usb.Cmd(Packet.Byte0.ArmStop, Packet.Byte1.BaseStop, Packet.Byte2.LedOn);
             wait(500);
             usb.Cmd(Packet.Byte0.GripOpen | Packet.Byte0.WristUp | Packet.Byte0.ElbowUp, Packet.Byte1.BaseStop, Packet.Byte2.LedOff);
