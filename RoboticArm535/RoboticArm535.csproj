@@ -15,6 +15,9 @@ https://github.com/sulaimanvali/RoboticArm535</Description>
     <SignAssembly>false</SignAssembly>
     <Version>1.0.1</Version>
     <PackageProjectUrl>https://github.com/sulaimanvali/RoboticArm535</PackageProjectUrl>
+    <Company>N/A</Company>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
