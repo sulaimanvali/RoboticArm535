@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace RoboticArm535Library
 {
@@ -17,6 +18,8 @@ namespace RoboticArm535Library
         private const int ProductId = 0x0000;
         readonly UsbSetupPacket setupPacket = new UsbSetupPacket(
             bRequestType: 0x40, bRequest: 6, wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
+
+        public bool LedOn { get; private set; }
 
         #region
         /// <summary>
@@ -60,21 +63,30 @@ namespace RoboticArm535Library
         }
         #endregion
 
+        public void TurnLedOn(bool on)
+        {
+            if (usbDevice == null || !usbDevice.IsOpen)
+                throw new Exception("USB device not connected.");
 
-        #region Motor and LED control commands
+            sendPacket(PacketGenerator.GenSinglePress(on ? OpCode.LedOn : OpCode.AllOff));
+            LedOn = on;
+        }
+
+        #region Motor control commands
         /// <summary>
         /// Sends command to start or stop motors individually.
         /// This can be used for button down or up events.
         /// </summary>
         /// <param name="opCode"></param>
-        /// <param name="isPressed">True when button press is starting, false when it is being released</param>
-        public void CmdSingle(OpCode opCode, bool isPressed)
+        public void MoveMotor(OpCode opCode)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
-            var buffer = PacketGenerator.GenSinglePress(opCode, isPressed);
-            usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
+            if (LedOn)
+                opCode |= OpCode.LedOn;
+
+            sendPacket(PacketGenerator.GenSinglePress(opCode));
         }
 
         /// <summary>
@@ -93,8 +105,7 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
-            var buffer = PacketGenerator.GenMultiPress(led, grip, wrist, elbow, stem, baseMotor);
-            usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
+            sendPacket(PacketGenerator.GenMultiPress(led, grip, wrist, elbow, stem, baseMotor));
         }
 
         /// <summary>
@@ -110,9 +121,40 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
-            var buffer = new byte[] { (byte)byte0, (byte)byte1, (byte)byte2 };
-            usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
+            sendPacket(new byte[] { (byte)byte0, (byte)byte1, (byte)byte2 });
+        }
+
+        /// <summary>
+        /// Sends command to start or stop motors individually.
+        /// This can be used for button down or up events.
+        /// </summary>
+        /// <param name="opCode"></param>
+        /// <param name="durationSecs">Time duration in seconds between turning on and off the given command.
+        /// 0 to leave on and return immediately.</param>
+        public void Cmd(OpCode opCode, float durationSecs)
+        {
+            if (usbDevice == null || !usbDevice.IsOpen)
+                throw new Exception("USB device not connected.");
+
+            if (LedOn)
+                opCode |= OpCode.LedOn;
+
+            sendPacket(PacketGenerator.GenSinglePress(opCode));
+
+            if (durationSecs == 0)
+                return;
+
+            Thread.Sleep((int)(durationSecs * 1000));
+            Debug.WriteLine("sleep " + durationSecs);
+
+            sendPacket(PacketGenerator.GenSinglePress(LedOn ? OpCode.LedOn : OpCode.AllOff));
         }
         #endregion
+
+        private void sendPacket(byte[] buffer)
+        {
+            usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
+            Debug.WriteLine(BitConverter.ToString(buffer));
+        }
     }
 }

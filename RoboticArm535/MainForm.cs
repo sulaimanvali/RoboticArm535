@@ -49,11 +49,29 @@ namespace RoboticArm535
             }
         }
 
-        private bool sendCommand(OpCode control, bool isPressed)
+        private bool sendLedCommand(bool on)
         {
             try
             {
-                usbComms.CmdSingle(control, isPressed);
+                usbComms.TurnLedOn(on);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to send USB command:\r\n" + ex.Message,
+                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+
+        private bool sendMotorCommand(OpCode opCode, bool isPressed)
+        {
+            try
+            {
+                if (isPressed)
+                    usbComms.MoveMotor(opCode);
+                else
+                    usbComms.MoveMotor(OpCode.AllOff);
                 return true;
             }
             catch (Exception ex)
@@ -82,27 +100,27 @@ namespace RoboticArm535
 
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
         {
-            sendCommand(OpCode.Led, checkBox_LED.Checked);
+            sendLedCommand(checkBox_LED.Checked);
         }
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
         {
-            sendCommand((OpCode)(sender as Button).Tag, isPressed: false);
+            sendMotorCommand((OpCode)(sender as Button).Tag, isPressed: false);
         }
 
         private void Button_MouseDown(object sender, MouseEventArgs e)
         {
-            sendCommand((OpCode)(sender as Button).Tag, isPressed: true);
+            sendMotorCommand((OpCode)(sender as Button).Tag, isPressed: true);
         }
 
         private void Button_KeyUp(object sender, KeyEventArgs e)
         {
-            sendCommand((OpCode)(sender as Button).Tag, isPressed: false);
+            sendMotorCommand((OpCode)(sender as Button).Tag, isPressed: false);
         }
 
         private void Button_KeyDown(object sender, KeyEventArgs e)
         {
-            sendCommand((OpCode)(sender as Button).Tag, isPressed: true);
+            sendMotorCommand((OpCode)(sender as Button).Tag, isPressed: true);
         }
 
         private void linkLabel_Reconnect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -117,6 +135,7 @@ namespace RoboticArm535
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            sendLedCommand(false);
             usbComms.Close();
         }
     }
