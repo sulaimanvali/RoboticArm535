@@ -29,6 +29,7 @@ namespace RoboticArm535
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button_GripOpen = new System.Windows.Forms.Button();
             this.checkBox_LED = new System.Windows.Forms.CheckBox();
@@ -50,6 +51,12 @@ namespace RoboticArm535
             this.reconnectUSBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button_Clear = new System.Windows.Forms.Button();
+            this.button_Replay = new System.Windows.Forms.Button();
+            this.checkBox_Record = new System.Windows.Forms.CheckBox();
+            this.label_TimeButtonPressed = new System.Windows.Forms.Label();
+            this.timer_ButtonPresses = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox_TimedActions = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -215,7 +222,7 @@ namespace RoboticArm535
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(376, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(763, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -249,11 +256,70 @@ namespace RoboticArm535
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // button_Clear
+            // 
+            this.button_Clear.Location = new System.Drawing.Point(432, 501);
+            this.button_Clear.Name = "button_Clear";
+            this.button_Clear.Size = new System.Drawing.Size(75, 23);
+            this.button_Clear.TabIndex = 14;
+            this.button_Clear.Text = "Clear";
+            this.button_Clear.UseVisualStyleBackColor = true;
+            this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
+            // 
+            // button_Replay
+            // 
+            this.button_Replay.Location = new System.Drawing.Point(513, 501);
+            this.button_Replay.Name = "button_Replay";
+            this.button_Replay.Size = new System.Drawing.Size(75, 23);
+            this.button_Replay.TabIndex = 15;
+            this.button_Replay.Text = "Replay";
+            this.button_Replay.UseVisualStyleBackColor = true;
+            this.button_Replay.Click += new System.EventHandler(this.button_Replay_Click);
+            // 
+            // checkBox_Record
+            // 
+            this.checkBox_Record.AutoSize = true;
+            this.checkBox_Record.Location = new System.Drawing.Point(432, 35);
+            this.checkBox_Record.Name = "checkBox_Record";
+            this.checkBox_Record.Size = new System.Drawing.Size(143, 19);
+            this.checkBox_Record.TabIndex = 12;
+            this.checkBox_Record.Text = "Record Button Presses";
+            this.checkBox_Record.UseVisualStyleBackColor = true;
+            this.checkBox_Record.CheckedChanged += new System.EventHandler(this.checkBox_Record_CheckedChanged);
+            // 
+            // label_TimeButtonPressed
+            // 
+            this.label_TimeButtonPressed.AutoSize = true;
+            this.label_TimeButtonPressed.Font = new System.Drawing.Font("Consolas", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label_TimeButtonPressed.Location = new System.Drawing.Point(609, 33);
+            this.label_TimeButtonPressed.Name = "label_TimeButtonPressed";
+            this.label_TimeButtonPressed.Size = new System.Drawing.Size(40, 22);
+            this.label_TimeButtonPressed.TabIndex = 16;
+            this.label_TimeButtonPressed.Text = "---";
+            // 
+            // timer_ButtonPresses
+            // 
+            this.timer_ButtonPresses.Tick += new System.EventHandler(this.timer_ButtonPresses_Tick);
+            // 
+            // richTextBox_TimedActions
+            // 
+            this.richTextBox_TimedActions.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.richTextBox_TimedActions.Location = new System.Drawing.Point(432, 58);
+            this.richTextBox_TimedActions.Name = "richTextBox_TimedActions";
+            this.richTextBox_TimedActions.Size = new System.Drawing.Size(319, 434);
+            this.richTextBox_TimedActions.TabIndex = 13;
+            this.richTextBox_TimedActions.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 533);
+            this.ClientSize = new System.Drawing.Size(763, 533);
+            this.Controls.Add(this.richTextBox_TimedActions);
+            this.Controls.Add(this.label_TimeButtonPressed);
+            this.Controls.Add(this.checkBox_Record);
+            this.Controls.Add(this.button_Replay);
+            this.Controls.Add(this.button_Clear);
             this.Controls.Add(this.button_StemBack);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button_BaseRight);
@@ -307,6 +373,12 @@ namespace RoboticArm535
         private System.Windows.Forms.ToolStripMenuItem reconnectUSBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Button button_Clear;
+        private System.Windows.Forms.Button button_Replay;
+        private System.Windows.Forms.CheckBox checkBox_Record;
+        private System.Windows.Forms.Label label_TimeButtonPressed;
+        private System.Windows.Forms.Timer timer_ButtonPresses;
+        private System.Windows.Forms.RichTextBox richTextBox_TimedActions;
     }
 }
 

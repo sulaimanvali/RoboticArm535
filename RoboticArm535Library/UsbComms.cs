@@ -136,6 +136,9 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
+            if (opCode == OpCode.LedOn)
+                LedOn = true;
+
             if (LedOn)
                 opCode |= OpCode.LedOn;
 

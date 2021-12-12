@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RoboticArm535Library;
@@ -15,6 +16,7 @@ namespace RoboticArm535
     public partial class MainForm : Form
     {
         private UsbComms usbComms = new UsbComms();
+        private Stopwatch stopwatch = new Stopwatch();
 
         public MainForm()
         {
@@ -82,6 +84,21 @@ namespace RoboticArm535
             }
         }
 
+        private bool sendTimedMotorCommand(OpCode opCode, float durationSecs)
+        {
+            try
+            {
+                usbComms.Cmd(opCode, durationSecs);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to send USB command:\r\n" + ex.Message,
+                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+
         private void connectUSB()
         {
             try
@@ -98,29 +115,55 @@ namespace RoboticArm535
             }
         }
 
+        private void buttonPressStarted(object sender)
+        {
+            var opCode = (OpCode)(sender as Button).Tag;
+            stopwatch.Restart();
+            sendMotorCommand(opCode, isPressed: true);
+        }
+
+        private void buttonPressEnded(object sender)
+        {
+            var opCode = (OpCode)(sender as Button).Tag;
+            stopwatch.Stop();
+            sendMotorCommand(opCode, isPressed: false);
+            recordAction(opCode);
+        }
+
+        private void recordAction(OpCode opCode)
+        {
+            if (!checkBox_Record.Checked)
+                return;
+
+            var timedAction = new TimedAction(opCode, stopwatch.ElapsedMilliseconds / 1000.0f);
+            richTextBox_TimedActions.AppendText(timedAction + "\r\n");
+        }
+
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
         {
+            stopwatch.Reset();
             sendLedCommand(checkBox_LED.Checked);
+            recordAction(checkBox_LED.Checked ? OpCode.LedOn : OpCode.AllOff);
         }
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
         {
-            sendMotorCommand((OpCode)(sender as Button).Tag, isPressed: false);
+            buttonPressEnded(sender);
         }
 
         private void Button_MouseDown(object sender, MouseEventArgs e)
         {
-            sendMotorCommand((OpCode)(sender as Button).Tag, isPressed: true);
+            buttonPressStarted(sender);
         }
 
         private void Button_KeyUp(object sender, KeyEventArgs e)
         {
-            sendMotorCommand((OpCode)(sender as Button).Tag, isPressed: false);
+            buttonPressEnded(sender);
         }
 
         private void Button_KeyDown(object sender, KeyEventArgs e)
         {
-            sendMotorCommand((OpCode)(sender as Button).Tag, isPressed: true);
+            buttonPressStarted(sender);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -133,6 +176,46 @@ namespace RoboticArm535
             connectUSB();
         }
 
+        private void timer_ButtonPresses_Tick(object sender, EventArgs e)
+        {
+            label_TimeButtonPressed.Text = $"{(stopwatch.ElapsedMilliseconds/1000.0f):F2} s";
+        }
+
+        private void checkBox_Record_CheckedChanged(object sender, EventArgs e)
+        {
+            stopwatch.Reset();
+            if (checkBox_Record.Checked)
+                timer_ButtonPresses.Start();
+            else
+                timer_ButtonPresses.Stop();
+        }
+
+        private void button_Clear_Click(object sender, EventArgs e)
+        {
+            richTextBox_TimedActions.Clear();
+        }
+
+        private void button_Replay_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var lines = richTextBox_TimedActions.Text.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    var action = TimedAction.Parse(richTextBox_TimedActions.Lines[i]);
+                    if (action.OpCode == OpCode.AllOff)
+                        sendLedCommand(false);
+                    else
+                        sendTimedMotorCommand(action.OpCode, action.DurationSecs);
+                }
+            }
+            catch (Exception ex)
+            {
+                sendMotorCommand(OpCode.AllOff, false);
+                MessageBox.Show("Error parsing commands script:\r\n" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             connectUSB();
@@ -140,8 +223,12 @@ namespace RoboticArm535
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            sendLedCommand(false);
-            usbComms.Close();
+            try
+            {
+                sendLedCommand(false); // we don't want any motors running after we close
+                usbComms.Close();
+            }
+            catch { }
         }
     }
 }
