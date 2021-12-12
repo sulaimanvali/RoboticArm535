@@ -126,9 +126,9 @@ namespace RoboticArm535Library
 
         /// <summary>
         /// Sends command to start or stop motors individually.
-        /// This can be used for button down or up events.
+        /// This can be used for button down or up events or in a script.
         /// </summary>
-        /// <param name="opCode"></param>
+        /// <param name="opCode">Enum values can be or'd together but they should make sense.</param>
         /// <param name="durationSecs">Time duration in seconds between turning on and off the given command.
         /// 0 to leave on and return immediately.</param>
         public void Cmd(OpCode opCode, float durationSecs)
