@@ -6,7 +6,9 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>images\robotic_arm_96_i5D_icon.ico</ApplicationIcon>
     <Authors>Sulaiman Vali</Authors>
-    <Description>Controls the OWI-535 Robotic Arm Edge via USB interface.</Description>
+    <Description>Controls the OWI-535 Robotic Arm Edge via USB interface.
+Developed by Sulaiman.Vali@gmail.com
+https://github.com/sulaimanvali/RoboticArm535</Description>
     <Copyright>Sulaiman Vali</Copyright>
     <PackageIcon>robotic_arm_96.png</PackageIcon>
     <PackageIconUrl />

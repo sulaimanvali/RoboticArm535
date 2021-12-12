@@ -123,7 +123,12 @@ namespace RoboticArm535
             sendMotorCommand((OpCode)(sender as Button).Tag, isPressed: true);
         }
 
-        private void linkLabel_Reconnect_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutBox().ShowDialog();
+        }
+
+        private void reconnectUSBToolStripMenuItem_Click(object sender, EventArgs e)
         {
             connectUSB();
         }
