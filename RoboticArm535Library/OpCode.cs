@@ -12,7 +12,7 @@
         StemAhead  = 0x000080,
         BaseRight  = 0x000100,
         BaseLeft   = 0x000200,
-        AllOff     = 0x000000, // all off
+        AllOff     = 0x000000, // all off, including LED
         LedOn      = 0x010000
     }
 }
