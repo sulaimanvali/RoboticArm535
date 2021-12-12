@@ -138,6 +138,8 @@ namespace RoboticArm535Library
 
             if (opCode == OpCode.LedOn)
                 LedOn = true;
+            else if (opCode == OpCode.AllOff)
+                LedOn = false;
 
             if (LedOn)
                 opCode |= OpCode.LedOn;
@@ -149,7 +151,7 @@ namespace RoboticArm535Library
 
             Thread.Sleep((int)(durationSecs * 1000));
 
-            // turn off everything except LED
+            // turn off everything except LED if it was on
             sendPacket(PacketGenerator.GenSinglePress(LedOn ? OpCode.LedOn : OpCode.AllOff));
         }
         #endregion
