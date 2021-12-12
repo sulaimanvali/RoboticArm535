@@ -63,7 +63,7 @@ namespace RoboticArm535Library
         }
         #endregion
 
-        public void TurnLedOn(bool on)
+        public void TurnLed(bool on)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
@@ -148,8 +148,8 @@ namespace RoboticArm535Library
                 return;
 
             Thread.Sleep((int)(durationSecs * 1000));
-            Debug.WriteLine("sleep " + durationSecs);
 
+            // turn off everything except LED
             sendPacket(PacketGenerator.GenSinglePress(LedOn ? OpCode.LedOn : OpCode.AllOff));
         }
         #endregion

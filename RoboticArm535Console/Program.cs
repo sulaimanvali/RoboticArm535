@@ -67,17 +67,18 @@ namespace RoboticArm535Console
 
         private static void sendCommandsByTimedOpCodeMasks()
         {
-            usb.TurnLedOn(true);
+            usb.TurnLed(true);
             usb.Cmd(OpCode.WristUp, 1.0f);
             usb.Cmd(OpCode.ElbowUp, 1.0f);
 
             for (int i = 0; i < 5; i++)
             {
                 usb.Cmd(OpCode.GripOpen | OpCode.WristUp, 0.8f);
-                usb.TurnLedOn(true);
+                usb.TurnLed(true);
                 usb.Cmd(OpCode.GripClose | OpCode.WristDown, 0.8f);
-                usb.TurnLedOn(false);
+                usb.TurnLed(false);
             }
+            usb.Cmd(OpCode.WristDown | OpCode.ElbowDown, 1.0f);
             stopAll();
         }
 

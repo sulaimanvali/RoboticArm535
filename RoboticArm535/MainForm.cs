@@ -51,11 +51,11 @@ namespace RoboticArm535
             }
         }
 
-        private bool sendLedCommand(bool on)
+        private bool sendLedCommand(bool isOn)
         {
             try
             {
-                usbComms.TurnLedOn(on);
+                usbComms.TurnLed(isOn);
                 return true;
             }
             catch (Exception ex)
