@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoboticArm535Linrary
+namespace RoboticArm535Library
 {
     public class TimedAction
     {
@@ -20,7 +20,7 @@ namespace RoboticArm535Linrary
 
         public static TimedAction Parse(string opCodeAndDuration)
         {
-            var elems = opCodeAndDuration.Split();
+            var elems = opCodeAndDuration.Trim().Split();
             if (elems.Length != 2)
                 throw new Exception($"Unable to parse {opCodeAndDuration}. Expected 2 elements.");
             return new TimedAction(Enum.Parse<OpCode>(elems[0]), float.Parse(elems[1]));
