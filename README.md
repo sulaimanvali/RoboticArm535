@@ -10,3 +10,5 @@ If you write scripts to control it, you have to send the appropriate command to 
 If you are having USB driver issues, install the libusb-win32 driver explicitly via Device Manager.
 
 ![alt text](https://github.com/sulaimanvali/RoboticArm535/blob/master/RoboticArm535/images/Screenshot1.png)
+
+![alt text](https://github.com/sulaimanvali/RoboticArm535/blob/master/RoboticArm535/images/Screenshot2_AboutBox.png)
