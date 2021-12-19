@@ -200,13 +200,8 @@ namespace RoboticArm535
         {
             try
             {
-                var lines = textBox_TimedActions.Text.Split('\n', StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 0; i < lines.Length; i++)
+                foreach (var action in TimedAction.ParseLines(textBox_TimedActions.Text))
                 {
-                    var cmd = textBox_TimedActions.Lines[i];
-                    if (cmd.Trim() == "")
-                        continue;
-                    var action = TimedAction.Parse(cmd);
                     if (action.OpCode == OpCode.AllOff)
                         sendLedCommand(false);
                     else
