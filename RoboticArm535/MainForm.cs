@@ -225,7 +225,8 @@ namespace RoboticArm535
         {
             try
             {
-                sendLedCommand(false); // we don't want any motors running after we close
+                usbComms.TurnLed(false);
+                usbComms.MoveMotor(OpCode.AllOff); // we don't want any motors running after we close
                 usbComms.Close();
             }
             catch { }
