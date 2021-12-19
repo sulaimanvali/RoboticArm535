@@ -56,7 +56,7 @@ namespace RoboticArm535
             this.checkBox_Record = new System.Windows.Forms.CheckBox();
             this.label_TimeButtonPressed = new System.Windows.Forms.Label();
             this.timer_ButtonPresses = new System.Windows.Forms.Timer(this.components);
-            this.richTextBox_TimedActions = new System.Windows.Forms.RichTextBox();
+            this.textBox_TimedActions = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -301,21 +301,24 @@ namespace RoboticArm535
             // 
             this.timer_ButtonPresses.Tick += new System.EventHandler(this.timer_ButtonPresses_Tick);
             // 
-            // richTextBox_TimedActions
+            // textBox_TimedActions
             // 
-            this.richTextBox_TimedActions.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox_TimedActions.Location = new System.Drawing.Point(432, 58);
-            this.richTextBox_TimedActions.Name = "richTextBox_TimedActions";
-            this.richTextBox_TimedActions.Size = new System.Drawing.Size(319, 434);
-            this.richTextBox_TimedActions.TabIndex = 13;
-            this.richTextBox_TimedActions.Text = "";
+            this.textBox_TimedActions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_TimedActions.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox_TimedActions.Location = new System.Drawing.Point(432, 61);
+            this.textBox_TimedActions.Multiline = true;
+            this.textBox_TimedActions.Name = "textBox_TimedActions";
+            this.textBox_TimedActions.Size = new System.Drawing.Size(319, 434);
+            this.textBox_TimedActions.TabIndex = 17;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(763, 533);
-            this.Controls.Add(this.richTextBox_TimedActions);
+            this.Controls.Add(this.textBox_TimedActions);
             this.Controls.Add(this.label_TimeButtonPressed);
             this.Controls.Add(this.checkBox_Record);
             this.Controls.Add(this.button_Replay);
@@ -378,7 +381,7 @@ namespace RoboticArm535
         private System.Windows.Forms.CheckBox checkBox_Record;
         private System.Windows.Forms.Label label_TimeButtonPressed;
         private System.Windows.Forms.Timer timer_ButtonPresses;
-        private System.Windows.Forms.RichTextBox richTextBox_TimedActions;
+        private System.Windows.Forms.TextBox textBox_TimedActions;
     }
 }
 

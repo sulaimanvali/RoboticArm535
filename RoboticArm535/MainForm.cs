@@ -136,7 +136,7 @@ namespace RoboticArm535
                 return;
 
             var timedAction = new TimedAction(opCode, stopwatch.ElapsedMilliseconds / 1000.0f);
-            richTextBox_TimedActions.AppendText(timedAction + "\r\n");
+            textBox_TimedActions.AppendText(timedAction + "\r\n");
         }
 
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
@@ -192,17 +192,17 @@ namespace RoboticArm535
 
         private void button_Clear_Click(object sender, EventArgs e)
         {
-            richTextBox_TimedActions.Clear();
+            textBox_TimedActions.Clear();
         }
 
         private void button_Replay_Click(object sender, EventArgs e)
         {
             try
             {
-                var lines = richTextBox_TimedActions.Text.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+                var lines = textBox_TimedActions.Text.Split('\n', StringSplitOptions.RemoveEmptyEntries);
                 for (int i = 0; i < lines.Length; i++)
                 {
-                    var action = TimedAction.Parse(richTextBox_TimedActions.Lines[i]);
+                    var action = TimedAction.Parse(textBox_TimedActions.Lines[i]);
                     if (action.OpCode == OpCode.AllOff)
                         sendLedCommand(false);
                     else
