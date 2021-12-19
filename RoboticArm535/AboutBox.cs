@@ -16,7 +16,7 @@ namespace RoboticArm535
             InitializeComponent();
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
+            this.labelVersion.Text = String.Format("Version {0}", Application.ProductVersion);
             this.labelCopyright.Text = AssemblyCopyright;
             this.textBoxDescription.Text = AssemblyDescription;
         }
@@ -37,14 +37,6 @@ namespace RoboticArm535
                     }
                 }
                 return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
-            }
-        }
-
-        public string AssemblyVersion
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
             }
         }
 
