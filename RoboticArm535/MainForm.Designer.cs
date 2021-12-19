@@ -59,6 +59,10 @@ namespace RoboticArm535
             this.textBox_TimedActions = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.listBox_Commands = new System.Windows.Forms.ListBox();
+            this.saveFileDialog_Script = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog_Script = new System.Windows.Forms.OpenFileDialog();
+            this.button_Save = new System.Windows.Forms.Button();
+            this.button_Open = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -312,12 +316,12 @@ namespace RoboticArm535
             this.textBox_TimedActions.Multiline = true;
             this.textBox_TimedActions.Name = "textBox_TimedActions";
             this.textBox_TimedActions.Size = new System.Drawing.Size(252, 434);
-            this.textBox_TimedActions.TabIndex = 17;
+            this.textBox_TimedActions.TabIndex = 13;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(691, 68);
+            this.label4.Location = new System.Drawing.Point(693, 68);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(119, 15);
             this.label4.TabIndex = 19;
@@ -327,17 +331,53 @@ namespace RoboticArm535
             // 
             this.listBox_Commands.FormattingEnabled = true;
             this.listBox_Commands.ItemHeight = 15;
-            this.listBox_Commands.Location = new System.Drawing.Point(691, 86);
+            this.listBox_Commands.Location = new System.Drawing.Point(693, 86);
             this.listBox_Commands.Name = "listBox_Commands";
             this.listBox_Commands.Size = new System.Drawing.Size(132, 229);
-            this.listBox_Commands.TabIndex = 20;
+            this.listBox_Commands.TabIndex = 16;
             this.listBox_Commands.SelectedIndexChanged += new System.EventHandler(this.listBox_Commands_SelectedIndexChanged);
+            // 
+            // saveFileDialog_Script
+            // 
+            this.saveFileDialog_Script.DefaultExt = "535script";
+            this.saveFileDialog_Script.Filter = "RoboticArm535 Scripts|*.535script|All files|*.*";
+            this.saveFileDialog_Script.Title = "Save Script";
+            // 
+            // openFileDialog_Script
+            // 
+            this.openFileDialog_Script.DefaultExt = "535script";
+            this.openFileDialog_Script.Filter = "RoboticArm535 Scripts|*.535script|All files|*.*";
+            this.openFileDialog_Script.Title = "Open Script";
+            // 
+            // button_Save
+            // 
+            this.button_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Save.Location = new System.Drawing.Point(693, 471);
+            this.button_Save.Name = "button_Save";
+            this.button_Save.Size = new System.Drawing.Size(132, 23);
+            this.button_Save.TabIndex = 17;
+            this.button_Save.Text = "&Save Script";
+            this.button_Save.UseVisualStyleBackColor = true;
+            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
+            // 
+            // button_Open
+            // 
+            this.button_Open.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Open.Location = new System.Drawing.Point(693, 442);
+            this.button_Open.Name = "button_Open";
+            this.button_Open.Size = new System.Drawing.Size(132, 23);
+            this.button_Open.TabIndex = 16;
+            this.button_Open.Text = "&Open Script";
+            this.button_Open.UseVisualStyleBackColor = true;
+            this.button_Open.Click += new System.EventHandler(this.button_Open_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(835, 533);
+            this.Controls.Add(this.button_Open);
+            this.Controls.Add(this.button_Save);
             this.Controls.Add(this.listBox_Commands);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_TimedActions);
@@ -406,6 +446,10 @@ namespace RoboticArm535
         private System.Windows.Forms.TextBox textBox_TimedActions;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox_Commands;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog_Script;
+        private System.Windows.Forms.OpenFileDialog openFileDialog_Script;
+        private System.Windows.Forms.Button button_Save;
+        private System.Windows.Forms.Button button_Open;
     }
 }
 

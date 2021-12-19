@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,6 +16,7 @@ namespace RoboticArm535
 {
     public partial class MainForm : Form
     {
+        private readonly string ScriptsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.ProductName);
         private UsbComms usbComms = new UsbComms();
         private Stopwatch stopwatch = new Stopwatch();
 
@@ -24,6 +26,10 @@ namespace RoboticArm535
 
             this.Text = $"{Application.ProductName} V{Application.ProductVersion}";
             listBox_Commands.DataSource = Enum.GetValues<OpCode>();
+            textBox_TimedActions.Clear();
+
+            openFileDialog_Script.InitialDirectory = 
+                saveFileDialog_Script.InitialDirectory = ScriptsFolder;
 
             var buttons = new Button[] {
                 button_GripOpen , button_GripClose,
@@ -218,6 +224,23 @@ namespace RoboticArm535
         private void listBox_Commands_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBox_TimedActions.AppendText((OpCode)listBox_Commands.SelectedItem + " 1.0\r\n");
+        }
+
+        private void button_Save_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(ScriptsFolder))
+                try { Directory.CreateDirectory(ScriptsFolder); } catch { }
+
+            if (saveFileDialog_Script.ShowDialog() == DialogResult.OK)
+                File.WriteAllText(saveFileDialog_Script.FileName, textBox_TimedActions.Text);
+        }
+
+        private void button_Open_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog_Script.ShowDialog() == DialogResult.OK)
+            {
+                textBox_TimedActions.Text = File.ReadAllText(openFileDialog_Script.FileName);
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
