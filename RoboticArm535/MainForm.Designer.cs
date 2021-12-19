@@ -69,11 +69,11 @@ namespace RoboticArm535
             // button_GripOpen
             // 
             this.button_GripOpen.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_GripOpen.Location = new System.Drawing.Point(109, 68);
+            this.button_GripOpen.Location = new System.Drawing.Point(102, 68);
             this.button_GripOpen.Name = "button_GripOpen";
-            this.button_GripOpen.Size = new System.Drawing.Size(79, 36);
+            this.button_GripOpen.Size = new System.Drawing.Size(111, 36);
             this.button_GripOpen.TabIndex = 2;
-            this.button_GripOpen.Text = "Open";
+            this.button_GripOpen.Text = "◄ Open ►";
             this.button_GripOpen.UseVisualStyleBackColor = true;
             // 
             // checkBox_LED
@@ -91,9 +91,9 @@ namespace RoboticArm535
             // button_GripClose
             // 
             this.button_GripClose.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_GripClose.Location = new System.Drawing.Point(194, 68);
+            this.button_GripClose.Location = new System.Drawing.Point(219, 68);
             this.button_GripClose.Name = "button_GripClose";
-            this.button_GripClose.Size = new System.Drawing.Size(79, 36);
+            this.button_GripClose.Size = new System.Drawing.Size(66, 36);
             this.button_GripClose.TabIndex = 3;
             this.button_GripClose.Text = "Close";
             this.button_GripClose.UseVisualStyleBackColor = true;
