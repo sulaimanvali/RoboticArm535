@@ -13,7 +13,7 @@ https://github.com/sulaimanvali/RoboticArm535</Description>
     <PackageIcon>robotic_arm_96.png</PackageIcon>
     <PackageIconUrl />
     <SignAssembly>false</SignAssembly>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <PackageProjectUrl>https://github.com/sulaimanvali/RoboticArm535</PackageProjectUrl>
     <Company>N/A</Company>
     <AssemblyVersion>1.0.2.0</AssemblyVersion>
