@@ -23,6 +23,7 @@ namespace RoboticArm535
             InitializeComponent();
 
             this.Text = $"{Application.ProductName} V{Application.ProductVersion}";
+            listBox_Commands.DataSource = Enum.GetValues<OpCode>();
 
             var buttons = new Button[] {
                 button_GripOpen , button_GripClose,
@@ -214,6 +215,11 @@ namespace RoboticArm535
                 sendMotorCommand(OpCode.AllOff, false);
                 MessageBox.Show("Error parsing commands script:\r\n" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void listBox_Commands_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBox_TimedActions.AppendText((OpCode)listBox_Commands.SelectedItem + " 1.0\r\n");
         }
 
         private void MainForm_Load(object sender, EventArgs e)

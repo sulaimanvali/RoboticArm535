@@ -57,6 +57,8 @@ namespace RoboticArm535
             this.label_TimeButtonPressed = new System.Windows.Forms.Label();
             this.timer_ButtonPresses = new System.Windows.Forms.Timer(this.components);
             this.textBox_TimedActions = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.listBox_Commands = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -222,7 +224,7 @@ namespace RoboticArm535
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(763, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(835, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -303,21 +305,41 @@ namespace RoboticArm535
             // 
             // textBox_TimedActions
             // 
-            this.textBox_TimedActions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_TimedActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox_TimedActions.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBox_TimedActions.Location = new System.Drawing.Point(432, 61);
             this.textBox_TimedActions.Multiline = true;
             this.textBox_TimedActions.Name = "textBox_TimedActions";
-            this.textBox_TimedActions.Size = new System.Drawing.Size(319, 434);
+            this.textBox_TimedActions.Size = new System.Drawing.Size(252, 434);
             this.textBox_TimedActions.TabIndex = 17;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(691, 68);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(119, 15);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Click to Add for 1.0 s:";
+            // 
+            // listBox_Commands
+            // 
+            this.listBox_Commands.FormattingEnabled = true;
+            this.listBox_Commands.ItemHeight = 15;
+            this.listBox_Commands.Location = new System.Drawing.Point(691, 86);
+            this.listBox_Commands.Name = "listBox_Commands";
+            this.listBox_Commands.Size = new System.Drawing.Size(132, 229);
+            this.listBox_Commands.TabIndex = 20;
+            this.listBox_Commands.SelectedIndexChanged += new System.EventHandler(this.listBox_Commands_SelectedIndexChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 533);
+            this.ClientSize = new System.Drawing.Size(835, 533);
+            this.Controls.Add(this.listBox_Commands);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_TimedActions);
             this.Controls.Add(this.label_TimeButtonPressed);
             this.Controls.Add(this.checkBox_Record);
@@ -382,6 +404,8 @@ namespace RoboticArm535
         private System.Windows.Forms.Label label_TimeButtonPressed;
         private System.Windows.Forms.Timer timer_ButtonPresses;
         private System.Windows.Forms.TextBox textBox_TimedActions;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox listBox_Commands;
     }
 }
 
