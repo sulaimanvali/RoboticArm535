@@ -16,7 +16,7 @@ namespace RoboticArm535
 {
     public partial class MainForm : Form
     {
-        private readonly string ScriptsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.ProductName);
+        private readonly string ScriptsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.ProductName+"_scripts");
         private UsbComms usbComms = new UsbComms();
         private Stopwatch stopwatch = new Stopwatch();
 
@@ -239,7 +239,10 @@ namespace RoboticArm535
         {
             if (openFileDialog_Script.ShowDialog() == DialogResult.OK)
             {
-                textBox_TimedActions.Text = File.ReadAllText(openFileDialog_Script.FileName);
+                var fileText = File.ReadAllText(openFileDialog_Script.FileName);
+                if (textBox_TimedActions.Text != "")
+                    if (MessageBox.Show("Replace existing script?", Application.ProductName, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                        textBox_TimedActions.Text = fileText;
             }
         }
 
