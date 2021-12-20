@@ -12,3 +12,6 @@ If you are having USB driver issues, install the libusb-win32 driver explicitly 
 ![alt text](https://github.com/sulaimanvali/RoboticArm535/blob/master/RoboticArm535/images/Screenshot1.png)
 
 ![alt text](https://github.com/sulaimanvali/RoboticArm535/blob/master/RoboticArm535/images/Screenshot2_AboutBox.png)
+
+
+You can also use the RoboticArm535Library DLL to write your own console application to control the robotic arm as you please. See https://github.com/sulaimanvali/RoboticArm535/blob/master/RoboticArm535Console/Program.cs as an example.
