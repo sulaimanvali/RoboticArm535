@@ -117,23 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="script1_roundOfApplause" xml:space="preserve">
-    <value>LedOn 0.00
-WristUp 0.65
-ElbowUp 1.05
-GripOpen 0.92
-AllOff 0.00
-GripClose 0.85
-LedOn 0.00
-GripOpen 0.92
-AllOff 0.00
-GripClose 0.94
-LedOn 0.00
-GripOpen 0.92
-AllOff 0.00
-GripClose 0.94
-AllOff 0.00
-WristDown 0.80
-ElbowDown 0.77</value>
-  </data>
 </root>

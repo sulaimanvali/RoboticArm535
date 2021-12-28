@@ -142,6 +142,20 @@ namespace RoboticArm535Library
             // turn off everything except LED if it was on
             sendPacket(PacketGenerator.GenSinglePress(LedOn ? OpCode.LedOn : OpCode.AllOff));
         }
+
+        public void RunScript(string script)
+        {
+            try
+            {
+                foreach (var action in TimedAction.ParseLines(script))
+                    Cmd(action.OpCode, action.DurationSecs);
+            }
+            catch (Exception)
+            {
+                Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
+                throw;
+            }
+        }
         #endregion
 
         private void sendPacket(byte[] buffer)

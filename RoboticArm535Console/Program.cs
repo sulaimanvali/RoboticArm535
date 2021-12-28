@@ -21,7 +21,6 @@ namespace RoboticArm535Console
             // demonstrates a simple script controlling multiple outputs simultaneously in different ways
             //sendCommandsByOutputs();
             //sendCommandsByTimedOpCodeMasks();
-            //sendCommandsByScriptInAppConfig();
             sendCommandsByScriptInString();
         }
 
@@ -64,20 +63,6 @@ namespace RoboticArm535Console
             stopAll();
         }
 
-        private static void sendCommandsByScriptInAppConfig()
-        {
-            try
-            {
-                foreach (var action in TimedAction.ParseLines(Properties.Resources.script1_roundOfApplause))
-                    usb.Cmd(action.OpCode, action.DurationSecs);
-            }
-            catch (Exception ex)
-            {
-                stopAll();
-                Console.WriteLine(ex.Message);
-            }
-        }
-
         private static void sendCommandsByScriptInString()
         {
             var script =
@@ -99,16 +84,7 @@ AllOff 0.00
 WristDown 0.80
 ElbowDown 0.77";
 
-            try
-            {
-                foreach (var action in TimedAction.ParseLines(script))
-                    usb.Cmd(action.OpCode, action.DurationSecs);
-            }
-            catch (Exception ex)
-            {
-                stopAll();
-                Console.WriteLine(ex.Message);
-            }
+            usb.RunScript(script);
         }
 
         private static void wait(int durationMs)

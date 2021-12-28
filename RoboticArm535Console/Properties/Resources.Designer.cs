@@ -59,30 +59,5 @@ namespace RoboticArm535Console.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to LedOn 0.00
-        ///WristUp 0.65
-        ///ElbowUp 1.05
-        ///GripOpen 0.92
-        ///AllOff 0.00
-        ///GripClose 0.85
-        ///LedOn 0.00
-        ///GripOpen 0.92
-        ///AllOff 0.00
-        ///GripClose 0.94
-        ///LedOn 0.00
-        ///GripOpen 0.92
-        ///AllOff 0.00
-        ///GripClose 0.94
-        ///AllOff 0.00
-        ///WristDown 0.80
-        ///ElbowDown 0.77.
-        /// </summary>
-        internal static string script1_roundOfApplause {
-            get {
-                return ResourceManager.GetString("script1_roundOfApplause", resourceCulture);
-            }
-        }
     }
 }
