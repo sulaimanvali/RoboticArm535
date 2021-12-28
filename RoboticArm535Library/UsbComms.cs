@@ -63,6 +63,10 @@ namespace RoboticArm535Library
         }
         #endregion
 
+        /// <summary>
+        /// Turns LED on or off in single press mode (all running motors will be stopped).
+        /// </summary>
+        /// <param name="on"></param>
         public void TurnLed(bool on)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
@@ -106,22 +110,6 @@ namespace RoboticArm535Library
                 throw new Exception("USB device not connected.");
 
             sendPacket(PacketGenerator.GenMultiPress(led, grip, wrist, elbow, stem, baseMotor));
-        }
-
-        /// <summary>
-        /// Sends command to start or stop multiple motors simultaneously.
-        /// This can be used in a script or app.
-        /// Each byte argument can be a bitmask of multiple enum values or'ed together.
-        /// </summary>
-        /// <param name="byte0"></param>
-        /// <param name="byte1"></param>
-        /// <param name="byte2"></param>
-        public void Cmd(Packet.Byte0 byte0, Packet.Byte1 byte1, Packet.Byte2 byte2)
-        {
-            if (usbDevice == null || !usbDevice.IsOpen)
-                throw new Exception("USB device not connected.");
-
-            sendPacket(new byte[] { (byte)byte0, (byte)byte1, (byte)byte2 });
         }
 
         /// <summary>

@@ -48,26 +48,6 @@ namespace RoboticArm535Console
             stopAll();
         }
 
-        private static void sendCommandsByBytes()
-        {
-            Console.WriteLine("Press any key to abort script");
-            usb.Cmd(Packet.Byte0.ArmStop, Packet.Byte1.BaseStop, Packet.Byte2.LedOn);
-            wait(500);
-            usb.Cmd(Packet.Byte0.GripOpen | Packet.Byte0.WristUp | Packet.Byte0.ElbowUp, Packet.Byte1.BaseStop, Packet.Byte2.LedOff);
-            wait(1500);
-            usb.Cmd(Packet.Byte0.ArmStop, Packet.Byte1.BaseStop, Packet.Byte2.LedOn);
-            wait(500);
-
-            for (int i = 0; i < 5; i++)
-            {
-                usb.Cmd(Packet.Byte0.GripOpen | Packet.Byte0.WristUp | Packet.Byte0.ElbowUp, Packet.Byte1.BaseStop, Packet.Byte2.LedOff);
-                wait(800);
-                usb.Cmd(Packet.Byte0.GripClose | Packet.Byte0.WristDown | Packet.Byte0.ElbowDown, Packet.Byte1.BaseStop, Packet.Byte2.LedOn);
-                wait(800);
-            }
-            stopAll();
-        }
-
         private static void sendCommandsByTimedOpCodeMasks()
         {
             usb.TurnLed(true);
