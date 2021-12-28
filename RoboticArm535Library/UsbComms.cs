@@ -143,6 +143,10 @@ namespace RoboticArm535Library
             sendPacket(PacketGenerator.GenSinglePress(LedOn ? OpCode.LedOn : OpCode.AllOff));
         }
 
+        /// <summary>
+        /// Runs the given script of TimedActions.
+        /// </summary>
+        /// <param name="script"></param>
         public void RunScript(string script)
         {
             try
