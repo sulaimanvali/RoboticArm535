@@ -20,8 +20,8 @@ namespace RoboticArm535Console
 
             // demonstrates a simple script controlling multiple outputs simultaneously in different ways
             //sendCommandsByOutputs();
-            //sendCommandsByTimedOpCodeMasks();
-            sendCommandsByScriptInString();
+            sendCommandsByTimedOpCodeMasks();
+            //sendCommandsByScriptInString();
         }
 
         private static void sendCommandsByOutputs()
@@ -48,39 +48,34 @@ namespace RoboticArm535Console
 
         private static void sendCommandsByTimedOpCodeMasks()
         {
-            usb.TurnLed(true);
             usb.Cmd(OpCode.WristUp, 1.0f);
             usb.Cmd(OpCode.ElbowUp, 1.0f);
 
             for (int i = 0; i < 5; i++)
             {
-                usb.Cmd(OpCode.GripOpen | OpCode.WristUp, 0.8f);
-                usb.TurnLed(true);
-                usb.Cmd(OpCode.GripClose | OpCode.WristDown, 0.8f);
-                usb.TurnLed(false);
+                usb.Cmd(OpCode.GripOpen | OpCode.WristUp | OpCode.LedOn, 0.8f);
+                usb.Cmd(OpCode.GripClose | OpCode.WristDown | OpCode.LedOff, 0.8f);
             }
             usb.Cmd(OpCode.WristDown | OpCode.ElbowDown, 1.0f);
-            stopAll();
         }
 
         private static void sendCommandsByScriptInString()
         {
             var script =
-@"LedOn 0.00
+@"
 WristUp 0.65
 ElbowUp 1.05
 GripOpen 0.92
-AllOff 0.00
 GripClose 0.85
-LedOn 0.00
+LedOn 0.5
 GripOpen 0.92
-AllOff 0.00
+LedOff 0.5
 GripClose 0.94
-LedOn 0.00
+LedOn 0.5
 GripOpen 0.92
-AllOff 0.00
+LedOff 0.5
 GripClose 0.94
-AllOff 0.00
+LedOff 0.5
 WristDown 0.80
 ElbowDown 0.77";
 

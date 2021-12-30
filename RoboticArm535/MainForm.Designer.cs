@@ -47,12 +47,15 @@ namespace RoboticArm535
             this.button_BaseRight = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reconnectUSBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button_Clear = new System.Windows.Forms.Button();
-            this.button_Replay = new System.Windows.Forms.Button();
+            this.button_RunScript = new System.Windows.Forms.Button();
             this.checkBox_Record = new System.Windows.Forms.CheckBox();
             this.label_TimeButtonPressed = new System.Windows.Forms.Label();
             this.timer_ButtonPresses = new System.Windows.Forms.Timer(this.components);
@@ -61,8 +64,6 @@ namespace RoboticArm535
             this.listBox_Commands = new System.Windows.Forms.ListBox();
             this.saveFileDialog_Script = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog_Script = new System.Windows.Forms.OpenFileDialog();
-            this.button_Save = new System.Windows.Forms.Button();
-            this.button_Open = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -224,6 +225,7 @@ namespace RoboticArm535
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
             this.connectionToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -231,6 +233,29 @@ namespace RoboticArm535
             this.menuStrip1.Size = new System.Drawing.Size(835, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.saveToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.openToolStripMenuItem.Text = "&Open Script";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.saveToolStripMenuItem.Text = "&Save Script";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // connectionToolStripMenuItem
             // 
@@ -272,15 +297,15 @@ namespace RoboticArm535
             this.button_Clear.UseVisualStyleBackColor = true;
             this.button_Clear.Click += new System.EventHandler(this.button_Clear_Click);
             // 
-            // button_Replay
+            // button_RunScript
             // 
-            this.button_Replay.Location = new System.Drawing.Point(513, 501);
-            this.button_Replay.Name = "button_Replay";
-            this.button_Replay.Size = new System.Drawing.Size(75, 23);
-            this.button_Replay.TabIndex = 15;
-            this.button_Replay.Text = "Replay";
-            this.button_Replay.UseVisualStyleBackColor = true;
-            this.button_Replay.Click += new System.EventHandler(this.button_Replay_Click);
+            this.button_RunScript.Location = new System.Drawing.Point(513, 501);
+            this.button_RunScript.Name = "button_RunScript";
+            this.button_RunScript.Size = new System.Drawing.Size(114, 23);
+            this.button_RunScript.TabIndex = 15;
+            this.button_RunScript.Text = "Run Script";
+            this.button_RunScript.UseVisualStyleBackColor = true;
+            this.button_RunScript.Click += new System.EventHandler(this.button_RunScript_Click);
             // 
             // checkBox_Record
             // 
@@ -321,7 +346,7 @@ namespace RoboticArm535
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(693, 68);
+            this.label4.Location = new System.Drawing.Point(693, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(119, 15);
             this.label4.TabIndex = 19;
@@ -329,11 +354,12 @@ namespace RoboticArm535
             // 
             // listBox_Commands
             // 
+            this.listBox_Commands.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listBox_Commands.FormattingEnabled = true;
-            this.listBox_Commands.ItemHeight = 15;
-            this.listBox_Commands.Location = new System.Drawing.Point(693, 86);
+            this.listBox_Commands.ItemHeight = 20;
+            this.listBox_Commands.Location = new System.Drawing.Point(693, 61);
             this.listBox_Commands.Name = "listBox_Commands";
-            this.listBox_Commands.Size = new System.Drawing.Size(132, 229);
+            this.listBox_Commands.Size = new System.Drawing.Size(132, 384);
             this.listBox_Commands.TabIndex = 16;
             this.listBox_Commands.SelectedIndexChanged += new System.EventHandler(this.listBox_Commands_SelectedIndexChanged);
             // 
@@ -349,41 +375,17 @@ namespace RoboticArm535
             this.openFileDialog_Script.Filter = "RoboticArm535 Scripts|*.535script|All files|*.*";
             this.openFileDialog_Script.Title = "Open Script";
             // 
-            // button_Save
-            // 
-            this.button_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Save.Location = new System.Drawing.Point(693, 471);
-            this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(132, 23);
-            this.button_Save.TabIndex = 17;
-            this.button_Save.Text = "&Save Script";
-            this.button_Save.UseVisualStyleBackColor = true;
-            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
-            // 
-            // button_Open
-            // 
-            this.button_Open.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Open.Location = new System.Drawing.Point(693, 442);
-            this.button_Open.Name = "button_Open";
-            this.button_Open.Size = new System.Drawing.Size(132, 23);
-            this.button_Open.TabIndex = 16;
-            this.button_Open.Text = "&Open Script";
-            this.button_Open.UseVisualStyleBackColor = true;
-            this.button_Open.Click += new System.EventHandler(this.button_Open_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(835, 533);
-            this.Controls.Add(this.button_Open);
-            this.Controls.Add(this.button_Save);
             this.Controls.Add(this.listBox_Commands);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_TimedActions);
             this.Controls.Add(this.label_TimeButtonPressed);
             this.Controls.Add(this.checkBox_Record);
-            this.Controls.Add(this.button_Replay);
+            this.Controls.Add(this.button_RunScript);
             this.Controls.Add(this.button_Clear);
             this.Controls.Add(this.button_StemBack);
             this.Controls.Add(this.label1);
@@ -439,7 +441,7 @@ namespace RoboticArm535
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button button_Clear;
-        private System.Windows.Forms.Button button_Replay;
+        private System.Windows.Forms.Button button_RunScript;
         private System.Windows.Forms.CheckBox checkBox_Record;
         private System.Windows.Forms.Label label_TimeButtonPressed;
         private System.Windows.Forms.Timer timer_ButtonPresses;
@@ -448,8 +450,9 @@ namespace RoboticArm535
         private System.Windows.Forms.ListBox listBox_Commands;
         private System.Windows.Forms.SaveFileDialog saveFileDialog_Script;
         private System.Windows.Forms.OpenFileDialog openFileDialog_Script;
-        private System.Windows.Forms.Button button_Save;
-        private System.Windows.Forms.Button button_Open;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     }
 }
 

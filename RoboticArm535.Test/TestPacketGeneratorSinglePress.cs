@@ -22,7 +22,7 @@ namespace RoboticArm535.Test
         [TestMethod]
         public void GenSinglePress_LedOff_Ok()
         {
-            var bytes = PacketGenerator.GenSinglePress(OpCode.AllOff);
+            var bytes = PacketGenerator.GenSinglePress(OpCode.LedOff);
             checkPacket(bytes, new byte[] { 0, 0, 0x00 });
         }
 

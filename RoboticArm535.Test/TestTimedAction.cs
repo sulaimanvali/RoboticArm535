@@ -28,7 +28,7 @@ StemBack  7.8
 StemAhead 8.9
 BaseRight 9.1
 BaseLeft  0.2
-AllOff    1.3
+LedOff    1.3
 LedOn     2.4";
             var actions = TimedAction.ParseLines(lines);
             Assert.AreEqual<OpCode>(OpCode.GripClose, actions[0].OpCode);
@@ -61,7 +61,7 @@ LedOn     2.4";
             Assert.AreEqual<OpCode>(OpCode.BaseLeft, actions[9].OpCode);
             Assert.AreEqual<float>(0.2f, actions[9].DurationSecs);
 
-            Assert.AreEqual<OpCode>(OpCode.AllOff, actions[10].OpCode);
+            Assert.AreEqual<OpCode>(OpCode.LedOff, actions[10].OpCode);
             Assert.AreEqual<float>(1.3f, actions[10].DurationSecs);
 
             Assert.AreEqual<OpCode>(OpCode.LedOn, actions[11].OpCode);

@@ -13,7 +13,7 @@ namespace RoboticArm535.Test
         }
 
         [TestMethod]
-        public void GenMultiPress_AllOff_Ok()
+        public void GenMultiPress_LedOff_Ok()
         {
             var bytes = PacketGenerator.GenMultiPress(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
             checkPacket(bytes, new byte[] { 0, 0, 0 });

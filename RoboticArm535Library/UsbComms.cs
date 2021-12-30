@@ -19,8 +19,6 @@ namespace RoboticArm535Library
         readonly UsbSetupPacket setupPacket = new UsbSetupPacket(
             bRequestType: 0x40, bRequest: 6, wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
 
-        public bool LedOn { get; private set; }
-
         #region
         /// <summary>
         /// Connects to USB device.
@@ -72,8 +70,7 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
-            sendPacket(PacketGenerator.GenSinglePress(on ? OpCode.LedOn : OpCode.AllOff));
-            LedOn = on;
+            sendPacket(PacketGenerator.GenSinglePress(on ? OpCode.LedOn : OpCode.LedOff));
         }
 
         #region Motor control commands
@@ -86,10 +83,7 @@ namespace RoboticArm535Library
         {
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
-
-            if (LedOn)
-                opCode |= OpCode.LedOn;
-
+            
             sendPacket(PacketGenerator.GenSinglePress(opCode));
         }
 
@@ -124,14 +118,6 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
-            if (opCode == OpCode.LedOn)
-                LedOn = true;
-            else if (opCode == OpCode.AllOff)
-                LedOn = false;
-
-            if (LedOn)
-                opCode |= OpCode.LedOn;
-
             sendPacket(PacketGenerator.GenSinglePress(opCode));
 
             if (durationSecs == 0)
@@ -140,7 +126,7 @@ namespace RoboticArm535Library
             Thread.Sleep((int)(durationSecs * 1000));
 
             // turn off everything except LED if it was on
-            sendPacket(PacketGenerator.GenSinglePress(LedOn ? OpCode.LedOn : OpCode.AllOff));
+            sendPacket(PacketGenerator.GenSinglePress(OpCode.AllOff));
         }
 
         /// <summary>

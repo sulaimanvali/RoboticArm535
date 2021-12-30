@@ -80,22 +80,7 @@ namespace RoboticArm535
                 if (isPressed)
                     usbComms.MoveMotor(opCode);
                 else
-                    usbComms.MoveMotor(OpCode.AllOff);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to send USB command:\r\n" + ex.Message,
-                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-        }
-
-        private bool sendTimedMotorCommand(OpCode opCode, float durationSecs)
-        {
-            try
-            {
-                usbComms.Cmd(opCode, durationSecs);
+                    usbComms.MoveMotor(OpCode.LedOff);
                 return true;
             }
             catch (Exception ex)
@@ -150,7 +135,7 @@ namespace RoboticArm535
         {
             stopwatch.Reset();
             sendLedCommand(checkBox_LED.Checked);
-            recordAction(checkBox_LED.Checked ? OpCode.LedOn : OpCode.AllOff);
+            recordAction(checkBox_LED.Checked ? OpCode.LedOn : OpCode.LedOff);
         }
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
@@ -202,21 +187,14 @@ namespace RoboticArm535
             textBox_TimedActions.Clear();
         }
 
-        private void button_Replay_Click(object sender, EventArgs e)
+        private void button_RunScript_Click(object sender, EventArgs e)
         {
             try
             {
-                foreach (var action in TimedAction.ParseLines(textBox_TimedActions.Text))
-                {
-                    if (action.OpCode == OpCode.AllOff)
-                        sendLedCommand(false);
-                    else
-                        sendTimedMotorCommand(action.OpCode, action.DurationSecs);
-                }
+                usbComms.RunScript(textBox_TimedActions.Text);
             }
             catch (Exception ex)
             {
-                sendMotorCommand(OpCode.AllOff, false);
                 MessageBox.Show("Error parsing commands script:\r\n" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -226,16 +204,7 @@ namespace RoboticArm535
             textBox_TimedActions.AppendText((OpCode)listBox_Commands.SelectedItem + " 1.0\r\n");
         }
 
-        private void button_Save_Click(object sender, EventArgs e)
-        {
-            if (!Directory.Exists(ScriptsFolder))
-                try { Directory.CreateDirectory(ScriptsFolder); } catch { }
-
-            if (saveFileDialog_Script.ShowDialog() == DialogResult.OK)
-                File.WriteAllText(saveFileDialog_Script.FileName, textBox_TimedActions.Text);
-        }
-
-        private void button_Open_Click(object sender, EventArgs e)
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog_Script.ShowDialog() == DialogResult.OK)
             {
@@ -244,6 +213,15 @@ namespace RoboticArm535
                     if (MessageBox.Show("Replace existing script?", Application.ProductName, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                         textBox_TimedActions.Text = fileText;
             }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(ScriptsFolder))
+                try { Directory.CreateDirectory(ScriptsFolder); } catch { }
+
+            if (saveFileDialog_Script.ShowDialog() == DialogResult.OK)
+                File.WriteAllText(saveFileDialog_Script.FileName, textBox_TimedActions.Text);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -255,8 +233,7 @@ namespace RoboticArm535
         {
             try
             {
-                usbComms.TurnLed(false);
-                usbComms.MoveMotor(OpCode.AllOff); // we don't want any motors running after we close
+                usbComms.MoveMotor(OpCode.AllOff); // we don't want any motors (or LED) left on after we close
                 usbComms.Close();
             }
             catch { }
