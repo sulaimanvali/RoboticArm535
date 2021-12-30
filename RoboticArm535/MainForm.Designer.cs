@@ -65,13 +65,19 @@ namespace RoboticArm535
             this.saveFileDialog_Script = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog_Script = new System.Windows.Forms.OpenFileDialog();
             this.label5 = new System.Windows.Forms.Label();
+            this.button_Abort = new System.Windows.Forms.Button();
+            this.panel_Buttons = new System.Windows.Forms.Panel();
+            this.label_CurrentLineRunning = new System.Windows.Forms.Label();
+            this.panel_Right = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
+            this.panel_Buttons.SuspendLayout();
+            this.panel_Right.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_GripOpen
             // 
             this.button_GripOpen.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_GripOpen.Location = new System.Drawing.Point(102, 68);
+            this.button_GripOpen.Location = new System.Drawing.Point(68, 39);
             this.button_GripOpen.Name = "button_GripOpen";
             this.button_GripOpen.Size = new System.Drawing.Size(111, 36);
             this.button_GripOpen.TabIndex = 2;
@@ -82,7 +88,7 @@ namespace RoboticArm535
             // 
             this.checkBox_LED.AutoSize = true;
             this.checkBox_LED.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.checkBox_LED.Location = new System.Drawing.Point(172, 33);
+            this.checkBox_LED.Location = new System.Drawing.Point(138, 4);
             this.checkBox_LED.Name = "checkBox_LED";
             this.checkBox_LED.Size = new System.Drawing.Size(63, 29);
             this.checkBox_LED.TabIndex = 1;
@@ -93,7 +99,7 @@ namespace RoboticArm535
             // button_GripClose
             // 
             this.button_GripClose.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_GripClose.Location = new System.Drawing.Point(219, 68);
+            this.button_GripClose.Location = new System.Drawing.Point(185, 39);
             this.button_GripClose.Name = "button_GripClose";
             this.button_GripClose.Size = new System.Drawing.Size(66, 36);
             this.button_GripClose.TabIndex = 3;
@@ -104,7 +110,7 @@ namespace RoboticArm535
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(48, 74);
+            this.label1.Location = new System.Drawing.Point(14, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 25);
             this.label1.TabIndex = 2;
@@ -114,7 +120,7 @@ namespace RoboticArm535
             // button_WristUp
             // 
             this.button_WristUp.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_WristUp.Location = new System.Drawing.Point(140, 123);
+            this.button_WristUp.Location = new System.Drawing.Point(106, 94);
             this.button_WristUp.Name = "button_WristUp";
             this.button_WristUp.Size = new System.Drawing.Size(95, 38);
             this.button_WristUp.TabIndex = 4;
@@ -124,7 +130,7 @@ namespace RoboticArm535
             // button_WristDown
             // 
             this.button_WristDown.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_WristDown.Location = new System.Drawing.Point(140, 167);
+            this.button_WristDown.Location = new System.Drawing.Point(106, 138);
             this.button_WristDown.Name = "button_WristDown";
             this.button_WristDown.Size = new System.Drawing.Size(95, 38);
             this.button_WristDown.TabIndex = 5;
@@ -135,7 +141,7 @@ namespace RoboticArm535
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(71, 149);
+            this.label2.Location = new System.Drawing.Point(37, 120);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 25);
             this.label2.TabIndex = 2;
@@ -145,7 +151,7 @@ namespace RoboticArm535
             // button_ElbowUp
             // 
             this.button_ElbowUp.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_ElbowUp.Location = new System.Drawing.Point(140, 224);
+            this.button_ElbowUp.Location = new System.Drawing.Point(106, 195);
             this.button_ElbowUp.Name = "button_ElbowUp";
             this.button_ElbowUp.Size = new System.Drawing.Size(95, 38);
             this.button_ElbowUp.TabIndex = 6;
@@ -155,7 +161,7 @@ namespace RoboticArm535
             // button_ElbowDown
             // 
             this.button_ElbowDown.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_ElbowDown.Location = new System.Drawing.Point(140, 268);
+            this.button_ElbowDown.Location = new System.Drawing.Point(106, 239);
             this.button_ElbowDown.Name = "button_ElbowDown";
             this.button_ElbowDown.Size = new System.Drawing.Size(95, 38);
             this.button_ElbowDown.TabIndex = 7;
@@ -166,7 +172,7 @@ namespace RoboticArm535
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(64, 253);
+            this.label3.Location = new System.Drawing.Point(30, 224);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 25);
             this.label3.TabIndex = 2;
@@ -176,7 +182,7 @@ namespace RoboticArm535
             // button_StemBack
             // 
             this.button_StemBack.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_StemBack.Location = new System.Drawing.Point(140, 399);
+            this.button_StemBack.Location = new System.Drawing.Point(106, 370);
             this.button_StemBack.Name = "button_StemBack";
             this.button_StemBack.Size = new System.Drawing.Size(95, 64);
             this.button_StemBack.TabIndex = 11;
@@ -186,7 +192,7 @@ namespace RoboticArm535
             // button_StemAhead
             // 
             this.button_StemAhead.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_StemAhead.Location = new System.Drawing.Point(140, 329);
+            this.button_StemAhead.Location = new System.Drawing.Point(106, 300);
             this.button_StemAhead.Name = "button_StemAhead";
             this.button_StemAhead.Size = new System.Drawing.Size(95, 64);
             this.button_StemAhead.TabIndex = 10;
@@ -196,7 +202,7 @@ namespace RoboticArm535
             // button_BaseLeft
             // 
             this.button_BaseLeft.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_BaseLeft.Location = new System.Drawing.Point(48, 368);
+            this.button_BaseLeft.Location = new System.Drawing.Point(14, 339);
             this.button_BaseLeft.Name = "button_BaseLeft";
             this.button_BaseLeft.Size = new System.Drawing.Size(86, 61);
             this.button_BaseLeft.TabIndex = 8;
@@ -206,7 +212,7 @@ namespace RoboticArm535
             // button_BaseRight
             // 
             this.button_BaseRight.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_BaseRight.Location = new System.Drawing.Point(241, 368);
+            this.button_BaseRight.Location = new System.Drawing.Point(207, 339);
             this.button_BaseRight.Name = "button_BaseRight";
             this.button_BaseRight.Size = new System.Drawing.Size(86, 61);
             this.button_BaseRight.TabIndex = 9;
@@ -302,7 +308,7 @@ namespace RoboticArm535
             // 
             this.button_RunScript.Location = new System.Drawing.Point(513, 501);
             this.button_RunScript.Name = "button_RunScript";
-            this.button_RunScript.Size = new System.Drawing.Size(114, 23);
+            this.button_RunScript.Size = new System.Drawing.Size(101, 23);
             this.button_RunScript.TabIndex = 15;
             this.button_RunScript.Text = "Run Script";
             this.button_RunScript.UseVisualStyleBackColor = true;
@@ -311,7 +317,7 @@ namespace RoboticArm535
             // checkBox_Record
             // 
             this.checkBox_Record.AutoSize = true;
-            this.checkBox_Record.Location = new System.Drawing.Point(432, 35);
+            this.checkBox_Record.Location = new System.Drawing.Point(3, 4);
             this.checkBox_Record.Name = "checkBox_Record";
             this.checkBox_Record.Size = new System.Drawing.Size(143, 19);
             this.checkBox_Record.TabIndex = 12;
@@ -323,7 +329,7 @@ namespace RoboticArm535
             // 
             this.label_TimeButtonPressed.AutoSize = true;
             this.label_TimeButtonPressed.Font = new System.Drawing.Font("Consolas", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label_TimeButtonPressed.Location = new System.Drawing.Point(609, 33);
+            this.label_TimeButtonPressed.Location = new System.Drawing.Point(180, 2);
             this.label_TimeButtonPressed.Name = "label_TimeButtonPressed";
             this.label_TimeButtonPressed.Size = new System.Drawing.Size(40, 22);
             this.label_TimeButtonPressed.TabIndex = 16;
@@ -338,16 +344,17 @@ namespace RoboticArm535
             this.textBox_TimedActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox_TimedActions.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox_TimedActions.Location = new System.Drawing.Point(432, 61);
+            this.textBox_TimedActions.Location = new System.Drawing.Point(3, 30);
             this.textBox_TimedActions.Multiline = true;
             this.textBox_TimedActions.Name = "textBox_TimedActions";
-            this.textBox_TimedActions.Size = new System.Drawing.Size(252, 434);
+            this.textBox_TimedActions.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox_TimedActions.Size = new System.Drawing.Size(252, 412);
             this.textBox_TimedActions.TabIndex = 13;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(693, 42);
+            this.label4.Location = new System.Drawing.Point(264, 11);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(119, 15);
             this.label4.TabIndex = 19;
@@ -358,9 +365,9 @@ namespace RoboticArm535
             this.listBox_Commands.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listBox_Commands.FormattingEnabled = true;
             this.listBox_Commands.ItemHeight = 20;
-            this.listBox_Commands.Location = new System.Drawing.Point(693, 61);
+            this.listBox_Commands.Location = new System.Drawing.Point(264, 30);
             this.listBox_Commands.Name = "listBox_Commands";
-            this.listBox_Commands.Size = new System.Drawing.Size(132, 384);
+            this.listBox_Commands.Size = new System.Drawing.Size(132, 364);
             this.listBox_Commands.TabIndex = 16;
             this.listBox_Commands.SelectedIndexChanged += new System.EventHandler(this.listBox_Commands_SelectedIndexChanged);
             // 
@@ -378,40 +385,78 @@ namespace RoboticArm535
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(693, 448);
+            this.label5.Location = new System.Drawing.Point(261, 397);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(132, 47);
             this.label5.TabIndex = 19;
             this.label5.Text = "Duration of 0 s implies output is left in that state.";
+            // 
+            // button_Abort
+            // 
+            this.button_Abort.Location = new System.Drawing.Point(620, 501);
+            this.button_Abort.Name = "button_Abort";
+            this.button_Abort.Size = new System.Drawing.Size(64, 23);
+            this.button_Abort.TabIndex = 20;
+            this.button_Abort.Text = "Abort";
+            this.button_Abort.UseVisualStyleBackColor = true;
+            this.button_Abort.Click += new System.EventHandler(this.button_Abort_Click);
+            // 
+            // panel_Buttons
+            // 
+            this.panel_Buttons.Controls.Add(this.button_GripOpen);
+            this.panel_Buttons.Controls.Add(this.button_WristUp);
+            this.panel_Buttons.Controls.Add(this.button_WristDown);
+            this.panel_Buttons.Controls.Add(this.label2);
+            this.panel_Buttons.Controls.Add(this.button_GripClose);
+            this.panel_Buttons.Controls.Add(this.button_ElbowUp);
+            this.panel_Buttons.Controls.Add(this.label3);
+            this.panel_Buttons.Controls.Add(this.button_ElbowDown);
+            this.panel_Buttons.Controls.Add(this.button_StemAhead);
+            this.panel_Buttons.Controls.Add(this.button_BaseLeft);
+            this.panel_Buttons.Controls.Add(this.button_StemBack);
+            this.panel_Buttons.Controls.Add(this.checkBox_LED);
+            this.panel_Buttons.Controls.Add(this.label1);
+            this.panel_Buttons.Controls.Add(this.button_BaseRight);
+            this.panel_Buttons.Location = new System.Drawing.Point(21, 35);
+            this.panel_Buttons.Name = "panel_Buttons";
+            this.panel_Buttons.Size = new System.Drawing.Size(307, 438);
+            this.panel_Buttons.TabIndex = 21;
+            // 
+            // label_CurrentLineRunning
+            // 
+            this.label_CurrentLineRunning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_CurrentLineRunning.Font = new System.Drawing.Font("Consolas", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label_CurrentLineRunning.Location = new System.Drawing.Point(432, 476);
+            this.label_CurrentLineRunning.Name = "label_CurrentLineRunning";
+            this.label_CurrentLineRunning.Size = new System.Drawing.Size(255, 18);
+            this.label_CurrentLineRunning.TabIndex = 22;
+            this.label_CurrentLineRunning.Text = "---";
+            // 
+            // panel_Right
+            // 
+            this.panel_Right.Controls.Add(this.textBox_TimedActions);
+            this.panel_Right.Controls.Add(this.label4);
+            this.panel_Right.Controls.Add(this.checkBox_Record);
+            this.panel_Right.Controls.Add(this.listBox_Commands);
+            this.panel_Right.Controls.Add(this.label5);
+            this.panel_Right.Controls.Add(this.label_TimeButtonPressed);
+            this.panel_Right.Location = new System.Drawing.Point(432, 27);
+            this.panel_Right.Name = "panel_Right";
+            this.panel_Right.Size = new System.Drawing.Size(402, 446);
+            this.panel_Right.TabIndex = 23;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(835, 533);
-            this.Controls.Add(this.listBox_Commands);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox_TimedActions);
-            this.Controls.Add(this.label_TimeButtonPressed);
-            this.Controls.Add(this.checkBox_Record);
+            this.Controls.Add(this.panel_Right);
+            this.Controls.Add(this.label_CurrentLineRunning);
+            this.Controls.Add(this.panel_Buttons);
+            this.Controls.Add(this.button_Abort);
             this.Controls.Add(this.button_RunScript);
             this.Controls.Add(this.button_Clear);
-            this.Controls.Add(this.button_StemBack);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button_BaseRight);
-            this.Controls.Add(this.checkBox_LED);
-            this.Controls.Add(this.button_BaseLeft);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button_StemAhead);
-            this.Controls.Add(this.button_ElbowDown);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.button_ElbowUp);
-            this.Controls.Add(this.button_GripClose);
-            this.Controls.Add(this.button_GripOpen);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button_WristDown);
-            this.Controls.Add(this.button_WristUp);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -423,6 +468,10 @@ namespace RoboticArm535
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel_Buttons.ResumeLayout(false);
+            this.panel_Buttons.PerformLayout();
+            this.panel_Right.ResumeLayout(false);
+            this.panel_Right.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -464,6 +513,10 @@ namespace RoboticArm535
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button_Abort;
+        private System.Windows.Forms.Panel panel_Buttons;
+        private System.Windows.Forms.Label label_CurrentLineRunning;
+        private System.Windows.Forms.Panel panel_Right;
     }
 }
 

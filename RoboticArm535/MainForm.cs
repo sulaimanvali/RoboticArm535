@@ -56,6 +56,8 @@ namespace RoboticArm535
                 button.KeyDown   += Button_KeyDown;
                 button.KeyUp     += Button_KeyUp;
             }
+
+            setScriptRunning(false);
         }
 
         private bool sendLedCommand(bool isOn)
@@ -131,6 +133,20 @@ namespace RoboticArm535
             textBox_TimedActions.AppendText(timedAction + "\r\n");
         }
 
+        private void selectLineRunning(int lineIndex)
+        {
+            label_CurrentLineRunning.Text = $"Line {lineIndex}: {textBox_TimedActions.Lines[lineIndex]}";
+        }
+
+        private void setScriptRunning(bool scriptRunning)
+        {
+            panel_Buttons.Enabled = panel_Right.Enabled = button_RunScript.Enabled = button_Clear.Enabled = !scriptRunning;
+            button_Abort.Enabled = scriptRunning;
+
+            if (!scriptRunning)
+                label_CurrentLineRunning.Text = "";
+        }
+
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
         {
             stopwatch.Reset();
@@ -187,16 +203,24 @@ namespace RoboticArm535
             textBox_TimedActions.Clear();
         }
 
-        private void button_RunScript_Click(object sender, EventArgs e)
+        private async void button_RunScript_Click(object sender, EventArgs e)
         {
+            setScriptRunning(true);
             try
             {
-                usbComms.RunScript(textBox_TimedActions.Text);
+                await usbComms.RunScript(textBox_TimedActions.Text, new Progress<int>(lineIndex => selectLineRunning(lineIndex)));
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error parsing commands script:\r\n" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Error running script:\r\n" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            setScriptRunning(false);
+        }
+
+        private void button_Abort_Click(object sender, EventArgs e)
+        {
+            setScriptRunning(false);
+            usbComms.AbortScript();
         }
 
         private void listBox_Commands_SelectedIndexChanged(object sender, EventArgs e)

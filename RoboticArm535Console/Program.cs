@@ -2,14 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace RoboticArm535Console
 {
     class Program
     {
         static readonly UsbComms usb = new UsbComms();
+        static CancellationTokenSource tokenSource = new();
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             if (usb.Connect() != UsbConnErrorCode.NoError)
             {
@@ -17,48 +19,79 @@ namespace RoboticArm535Console
                 Console.ReadKey();
                 return;
             }
+            Console.CancelKeyPress += Console_CancelKeyPress;
+            Console.WriteLine("Press Ctrl-C to abort");
 
             // demonstrates a simple script controlling multiple outputs simultaneously in different ways
-            //sendCommandsByOutputs();
-            sendCommandsByTimedOpCodeMasks();
-            //sendCommandsByScriptInString();
+            try
+            {
+                //await sendCommandsByOutputs();
+                await sendCommandsByTimedOpCodeMasks();
+                //await sendCommandsByScriptInString();
+            }
+            catch (OperationCanceledException)
+            {
+                usb.Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
+            }
+            finally
+            {
+                tokenSource.Dispose();
+            }
         }
 
-        private static void sendCommandsByOutputs()
+        private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        {
+            tokenSource.Cancel();
+            usb.AbortScript();
+            e.Cancel = true;
+        }
+
+        private static async Task sendCommandsByOutputs()
         {
             usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-            Thread.Sleep(500);
+            await wait(500);
             usb.Cmd(Out.Led.Off, Out.Grip.Open, Out.Wrist.Up, Out.Elbow.Up, Out.Stem.Stop, Out.Base.Stop);
-            Thread.Sleep(1000);
+            await wait(1000);
             usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Up, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-            Thread.Sleep(500);
+            await wait(500);
             usb.Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-            Thread.Sleep(500);
+            await wait(500);
 
             for (int i = 0; i < 5; i++)
             {
                 usb.Cmd(Out.Led.On, Out.Grip.Open, Out.Wrist.Down, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-                Thread.Sleep(800);
+                await wait(800);
                 usb.Cmd(Out.Led.Off, Out.Grip.Close, Out.Wrist.Up, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-                Thread.Sleep(800);
+                await wait(800);
             }
             usb.Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-        }
 
-        private static void sendCommandsByTimedOpCodeMasks()
-        {
-            usb.Cmd(OpCode.WristUp, 1.0f);
-            usb.Cmd(OpCode.ElbowUp, 1.0f);
-
-            for (int i = 0; i < 5; i++)
+            async Task wait(int millisecondsDelay)
             {
-                usb.Cmd(OpCode.GripOpen | OpCode.WristUp | OpCode.LedOn, 0.8f);
-                usb.Cmd(OpCode.GripClose | OpCode.WristDown | OpCode.LedOff, 0.8f);
+                await Task.Delay(millisecondsDelay, tokenSource.Token);
             }
-            usb.Cmd(OpCode.WristDown | OpCode.ElbowDown, 1.0f);
         }
 
-        private static void sendCommandsByScriptInString()
+        private static async Task sendCommandsByTimedOpCodeMasks()
+        {
+            await Task.Run(() =>
+            {
+                usb.Cmd(OpCode.WristUp, 1.0f);
+                usb.Cmd(OpCode.ElbowUp, 1.0f);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    if (tokenSource.IsCancellationRequested)
+                        tokenSource.Token.ThrowIfCancellationRequested();
+
+                    usb.Cmd(OpCode.GripOpen | OpCode.WristUp | OpCode.LedOn, 0.8f);
+                    usb.Cmd(OpCode.GripClose | OpCode.WristDown | OpCode.LedOff, 0.8f);
+                }
+                usb.Cmd(OpCode.WristDown | OpCode.ElbowDown, 1.0f);
+            }, tokenSource.Token);
+        }
+
+        private static async Task sendCommandsByScriptInString()
         {
             var script =
 @"
@@ -77,8 +110,8 @@ GripClose 1
 LedOn 0
 WristDown 0.80
 ElbowDown 0.77";
-
-            usb.RunScript(script);
+            var lines = script.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            await usb.RunScript(script, new Progress<int>(lineIndex => Console.WriteLine($"Line {lineIndex}: {lines[lineIndex]}")));
         }
     }
 }

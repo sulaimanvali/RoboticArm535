@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace RoboticArm535Library
 {
@@ -18,6 +19,7 @@ namespace RoboticArm535Library
         private const int ProductId = 0x0000;
         readonly UsbSetupPacket setupPacket = new UsbSetupPacket(
             bRequestType: 0x40, bRequest: 6, wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
+        CancellationTokenSource tokenSource;
 
         #region
         /// <summary>
@@ -139,18 +141,44 @@ namespace RoboticArm535Library
         /// Runs the given script of TimedActions.
         /// </summary>
         /// <param name="script"></param>
-        public void RunScript(string script)
+        public async Task RunScript(string script, IProgress<int> progress)
         {
+            var timedActions = TimedAction.ParseLines(script);
+
+            tokenSource = new CancellationTokenSource();
+            var token = tokenSource.Token;
+            var task = Task.Run(() =>
+            {
+                token.ThrowIfCancellationRequested();
+                for (int lineIndex = 0; lineIndex < timedActions.Length; lineIndex++)
+                {
+                    if (token.IsCancellationRequested)
+                        token.ThrowIfCancellationRequested();
+
+                    progress.Report(lineIndex);
+                    var action = timedActions[lineIndex];
+                    Cmd(action.OpCode, action.DurationSecs);
+                    
+                }
+            }, tokenSource.Token);
+
             try
             {
-                foreach (var action in TimedAction.ParseLines(script))
-                    Cmd(action.OpCode, action.DurationSecs);
+                await task;
             }
-            catch (Exception)
+            catch (OperationCanceledException)
             {
                 Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-                throw;
             }
+            finally
+            {
+                tokenSource.Dispose();
+            }
+        }
+
+        public void AbortScript()
+        {
+            tokenSource?.Cancel();
         }
         #endregion
 
