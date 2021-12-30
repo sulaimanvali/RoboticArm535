@@ -118,6 +118,12 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
+            if (opCode == OpCode.Wait)
+            {
+                Thread.Sleep((int)(durationSecs * 1000));
+                return;
+            }
+
             sendPacket(PacketGenerator.GenSinglePress(opCode));
 
             if (durationSecs == 0)

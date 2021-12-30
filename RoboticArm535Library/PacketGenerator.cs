@@ -15,11 +15,11 @@ namespace RoboticArm535Library
         /// <returns></returns>
         public static byte[] GenSinglePress(OpCode opCode)
         {
-            Out.Led led = Out.Led.Off;
-            Out.Grip grip = Out.Grip.Stop;
-            Out.Wrist wrist = Out.Wrist.Stop;
-            Out.Elbow elbow = Out.Elbow.Stop;
-            Out.Stem stem = Out.Stem.Stop;
+            Out.Led led        = Out.Led.Off;
+            Out.Grip grip      = Out.Grip.Stop;
+            Out.Wrist wrist    = Out.Wrist.Stop;
+            Out.Elbow elbow    = Out.Elbow.Stop;
+            Out.Stem stem      = Out.Stem.Stop;
             Out.Base baseMotor = Out.Base.Stop;
             var packet = new byte[3];
 
@@ -31,37 +31,27 @@ namespace RoboticArm535Library
             else if ((opCode & OpCode.LedOn) != 0)
                 led = Out.Led.On;
 
-            if ((opCode & OpCode.GripStop) != 0)
-                grip = Out.Grip.Stop;
-            else if ((opCode & OpCode.GripClose) != 0)
+            if ((opCode & OpCode.GripClose) != 0)
                 grip = Out.Grip.Close;
             else if ((opCode & OpCode.GripOpen) != 0)
                 grip = Out.Grip.Open;
 
-            if ((opCode & OpCode.WristStop) != 0)
-                wrist = Out.Wrist.Stop;
-            else if ((opCode & OpCode.WristUp) != 0)
+            if ((opCode & OpCode.WristUp) != 0)
                 wrist = Out.Wrist.Up;
             else if ((opCode & OpCode.WristDown) != 0)
                 wrist = Out.Wrist.Down;
 
-            if ((opCode & OpCode.ElbowStop) != 0)
-                elbow = Out.Elbow.Stop;
-            else if ((opCode & OpCode.ElbowUp) != 0)
+            if ((opCode & OpCode.ElbowUp) != 0)
                 elbow = Out.Elbow.Up;
             else if ((opCode & OpCode.ElbowDown) != 0)
                 elbow = Out.Elbow.Down;
 
-            if ((opCode & OpCode.StemStop) != 0)
-                stem = Out.Stem.Stop;
-            else if ((opCode & OpCode.StemBack) != 0)
+            if ((opCode & OpCode.StemBack) != 0)
                 stem = Out.Stem.Back;
             else if ((opCode & OpCode.StemAhead) != 0)
                 stem = Out.Stem.Ahead;
 
-            if ((opCode & OpCode.BaseStop) != 0)
-                baseMotor = Out.Base.Stop;
-            else if ((opCode & OpCode.BaseLeft) != 0)
+            if ((opCode & OpCode.BaseLeft) != 0)
                 baseMotor = Out.Base.Left;
             else if ((opCode & OpCode.BaseRight) != 0)
                 baseMotor = Out.Base.Right;

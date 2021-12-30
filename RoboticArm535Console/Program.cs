@@ -20,13 +20,12 @@ namespace RoboticArm535Console
 
             // demonstrates a simple script controlling multiple outputs simultaneously in different ways
             //sendCommandsByOutputs();
-            //sendCommandsByTimedOpCodeMasks();
-            sendCommandsByScriptInString();
+            sendCommandsByTimedOpCodeMasks();
+            //sendCommandsByScriptInString();
         }
 
         private static void sendCommandsByOutputs()
         {
-            Console.WriteLine("Press any key to abort script");
             usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
             Thread.Sleep(500);
             usb.Cmd(Out.Led.Off, Out.Grip.Open, Out.Wrist.Up, Out.Elbow.Up, Out.Stem.Stop, Out.Base.Stop);
@@ -67,15 +66,15 @@ WristUp 0.65
 ElbowUp 1.05
 GripOpen 0.92
 GripClose 0.85
-LedOn 0.5
-GripOpen 0.92
-LedOff 0.5
-GripClose 0.94
-LedOn 0.5
-GripOpen 0.92
-LedOff 0.5
-GripClose 0.94
-LedOff 0.5
+LedOn 0
+GripOpen 1
+LedOff 0
+GripClose 1
+LedOn 0
+GripOpen 1
+LedOff 0
+GripClose 1
+LedOn 0
 WristDown 0.80
 ElbowDown 0.77";
 

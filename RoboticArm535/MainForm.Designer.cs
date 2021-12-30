@@ -64,6 +64,7 @@ namespace RoboticArm535
             this.listBox_Commands = new System.Windows.Forms.ListBox();
             this.saveFileDialog_Script = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog_Script = new System.Windows.Forms.OpenFileDialog();
+            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -375,12 +376,21 @@ namespace RoboticArm535
             this.openFileDialog_Script.Filter = "RoboticArm535 Scripts|*.535script|All files|*.*";
             this.openFileDialog_Script.Title = "Open Script";
             // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(693, 448);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(132, 47);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Duration of 0 s implies output is left in that state.";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(835, 533);
             this.Controls.Add(this.listBox_Commands);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_TimedActions);
             this.Controls.Add(this.label_TimeButtonPressed);
@@ -453,6 +463,7 @@ namespace RoboticArm535
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.Label label5;
     }
 }
 
