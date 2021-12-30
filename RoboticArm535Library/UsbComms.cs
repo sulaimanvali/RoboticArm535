@@ -125,7 +125,7 @@ namespace RoboticArm535Library
 
             Thread.Sleep((int)(durationSecs * 1000));
 
-            // turn off everything except LED if it was on
+            // turn off everything
             sendPacket(PacketGenerator.GenSinglePress(OpCode.AllOff));
         }
 

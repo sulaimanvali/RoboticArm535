@@ -19,9 +19,9 @@ namespace RoboticArm535Console
             }
 
             // demonstrates a simple script controlling multiple outputs simultaneously in different ways
-            sendCommandsByOutputs();
+            //sendCommandsByOutputs();
             //sendCommandsByTimedOpCodeMasks();
-            //sendCommandsByScriptInString();
+            sendCommandsByScriptInString();
         }
 
         private static void sendCommandsByOutputs()
