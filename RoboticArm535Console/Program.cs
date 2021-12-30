@@ -19,8 +19,8 @@ namespace RoboticArm535Console
             }
 
             // demonstrates a simple script controlling multiple outputs simultaneously in different ways
-            //sendCommandsByOutputs();
-            sendCommandsByTimedOpCodeMasks();
+            sendCommandsByOutputs();
+            //sendCommandsByTimedOpCodeMasks();
             //sendCommandsByScriptInString();
         }
 
@@ -28,22 +28,22 @@ namespace RoboticArm535Console
         {
             Console.WriteLine("Press any key to abort script");
             usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-            wait(500);
+            Thread.Sleep(500);
             usb.Cmd(Out.Led.Off, Out.Grip.Open, Out.Wrist.Up, Out.Elbow.Up, Out.Stem.Stop, Out.Base.Stop);
-            wait(1000);
+            Thread.Sleep(1000);
             usb.Cmd(Out.Led.On, Out.Grip.Stop, Out.Wrist.Up, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-            wait(500);
+            Thread.Sleep(500);
             usb.Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-            wait(500);
+            Thread.Sleep(500);
 
             for (int i = 0; i < 5; i++)
             {
                 usb.Cmd(Out.Led.On, Out.Grip.Open, Out.Wrist.Down, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-                wait(800);
+                Thread.Sleep(800);
                 usb.Cmd(Out.Led.Off, Out.Grip.Close, Out.Wrist.Up, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
-                wait(800);
+                Thread.Sleep(800);
             }
-            stopAll();
+            usb.Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
         }
 
         private static void sendCommandsByTimedOpCodeMasks()
@@ -80,31 +80,6 @@ WristDown 0.80
 ElbowDown 0.77";
 
             usb.RunScript(script);
-        }
-
-        private static void wait(int durationMs)
-        {
-            int intervalsMs = 200;
-            int sleepTime = 0;
-            while (sleepTime < durationMs)
-            {
-                if (Console.KeyAvailable)
-                {
-                    stopAll();
-                    Environment.Exit(0);
-                    return;
-                }
-
-                if (sleepTime + intervalsMs > durationMs)
-                    intervalsMs = durationMs - sleepTime;
-                sleepTime += intervalsMs;
-                Thread.Sleep(intervalsMs);
-            }
-        }
-
-        private static void stopAll()
-        {
-            usb.Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
         }
     }
 }
