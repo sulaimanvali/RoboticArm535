@@ -77,10 +77,10 @@ namespace RoboticArm535
         {
             try
             {
-                if (isPressed)
-                    usbComms.MoveMotor(opCode);
-                else
-                    usbComms.MoveMotor(OpCode.LedOff);
+                if (isPressed) // button press started
+                    usbComms.MoveMotor(checkBox_LED.Checked ? (opCode | OpCode.LedOn) : opCode);
+                else           // button released
+                    usbComms.MoveMotor(checkBox_LED.Checked ? OpCode.LedOn : OpCode.AllOff);
                 return true;
             }
             catch (Exception ex)
