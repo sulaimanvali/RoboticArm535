@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboticArm535Library", "Rob
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboticArm535Console", "RoboticArm535Console\RoboticArm535Console.csproj", "{0B548BDA-9EF5-4F1A-94CA-398B6BD14D69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoboticArm535.Test", "RoboticArm535.Test\RoboticArm535.Test.csproj", "{3686CC69-1170-4108-8D5D-29CC5A0921DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboticArm535.Test", "RoboticArm535.Test\RoboticArm535.Test.csproj", "{3686CC69-1170-4108-8D5D-29CC5A0921DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
