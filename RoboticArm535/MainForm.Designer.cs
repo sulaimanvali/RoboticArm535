@@ -172,7 +172,7 @@ namespace RoboticArm535
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(30, 224);
+            this.label3.Location = new System.Drawing.Point(30, 221);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 25);
             this.label3.TabIndex = 2;
@@ -252,15 +252,17 @@ namespace RoboticArm535
             // 
             // openToolStripMenuItem
             // 
+            this.openToolStripMenuItem.Image = global::RoboticArm535.Properties.Resources.OpenFolder_16x;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "&Open Script";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
+            this.saveToolStripMenuItem.Image = global::RoboticArm535.Properties.Resources.Save_16x;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "&Save Script";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -274,8 +276,9 @@ namespace RoboticArm535
             // 
             // reconnectUSBToolStripMenuItem
             // 
+            this.reconnectUSBToolStripMenuItem.Image = global::RoboticArm535.Properties.Resources.USB_16x;
             this.reconnectUSBToolStripMenuItem.Name = "reconnectUSBToolStripMenuItem";
-            this.reconnectUSBToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.reconnectUSBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reconnectUSBToolStripMenuItem.Text = "&Reconnect USB";
             this.reconnectUSBToolStripMenuItem.Click += new System.EventHandler(this.reconnectUSBToolStripMenuItem_Click);
             // 
@@ -290,7 +293,7 @@ namespace RoboticArm535
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -298,7 +301,7 @@ namespace RoboticArm535
             // 
             this.button_Clear.Location = new System.Drawing.Point(432, 501);
             this.button_Clear.Name = "button_Clear";
-            this.button_Clear.Size = new System.Drawing.Size(75, 23);
+            this.button_Clear.Size = new System.Drawing.Size(67, 23);
             this.button_Clear.TabIndex = 14;
             this.button_Clear.Text = "Clear";
             this.button_Clear.UseVisualStyleBackColor = true;
@@ -306,7 +309,9 @@ namespace RoboticArm535
             // 
             // button_RunScript
             // 
-            this.button_RunScript.Location = new System.Drawing.Point(513, 501);
+            this.button_RunScript.Image = global::RoboticArm535.Properties.Resources.Run_16x;
+            this.button_RunScript.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_RunScript.Location = new System.Drawing.Point(505, 501);
             this.button_RunScript.Name = "button_RunScript";
             this.button_RunScript.Size = new System.Drawing.Size(101, 23);
             this.button_RunScript.TabIndex = 15;
@@ -367,7 +372,7 @@ namespace RoboticArm535
             this.listBox_Commands.ItemHeight = 20;
             this.listBox_Commands.Location = new System.Drawing.Point(264, 30);
             this.listBox_Commands.Name = "listBox_Commands";
-            this.listBox_Commands.Size = new System.Drawing.Size(132, 364);
+            this.listBox_Commands.Size = new System.Drawing.Size(132, 344);
             this.listBox_Commands.TabIndex = 16;
             this.listBox_Commands.SelectedIndexChanged += new System.EventHandler(this.listBox_Commands_SelectedIndexChanged);
             // 
@@ -385,17 +390,19 @@ namespace RoboticArm535
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(261, 397);
+            this.label5.Location = new System.Drawing.Point(261, 378);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(132, 47);
+            this.label5.Size = new System.Drawing.Size(132, 66);
             this.label5.TabIndex = 19;
-            this.label5.Text = "Duration of 0 s implies output is left in that state.";
+            this.label5.Text = "Duration of 0 s implies output is left in that state until the next step.";
             // 
             // button_Abort
             // 
-            this.button_Abort.Location = new System.Drawing.Point(620, 501);
+            this.button_Abort.Image = global::RoboticArm535.Properties.Resources.Stop_16x;
+            this.button_Abort.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_Abort.Location = new System.Drawing.Point(612, 501);
             this.button_Abort.Name = "button_Abort";
-            this.button_Abort.Size = new System.Drawing.Size(64, 23);
+            this.button_Abort.Size = new System.Drawing.Size(72, 23);
             this.button_Abort.TabIndex = 20;
             this.button_Abort.Text = "Abort";
             this.button_Abort.UseVisualStyleBackColor = true;
