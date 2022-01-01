@@ -17,8 +17,8 @@ namespace RoboticArm535
     public partial class MainForm : Form
     {
         private readonly string ScriptsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.ProductName+"_scripts");
-        private UsbComms usbComms = new UsbComms();
-        private Stopwatch stopwatch = new Stopwatch();
+        private readonly UsbComms usbComms = new UsbComms();
+        private readonly Stopwatch stopwatch = new Stopwatch();
 
         public MainForm()
         {
@@ -53,8 +53,6 @@ namespace RoboticArm535
             {
                 button.MouseDown += Button_MouseDown;
                 button.MouseUp   += Button_MouseUp;
-                button.KeyDown   += Button_KeyDown;
-                button.KeyUp     += Button_KeyUp;
             }
 
             setScriptRunning(false);
@@ -112,7 +110,8 @@ namespace RoboticArm535
         private void buttonPressStarted(object sender)
         {
             var opCode = (OpCode)(sender as Button).Tag;
-            stopwatch.Restart();
+            if (checkBox_Record.Checked)
+                stopwatch.Restart();
             sendMotorCommand(opCode, isPressed: true);
         }
 
@@ -160,16 +159,6 @@ namespace RoboticArm535
         }
 
         private void Button_MouseDown(object sender, MouseEventArgs e)
-        {
-            buttonPressStarted(sender);
-        }
-
-        private void Button_KeyUp(object sender, KeyEventArgs e)
-        {
-            buttonPressEnded(sender);
-        }
-
-        private void Button_KeyDown(object sender, KeyEventArgs e)
         {
             buttonPressStarted(sender);
         }

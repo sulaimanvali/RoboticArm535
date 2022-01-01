@@ -254,7 +254,7 @@ namespace RoboticArm535
             // 
             this.openToolStripMenuItem.Image = global::RoboticArm535.Properties.Resources.OpenFolder_16x;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.openToolStripMenuItem.Text = "&Open Script";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -262,7 +262,7 @@ namespace RoboticArm535
             // 
             this.saveToolStripMenuItem.Image = global::RoboticArm535.Properties.Resources.Save_16x;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.saveToolStripMenuItem.Text = "&Save Script";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -278,7 +278,7 @@ namespace RoboticArm535
             // 
             this.reconnectUSBToolStripMenuItem.Image = global::RoboticArm535.Properties.Resources.USB_16x;
             this.reconnectUSBToolStripMenuItem.Name = "reconnectUSBToolStripMenuItem";
-            this.reconnectUSBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.reconnectUSBToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.reconnectUSBToolStripMenuItem.Text = "&Reconnect USB";
             this.reconnectUSBToolStripMenuItem.Click += new System.EventHandler(this.reconnectUSBToolStripMenuItem_Click);
             // 
@@ -293,7 +293,7 @@ namespace RoboticArm535
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -373,7 +373,7 @@ namespace RoboticArm535
             this.listBox_Commands.Location = new System.Drawing.Point(264, 30);
             this.listBox_Commands.Name = "listBox_Commands";
             this.listBox_Commands.Size = new System.Drawing.Size(132, 344);
-            this.listBox_Commands.TabIndex = 16;
+            this.listBox_Commands.TabIndex = 17;
             this.listBox_Commands.SelectedIndexChanged += new System.EventHandler(this.listBox_Commands_SelectedIndexChanged);
             // 
             // saveFileDialog_Script
@@ -403,7 +403,7 @@ namespace RoboticArm535
             this.button_Abort.Location = new System.Drawing.Point(612, 501);
             this.button_Abort.Name = "button_Abort";
             this.button_Abort.Size = new System.Drawing.Size(72, 23);
-            this.button_Abort.TabIndex = 20;
+            this.button_Abort.TabIndex = 16;
             this.button_Abort.Text = "Abort";
             this.button_Abort.UseVisualStyleBackColor = true;
             this.button_Abort.Click += new System.EventHandler(this.button_Abort_Click);
