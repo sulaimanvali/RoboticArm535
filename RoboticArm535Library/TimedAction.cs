@@ -22,7 +22,7 @@ namespace RoboticArm535Library
         {
             var elems = opCodeAndDuration.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
             if (elems.Length != 2)
-                throw new Exception($"Unable to parse {opCodeAndDuration}. Expected 2 elements.");
+                throw new Exception($"Unable to parse \"{opCodeAndDuration}\". Expected 2 elements.");
 
             if (!Enum.TryParse<OpCode>(elems[0], out OpCode opCode))
                 throw new Exception($"Invalid command: {elems[0]}");

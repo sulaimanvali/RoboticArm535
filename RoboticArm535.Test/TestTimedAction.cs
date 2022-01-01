@@ -30,9 +30,10 @@ StemAhead 8.9
 BaseRight 9.1
 BaseLeft  0.2
 LedOff    1.3
-LedOn     2.4";
+LedOn     2.4
+AllOff    3.5";
             var actions = TimedAction.ParseLines(lines);
-            Assert.AreEqual<int>(12, actions.Length);
+            Assert.AreEqual<int>(13, actions.Length);
 
             Assert.AreEqual<OpCode>(OpCode.GripClose, actions[0].OpCode);
             Assert.AreEqual<float>(1.2f, actions[0].DurationSecs);
@@ -69,13 +70,37 @@ LedOn     2.4";
 
             Assert.AreEqual<OpCode>(OpCode.LedOn, actions[11].OpCode);
             Assert.AreEqual<float>(2.4f, actions[11].DurationSecs);
+
+            Assert.AreEqual<OpCode>(OpCode.AllOff, actions[12].OpCode);
+            Assert.AreEqual<float>(3.5f, actions[12].DurationSecs);
         }
 
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void Parse_ExpectException()
+        public void Parse_TooManyElems_ExpectException()
         {
             TimedAction.Parse("GripClose 1.2 dfjshdksjfh");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void Parse_BadOpCode_ExpectException()
+        {
+            TimedAction.Parse("GripClosefdfdgd 1.2");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void Parse_BadDuration_ExpectException()
+        {
+            TimedAction.Parse("GripClose 1.gfdgf2");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void Parse_EmptyString_ExpectException()
+        {
+            TimedAction.Parse("");
         }
     }
 }
