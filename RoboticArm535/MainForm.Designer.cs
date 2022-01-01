@@ -428,7 +428,7 @@ namespace RoboticArm535
             this.buttonPressTimerControl.Location = new System.Drawing.Point(3, 3);
             this.buttonPressTimerControl.Name = "buttonPressTimerControl";
             this.buttonPressTimerControl.Size = new System.Drawing.Size(244, 25);
-            this.buttonPressTimerControl.TabIndex = 20;
+            this.buttonPressTimerControl.TabIndex = 12;
             // 
             // MainForm
             // 
