@@ -3,7 +3,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-UsbComms usb = new UsbComms();
+UsbComms usb = new();
 CancellationTokenSource tokenSource = new();
 if (usb.Connect() != UsbConnErrorCode.NoError)
 {

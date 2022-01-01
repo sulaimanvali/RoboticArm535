@@ -17,8 +17,8 @@ namespace RoboticArm535
     public partial class MainForm : Form
     {
         private readonly string ScriptsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.ProductName+"_scripts");
-        private readonly UsbComms usbComms = new UsbComms();
-        private readonly Stopwatch stopwatch = new Stopwatch();
+        private readonly UsbComms usbComms = new();
+        private readonly Stopwatch stopwatch = new();
 
         public MainForm()
         {

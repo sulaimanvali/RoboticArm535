@@ -17,8 +17,8 @@ namespace RoboticArm535Library
         IUsbDevice usbDevice = null;
         private const int VendorId = 0x1267;
         private const int ProductId = 0x0000;
-        readonly UsbSetupPacket setupPacket = new UsbSetupPacket(
-            bRequestType: 0x40, bRequest: 6, wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
+        readonly UsbSetupPacket setupPacket = new(bRequestType: 0x40, bRequest: 6,
+            wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
         CancellationTokenSource tokenSource;
 
         #region

@@ -6,7 +6,7 @@ namespace RoboticArm535.Test
     [TestClass]
     public class TestPacketGeneratorMultiPress
     {
-        private void checkPacket(byte[] actual, byte[] expected)
+        private static void checkPacket(byte[] actual, byte[] expected)
         {
             for (int i = 0; i < actual.Length; i++)
                 Assert.AreEqual<byte>(expected[i], actual[i]);
