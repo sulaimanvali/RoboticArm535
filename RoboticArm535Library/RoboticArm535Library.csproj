@@ -5,6 +5,11 @@
     <Version>1.2.0</Version>
     <Description>.Net library to control Robotic Arm Edge (OWI-535) via USB interface. Uses LibUsbDotNet library.</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>Sulaiman Vali</Copyright>
+    <RepositoryUrl>https://github.com/sulaimanvali/RoboticArm535</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/sulaimanvali/RoboticArm535</PackageProjectUrl>
+    <Authors>Sulaiman Vali</Authors>
+    <PackageTags>OWI-535 Robotic Arm Edge Maplin USB robot</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
