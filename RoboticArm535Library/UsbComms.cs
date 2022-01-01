@@ -168,6 +168,7 @@ namespace RoboticArm535Library
             }
             catch (OperationCanceledException)
             {
+                // stop all motors and turn off LED
                 Cmd(Out.Led.Off, Out.Grip.Stop, Out.Wrist.Stop, Out.Elbow.Stop, Out.Stem.Stop, Out.Base.Stop);
             }
             finally
