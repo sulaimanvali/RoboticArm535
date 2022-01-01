@@ -15,12 +15,14 @@ Disclaimer: A badly composed script could damage your robotic arm. It has no fee
     <PackageIcon>robotic_arm_96.png</PackageIcon>
     <PackageIconUrl />
     <SignAssembly>false</SignAssembly>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <PackageProjectUrl>https://github.com/sulaimanvali/RoboticArm535</PackageProjectUrl>
     <Company>N/A</Company>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <FileVersion>1.3.0.0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/sulaimanvali/RoboticArm535</RepositoryUrl>
+    <PackageTags>OWI-535 Robotic Arm Edge Maplin USB robotarm</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
