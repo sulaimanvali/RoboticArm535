@@ -26,6 +26,9 @@ namespace RoboticArm535Library
             if (opCode == OpCode.AllOff)
                 return packet;
 
+            if (opCode == OpCode.Wait)
+                throw new InvalidOperationException("Wait is not a valid command to send to robotic arm.");
+
             if ((opCode & OpCode.LedOff) != 0)
                 led = Out.Led.Off;
             else if ((opCode & OpCode.LedOn) != 0)

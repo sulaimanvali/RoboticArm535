@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RoboticArm535Library;
+using System;
 
 namespace RoboticArm535.Test
 {
@@ -31,6 +32,8 @@ BaseLeft  0.2
 LedOff    1.3
 LedOn     2.4";
             var actions = TimedAction.ParseLines(lines);
+            Assert.AreEqual<int>(12, actions.Length);
+
             Assert.AreEqual<OpCode>(OpCode.GripClose, actions[0].OpCode);
             Assert.AreEqual<float>(1.2f, actions[0].DurationSecs);
 
@@ -66,6 +69,13 @@ LedOn     2.4";
 
             Assert.AreEqual<OpCode>(OpCode.LedOn, actions[11].OpCode);
             Assert.AreEqual<float>(2.4f, actions[11].DurationSecs);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void Parse_ExpectException()
+        {
+            TimedAction.Parse("GripClose 1.2 dfjshdksjfh");
         }
     }
 }

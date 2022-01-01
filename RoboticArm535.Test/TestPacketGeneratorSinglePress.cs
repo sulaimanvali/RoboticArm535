@@ -1,12 +1,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RoboticArm535Library;
+using System;
 
 namespace RoboticArm535.Test
 {
     [TestClass]
     public class TestPacketGeneratorSinglePress
     {
-        private void checkPacket(byte[] actual, byte[] expected)
+        private static void checkPacket(byte[] actual, byte[] expected)
         {
             for (int i = 0; i < actual.Length; i++)
                 Assert.AreEqual<byte>(expected[i], actual[i]);
@@ -94,6 +95,20 @@ namespace RoboticArm535.Test
         {
             var bytes = PacketGenerator.GenSinglePress(OpCode.BaseLeft);
             checkPacket(bytes, new byte[] { 0, 0x02, 0 });
+        }
+
+        [TestMethod]
+        public void GenSinglePress_AllOff_Ok()
+        {
+            var bytes = PacketGenerator.GenSinglePress(OpCode.AllOff);
+            checkPacket(bytes, new byte[] { 0, 0, 0 });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GenSinglePress_Wait_ExpectException()
+        {
+            PacketGenerator.GenSinglePress(OpCode.Wait);
         }
     }
 }
