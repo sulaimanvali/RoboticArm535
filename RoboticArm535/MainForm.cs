@@ -18,7 +18,6 @@ namespace RoboticArm535
     {
         private readonly string ScriptsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.ProductName+"_scripts");
         private readonly UsbComms usbComms = new();
-        private readonly Stopwatch stopwatch = new();
 
         public MainForm()
         {
@@ -110,25 +109,24 @@ namespace RoboticArm535
         private void buttonPressStarted(object sender)
         {
             var opCode = (OpCode)(sender as Button).Tag;
-            if (checkBox_Record.Checked)
-                stopwatch.Restart();
+            buttonPressTimerControl.Start();
             sendMotorCommand(opCode, isPressed: true);
         }
 
         private void buttonPressEnded(object sender)
         {
             var opCode = (OpCode)(sender as Button).Tag;
-            stopwatch.Stop();
+            buttonPressTimerControl.Stop();
             sendMotorCommand(opCode, isPressed: false);
             recordAction(opCode);
         }
 
         private void recordAction(OpCode opCode)
         {
-            if (!checkBox_Record.Checked)
+            if (!buttonPressTimerControl.IsRecording)
                 return;
 
-            var timedAction = new TimedAction(opCode, stopwatch.ElapsedMilliseconds / 1000.0f);
+            var timedAction = new TimedAction(opCode, buttonPressTimerControl.GetElapsedTimeSecs());
             textBox_TimedActions.AppendText(timedAction + "\r\n");
         }
 
@@ -148,7 +146,6 @@ namespace RoboticArm535
 
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
         {
-            stopwatch.Reset();
             sendLedCommand(checkBox_LED.Checked);
             recordAction(checkBox_LED.Checked ? OpCode.LedOn : OpCode.LedOff);
         }
@@ -171,20 +168,6 @@ namespace RoboticArm535
         private void reconnectUSBToolStripMenuItem_Click(object sender, EventArgs e)
         {
             connectUSB();
-        }
-
-        private void timer_ButtonPresses_Tick(object sender, EventArgs e)
-        {
-            label_TimeButtonPressed.Text = $"{(stopwatch.ElapsedMilliseconds/1000.0f):F2} s";
-        }
-
-        private void checkBox_Record_CheckedChanged(object sender, EventArgs e)
-        {
-            stopwatch.Reset();
-            if (checkBox_Record.Checked)
-                timer_ButtonPresses.Start();
-            else
-                timer_ButtonPresses.Stop();
         }
 
         private void button_Clear_Click(object sender, EventArgs e)

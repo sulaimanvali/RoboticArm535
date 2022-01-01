@@ -29,7 +29,6 @@ namespace RoboticArm535
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.button_GripOpen = new System.Windows.Forms.Button();
             this.checkBox_LED = new System.Windows.Forms.CheckBox();
@@ -56,9 +55,6 @@ namespace RoboticArm535
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button_Clear = new System.Windows.Forms.Button();
             this.button_RunScript = new System.Windows.Forms.Button();
-            this.checkBox_Record = new System.Windows.Forms.CheckBox();
-            this.label_TimeButtonPressed = new System.Windows.Forms.Label();
-            this.timer_ButtonPresses = new System.Windows.Forms.Timer(this.components);
             this.textBox_TimedActions = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.listBox_Commands = new System.Windows.Forms.ListBox();
@@ -69,6 +65,7 @@ namespace RoboticArm535
             this.panel_Buttons = new System.Windows.Forms.Panel();
             this.label_CurrentLineRunning = new System.Windows.Forms.Label();
             this.panel_Right = new System.Windows.Forms.Panel();
+            this.buttonPressTimerControl = new RoboticArm535.ButtonPressTimerControl();
             this.menuStrip1.SuspendLayout();
             this.panel_Buttons.SuspendLayout();
             this.panel_Right.SuspendLayout();
@@ -313,47 +310,22 @@ namespace RoboticArm535
             this.button_RunScript.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button_RunScript.Location = new System.Drawing.Point(505, 501);
             this.button_RunScript.Name = "button_RunScript";
-            this.button_RunScript.Size = new System.Drawing.Size(101, 23);
+            this.button_RunScript.Size = new System.Drawing.Size(104, 23);
             this.button_RunScript.TabIndex = 15;
             this.button_RunScript.Text = "Run Script";
             this.button_RunScript.UseVisualStyleBackColor = true;
             this.button_RunScript.Click += new System.EventHandler(this.button_RunScript_Click);
-            // 
-            // checkBox_Record
-            // 
-            this.checkBox_Record.AutoSize = true;
-            this.checkBox_Record.Location = new System.Drawing.Point(3, 4);
-            this.checkBox_Record.Name = "checkBox_Record";
-            this.checkBox_Record.Size = new System.Drawing.Size(143, 19);
-            this.checkBox_Record.TabIndex = 12;
-            this.checkBox_Record.Text = "Record Button Presses";
-            this.checkBox_Record.UseVisualStyleBackColor = true;
-            this.checkBox_Record.CheckedChanged += new System.EventHandler(this.checkBox_Record_CheckedChanged);
-            // 
-            // label_TimeButtonPressed
-            // 
-            this.label_TimeButtonPressed.AutoSize = true;
-            this.label_TimeButtonPressed.Font = new System.Drawing.Font("Consolas", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label_TimeButtonPressed.Location = new System.Drawing.Point(180, 2);
-            this.label_TimeButtonPressed.Name = "label_TimeButtonPressed";
-            this.label_TimeButtonPressed.Size = new System.Drawing.Size(40, 22);
-            this.label_TimeButtonPressed.TabIndex = 16;
-            this.label_TimeButtonPressed.Text = "---";
-            // 
-            // timer_ButtonPresses
-            // 
-            this.timer_ButtonPresses.Tick += new System.EventHandler(this.timer_ButtonPresses_Tick);
             // 
             // textBox_TimedActions
             // 
             this.textBox_TimedActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox_TimedActions.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox_TimedActions.Location = new System.Drawing.Point(3, 30);
+            this.textBox_TimedActions.Location = new System.Drawing.Point(0, 30);
             this.textBox_TimedActions.Multiline = true;
             this.textBox_TimedActions.Name = "textBox_TimedActions";
             this.textBox_TimedActions.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox_TimedActions.Size = new System.Drawing.Size(252, 412);
+            this.textBox_TimedActions.Size = new System.Drawing.Size(255, 412);
             this.textBox_TimedActions.TabIndex = 13;
             // 
             // label4
@@ -400,7 +372,7 @@ namespace RoboticArm535
             // 
             this.button_Abort.Image = global::RoboticArm535.Properties.Resources.Stop_16x;
             this.button_Abort.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button_Abort.Location = new System.Drawing.Point(612, 501);
+            this.button_Abort.Location = new System.Drawing.Point(615, 501);
             this.button_Abort.Name = "button_Abort";
             this.button_Abort.Size = new System.Drawing.Size(72, 23);
             this.button_Abort.TabIndex = 16;
@@ -441,16 +413,22 @@ namespace RoboticArm535
             // 
             // panel_Right
             // 
+            this.panel_Right.Controls.Add(this.buttonPressTimerControl);
             this.panel_Right.Controls.Add(this.textBox_TimedActions);
             this.panel_Right.Controls.Add(this.label4);
-            this.panel_Right.Controls.Add(this.checkBox_Record);
             this.panel_Right.Controls.Add(this.listBox_Commands);
             this.panel_Right.Controls.Add(this.label5);
-            this.panel_Right.Controls.Add(this.label_TimeButtonPressed);
             this.panel_Right.Location = new System.Drawing.Point(432, 27);
             this.panel_Right.Name = "panel_Right";
             this.panel_Right.Size = new System.Drawing.Size(402, 446);
             this.panel_Right.TabIndex = 23;
+            // 
+            // buttonPressTimerControl
+            // 
+            this.buttonPressTimerControl.Location = new System.Drawing.Point(3, 3);
+            this.buttonPressTimerControl.Name = "buttonPressTimerControl";
+            this.buttonPressTimerControl.Size = new System.Drawing.Size(244, 25);
+            this.buttonPressTimerControl.TabIndex = 20;
             // 
             // MainForm
             // 
@@ -508,9 +486,6 @@ namespace RoboticArm535
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button button_Clear;
         private System.Windows.Forms.Button button_RunScript;
-        private System.Windows.Forms.CheckBox checkBox_Record;
-        private System.Windows.Forms.Label label_TimeButtonPressed;
-        private System.Windows.Forms.Timer timer_ButtonPresses;
         private System.Windows.Forms.TextBox textBox_TimedActions;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox_Commands;
@@ -524,6 +499,7 @@ namespace RoboticArm535
         private System.Windows.Forms.Panel panel_Buttons;
         private System.Windows.Forms.Label label_CurrentLineRunning;
         private System.Windows.Forms.Panel panel_Right;
+        private ButtonPressTimerControl buttonPressTimerControl;
     }
 }
 
