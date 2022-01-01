@@ -13,7 +13,7 @@ namespace RoboticArm535Library
         /// </summary>
         /// <param name="opCode"></param>
         /// <returns></returns>
-        public static byte[] GenSinglePress(OpCode opCode)
+        public static byte[] GenByOpCode(OpCode opCode)
         {
             Out.Led led        = Out.Led.Off;
             Out.Grip grip      = Out.Grip.Stop;
@@ -59,7 +59,7 @@ namespace RoboticArm535Library
             else if (opCode.HasFlag(OpCode.BaseRight))
                 baseMotor = Out.Base.Right;
 
-            return PacketGenerator.GenMultiPress(led, grip, wrist, elbow, stem, baseMotor);
+            return PacketGenerator.GenByOutputs(led, grip, wrist, elbow, stem, baseMotor);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace RoboticArm535Library
         /// <param name="stem"></param>
         /// <param name="baseMotor"></param>
         /// <returns></returns>
-        public static byte[] GenMultiPress(Out.Led led, Out.Grip grip, Out.Wrist wrist,
+        public static byte[] GenByOutputs(Out.Led led, Out.Grip grip, Out.Wrist wrist,
             Out.Elbow elbow, Out.Stem stem, Out.Base baseMotor)
         {
             var bytes = new byte[Packet.CommandLength];

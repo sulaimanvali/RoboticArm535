@@ -72,7 +72,7 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
-            sendPacket(PacketGenerator.GenSinglePress(on ? OpCode.LedOn : OpCode.LedOff));
+            sendPacket(PacketGenerator.GenByOpCode(on ? OpCode.LedOn : OpCode.LedOff));
         }
 
         #region Motor control commands
@@ -86,7 +86,7 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
             
-            sendPacket(PacketGenerator.GenSinglePress(opCode));
+            sendPacket(PacketGenerator.GenByOpCode(opCode));
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new Exception("USB device not connected.");
 
-            sendPacket(PacketGenerator.GenMultiPress(led, grip, wrist, elbow, stem, baseMotor));
+            sendPacket(PacketGenerator.GenByOutputs(led, grip, wrist, elbow, stem, baseMotor));
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace RoboticArm535Library
                 return;
             }
 
-            sendPacket(PacketGenerator.GenSinglePress(opCode));
+            sendPacket(PacketGenerator.GenByOpCode(opCode));
 
             if (durationSecs == 0)
                 return;
@@ -134,7 +134,7 @@ namespace RoboticArm535Library
             Thread.Sleep((int)(durationSecs * 1000));
 
             // turn off everything
-            sendPacket(PacketGenerator.GenSinglePress(OpCode.AllOff));
+            sendPacket(PacketGenerator.GenByOpCode(OpCode.AllOff));
         }
 
         /// <summary>
