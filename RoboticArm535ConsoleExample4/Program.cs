@@ -24,6 +24,6 @@ if (usb.Connect() != UsbConnErrorCode.NoError)
 Console.CancelKeyPress += (sender, e) => { usb.AbortScript(); e.Cancel = true; };
 Console.WriteLine("Press Ctrl-C to abort");
 
-// demonstrates a simple script in a string
+// demonstrates a simple script in a file passed in as an argument
 var lines = script.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 await usb.RunScript(script, new Progress<int>(lineIndex => Console.WriteLine($"Line {lineIndex}: {lines[lineIndex]}")));
