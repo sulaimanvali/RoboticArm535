@@ -9,7 +9,7 @@ namespace RoboticArm535Library
     public class PacketGenerator
     {
         /// <summary>
-        /// 
+        /// Generate 3 byte packet to send to robotic arm with the given output requests.
         /// </summary>
         /// <param name="opCode"></param>
         /// <returns></returns>
@@ -23,47 +23,47 @@ namespace RoboticArm535Library
             Out.Base baseMotor = Out.Base.Stop;
             var packet = new byte[3];
 
-            if (opCode == OpCode.AllOff)
+            if (opCode.HasFlag(OpCode.AllOff))
                 return packet;
 
-            if (opCode == OpCode.Wait)
+            if (opCode.HasFlag(OpCode.Wait))
                 throw new InvalidOperationException("Wait is not a valid command to send to robotic arm.");
 
-            if ((opCode & OpCode.LedOff) != 0)
+            if (opCode.HasFlag(OpCode.LedOff))
                 led = Out.Led.Off;
-            else if ((opCode & OpCode.LedOn) != 0)
+            else if (opCode.HasFlag(OpCode.LedOn))
                 led = Out.Led.On;
 
-            if ((opCode & OpCode.GripClose) != 0)
+            if (opCode.HasFlag(OpCode.GripClose))
                 grip = Out.Grip.Close;
-            else if ((opCode & OpCode.GripOpen) != 0)
+            else if (opCode.HasFlag(OpCode.GripOpen))
                 grip = Out.Grip.Open;
 
-            if ((opCode & OpCode.WristUp) != 0)
+            if (opCode.HasFlag(OpCode.WristUp))
                 wrist = Out.Wrist.Up;
-            else if ((opCode & OpCode.WristDown) != 0)
+            else if (opCode.HasFlag(OpCode.WristDown))
                 wrist = Out.Wrist.Down;
 
-            if ((opCode & OpCode.ElbowUp) != 0)
+            if (opCode.HasFlag(OpCode.ElbowUp))
                 elbow = Out.Elbow.Up;
-            else if ((opCode & OpCode.ElbowDown) != 0)
+            else if (opCode.HasFlag(OpCode.ElbowDown))
                 elbow = Out.Elbow.Down;
 
-            if ((opCode & OpCode.StemBack) != 0)
+            if (opCode.HasFlag(OpCode.StemBack))
                 stem = Out.Stem.Back;
-            else if ((opCode & OpCode.StemAhead) != 0)
+            else if (opCode.HasFlag(OpCode.StemAhead))
                 stem = Out.Stem.Ahead;
 
-            if ((opCode & OpCode.BaseLeft) != 0)
+            if (opCode.HasFlag(OpCode.BaseLeft))
                 baseMotor = Out.Base.Left;
-            else if ((opCode & OpCode.BaseRight) != 0)
+            else if (opCode.HasFlag(OpCode.BaseRight))
                 baseMotor = Out.Base.Right;
 
             return PacketGenerator.GenMultiPress(led, grip, wrist, elbow, stem, baseMotor);
         }
 
         /// <summary>
-        /// 
+        /// Generate 3 byte packet to send to robotic arm with the given output requests.
         /// </summary>
         /// <param name="led"></param>
         /// <param name="grip"></param>
