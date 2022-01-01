@@ -23,11 +23,10 @@ namespace RoboticArm535Library
             Out.Base baseMotor = Out.Base.Stop;
             var packet = new byte[3];
 
+            checkedSanity();
+
             if (opCode.HasFlag(OpCode.AllOff))
                 return packet;
-
-            if (opCode.HasFlag(OpCode.Wait))
-                throw new InvalidOperationException("Wait is not a valid command to send to robotic arm.");
 
             if (opCode.HasFlag(OpCode.LedOff))
                 led = Out.Led.Off;
@@ -60,6 +59,33 @@ namespace RoboticArm535Library
                 baseMotor = Out.Base.Right;
 
             return PacketGenerator.GenByOutputs(led, grip, wrist, elbow, stem, baseMotor);
+            
+            void checkedSanity()
+            {
+                if (opCode.HasFlag(OpCode.Wait))
+                    throw new InvalidOperationException("Wait is not a valid command to send to robotic arm.");
+
+                if (opCode.HasFlag(OpCode.AllOff) && opCode != OpCode.AllOff)
+                    throw new InvalidOperationException("Cannot set AllOff and some on at the same time.");
+
+                if (opCode.HasFlag(OpCode.LedOff) && opCode.HasFlag(OpCode.LedOn))
+                    throw new InvalidOperationException("Cannot set LED on and off at the same time.");
+
+                if (opCode.HasFlag(OpCode.GripOpen) && opCode.HasFlag(OpCode.GripClose))
+                    throw new InvalidOperationException("Cannot move grip motor open and close at the same time.");
+
+                if (opCode.HasFlag(OpCode.WristUp) && opCode.HasFlag(OpCode.WristDown))
+                    throw new InvalidOperationException("Cannot move wrist motor up and down at the same time.");
+
+                if (opCode.HasFlag(OpCode.ElbowUp) && opCode.HasFlag(OpCode.ElbowDown))
+                    throw new InvalidOperationException("Cannot move elbow motor up and down at the same time.");
+
+                if (opCode.HasFlag(OpCode.StemAhead) && opCode.HasFlag(OpCode.StemBack))
+                    throw new InvalidOperationException("Cannot move stem motor ahead and back at the same time.");
+
+                if (opCode.HasFlag(OpCode.BaseRight) && opCode.HasFlag(OpCode.BaseLeft))
+                    throw new InvalidOperationException("Cannot move base motor right and left at the same time.");
+            }
         }
 
         /// <summary>

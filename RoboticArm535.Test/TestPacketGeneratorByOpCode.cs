@@ -110,5 +110,54 @@ namespace RoboticArm535.Test
         {
             PacketGenerator.GenByOpCode(OpCode.Wait);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GenByOpCode_LedOnAndOff_ExpectException()
+        {
+            PacketGenerator.GenByOpCode(OpCode.LedOn | OpCode.LedOff);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GenByOpCode_GripOpenAndClose_ExpectException()
+        {
+            PacketGenerator.GenByOpCode(OpCode.GripOpen | OpCode.GripClose);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GenByOpCode_WristUpAndDown_ExpectException()
+        {
+            PacketGenerator.GenByOpCode(OpCode.WristUp | OpCode.WristDown);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GenByOpCode_ElbowUpAndDown_ExpectException()
+        {
+            PacketGenerator.GenByOpCode(OpCode.ElbowUp | OpCode.ElbowDown);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GenByOpCode_StemAheadAndBack_ExpectException()
+        {
+            PacketGenerator.GenByOpCode(OpCode.StemAhead | OpCode.StemBack);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GenByOpCode_BaseRightAndLeft_ExpectException()
+        {
+            PacketGenerator.GenByOpCode(OpCode.BaseRight | OpCode.BaseLeft);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void GenByOpCode_AllOffAndSomeOn_ExpectException()
+        {
+            PacketGenerator.GenByOpCode(OpCode.AllOff | OpCode.BaseLeft);
+        }
     }
 }
