@@ -8,7 +8,9 @@
     <Authors>Sulaiman Vali</Authors>
     <Description>Controls the OWI-535 Robotic Arm Edge via USB interface.
 Developed by Sulaiman.Vali@gmail.com
-https://github.com/sulaimanvali/RoboticArm535</Description>
+https://github.com/sulaimanvali/RoboticArm535
+
+Disclaimer: A badly composed script could damage your robotic arm. It has no feedback switches. The motor will keep running, or attempting to run, until it is commanded to stop.</Description>
     <Copyright>Sulaiman Vali</Copyright>
     <PackageIcon>robotic_arm_96.png</PackageIcon>
     <PackageIconUrl />
@@ -18,6 +20,7 @@ https://github.com/sulaimanvali/RoboticArm535</Description>
     <Company>N/A</Company>
     <AssemblyVersion>1.2.0.0</AssemblyVersion>
     <FileVersion>1.2.0.0</FileVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

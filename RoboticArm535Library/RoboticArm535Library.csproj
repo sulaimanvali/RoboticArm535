@@ -10,10 +10,20 @@
     <PackageProjectUrl>https://github.com/sulaimanvali/RoboticArm535</PackageProjectUrl>
     <Authors>Sulaiman Vali</Authors>
     <PackageTags>OWI-535 Robotic Arm Edge Maplin USB robot</PackageTags>
+    <PackageIcon>robotic_arm_96.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="LibUsbDotNet" Version="3.0.97-alpha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\RoboticArm535\images\robotic_arm_96.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
