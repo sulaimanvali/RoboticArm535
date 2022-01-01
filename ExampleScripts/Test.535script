@@ -1,0 +1,14 @@
+LedOff 1.0
+LedOn 1.0
+GripClose 0.3
+GripOpen 0.3
+WristUp 1.0
+WristDown 1.0
+ElbowUp 1.0
+ElbowDown 1.0
+StemBack 1.0
+StemAhead 1.0
+BaseRight 1.0
+BaseLeft 1.0
+AllOff 1.0
+Wait 1.0

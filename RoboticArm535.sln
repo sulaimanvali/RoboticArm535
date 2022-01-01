@@ -17,6 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboticArm535ConsoleExample
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboticArm535ConsoleExample4", "RoboticArm535ConsoleExample4\RoboticArm535ConsoleExample4.csproj", "{1A316800-E256-45C3-A10A-B3E5308AD59D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExampleScripts", "ExampleScripts", "{52EF8317-11A2-4746-9DA7-DFFF29931597}"
+	ProjectSection(SolutionItems) = preProject
+		ExampleScripts\example1.535script = ExampleScripts\example1.535script
+		ExampleScripts\Test.535script = ExampleScripts\Test.535script
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RoboticArm535ConsoleExample4": {
+      "commandName": "Project",
+      "commandLineArgs": "$(ProjectDir)..\\ExampleScripts\\Test.535script"
+    }
+  }
+}
