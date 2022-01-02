@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,7 @@ namespace RoboticArm535
             this.Text = $"{Application.ProductName} V{Application.ProductVersion}";
             listBox_Commands.DataSource = Enum.GetValues<OpCode>();
             textBox_TimedActions.Clear();
+            setMotorDurationLimits();
 
             openFileDialog_Script.InitialDirectory = 
                 saveFileDialog_Script.InitialDirectory = ScriptsFolder;
@@ -55,6 +57,17 @@ namespace RoboticArm535
             }
 
             setScriptRunning(false);
+        }
+
+        private void setMotorDurationLimits()
+        {
+            var culture = CultureInfo.InvariantCulture;
+            var limits = usbComms.MotorLimits;
+            limits.MaxTimeGrip  = float.Parse(Properties.Resources.MotorDurationLimitGrip, culture);
+            limits.MaxTimeWrist = float.Parse(Properties.Resources.MotorDurationLimitWrist, culture);
+            limits.MaxTimeElbow = float.Parse(Properties.Resources.MotorDurationLimitElbow, culture);
+            limits.MaxTimeStem  = float.Parse(Properties.Resources.MotorDurationLimitStem, culture);
+            limits.MaxTimeBase  = float.Parse(Properties.Resources.MotorDurationLimitBase, culture);
         }
 
         private bool sendLedCommand(bool isOn)
@@ -227,6 +240,13 @@ namespace RoboticArm535
 
             if (saveFileDialog_Script.ShowDialog() == DialogResult.OK)
                 File.WriteAllText(saveFileDialog_Script.FileName, textBox_TimedActions.Text);
+        }
+
+        private void setMotorDurationLimitsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new MotorDurationLimitsForm(usbComms.MotorLimits);
+            if (form.ShowDialog() == DialogResult.OK)
+                usbComms.MotorLimits = form.MotorLimits;
         }
 
         private void MainForm_Load(object sender, EventArgs e)

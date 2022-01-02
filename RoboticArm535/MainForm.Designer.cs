@@ -66,6 +66,8 @@ namespace RoboticArm535
             this.label_CurrentLineRunning = new System.Windows.Forms.Label();
             this.panel_Right = new System.Windows.Forms.Panel();
             this.buttonPressTimerControl = new RoboticArm535.ButtonPressTimerControl();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.setMotorDurationLimitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel_Buttons.SuspendLayout();
             this.panel_Right.SuspendLayout();
@@ -242,7 +244,9 @@ namespace RoboticArm535
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
-            this.saveToolStripMenuItem});
+            this.saveToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.setMotorDurationLimitsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
@@ -251,7 +255,7 @@ namespace RoboticArm535
             // 
             this.openToolStripMenuItem.Image = global::RoboticArm535.Properties.Resources.OpenFolder_16x;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.openToolStripMenuItem.Text = "&Open Script";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -259,7 +263,7 @@ namespace RoboticArm535
             // 
             this.saveToolStripMenuItem.Image = global::RoboticArm535.Properties.Resources.Save_16x;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.saveToolStripMenuItem.Text = "&Save Script";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -275,7 +279,7 @@ namespace RoboticArm535
             // 
             this.reconnectUSBToolStripMenuItem.Image = global::RoboticArm535.Properties.Resources.USB_16x;
             this.reconnectUSBToolStripMenuItem.Name = "reconnectUSBToolStripMenuItem";
-            this.reconnectUSBToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.reconnectUSBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reconnectUSBToolStripMenuItem.Text = "&Reconnect USB";
             this.reconnectUSBToolStripMenuItem.Click += new System.EventHandler(this.reconnectUSBToolStripMenuItem_Click);
             // 
@@ -430,6 +434,18 @@ namespace RoboticArm535
             this.buttonPressTimerControl.Size = new System.Drawing.Size(244, 25);
             this.buttonPressTimerControl.TabIndex = 12;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
+            // 
+            // setMotorDurationLimitsToolStripMenuItem
+            // 
+            this.setMotorDurationLimitsToolStripMenuItem.Name = "setMotorDurationLimitsToolStripMenuItem";
+            this.setMotorDurationLimitsToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.setMotorDurationLimitsToolStripMenuItem.Text = "Set Motor Duration &Limits";
+            this.setMotorDurationLimitsToolStripMenuItem.Click += new System.EventHandler(this.setMotorDurationLimitsToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -500,6 +516,8 @@ namespace RoboticArm535
         private System.Windows.Forms.Label label_CurrentLineRunning;
         private System.Windows.Forms.Panel panel_Right;
         private ButtonPressTimerControl buttonPressTimerControl;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem setMotorDurationLimitsToolStripMenuItem;
     }
 }
 
