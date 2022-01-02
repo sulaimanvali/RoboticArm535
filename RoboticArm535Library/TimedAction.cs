@@ -1,6 +1,7 @@
 ﻿using RoboticArm535Library;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace RoboticArm535Library
             if (!Enum.TryParse<OpCode>(elems[0], out OpCode opCode))
                 throw new Exception($"Invalid command: {elems[0]}");
 
-            if (!float.TryParse(elems[1], out float duration))
+            if (!float.TryParse(elems[1], NumberStyles.Float, CultureInfo.InvariantCulture, out float duration))
                 throw new Exception($"Invalid duration: {elems[1]}");
 
             if (duration < 0)
