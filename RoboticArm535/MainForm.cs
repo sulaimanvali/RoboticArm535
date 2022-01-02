@@ -145,10 +145,19 @@ namespace RoboticArm535
         }
 
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
-        {
+        {            
             sendLedCommand(checkBox_LED.Checked);
-            recordAction(checkBox_LED.Checked ? OpCode.LedOn : OpCode.LedOff);
-        }
+            if (checkBox_LED.Checked)
+            {
+                buttonPressTimerControl.Start();
+                recordAction(OpCode.LedOn);
+            }
+            else
+            {
+                buttonPressTimerControl.Stop();
+                recordAction(OpCode.LedOff);
+            }
+         }
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
         {
