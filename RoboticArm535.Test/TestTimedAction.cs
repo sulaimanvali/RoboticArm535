@@ -102,5 +102,12 @@ AllOff    3.5";
         {
             TimedAction.Parse("");
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void Parse_NegativeDuration_ExpectException()
+        {
+            TimedAction.Parse("LedOn -2.4");
+        }
     }
 }

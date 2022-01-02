@@ -30,6 +30,9 @@ namespace RoboticArm535Library
             if (!float.TryParse(elems[1], out float duration))
                 throw new Exception($"Invalid duration: {elems[1]}");
 
+            if (duration < 0)
+                throw new Exception($"Duration requested cannot be negative: {duration}");
+
             return new TimedAction(opCode, duration);
         }
 
