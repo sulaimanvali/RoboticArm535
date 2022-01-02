@@ -7,7 +7,7 @@ Note that USB does not provide power to the robotic arm, only communication. You
 
 Feel free to take the code, modify it, learn from it, make it clap, dance, flip a bird etc.
 Please be warned though, that there are no feedback sensors in the robotic arm. 
-If you write scripts to control it, you have to send the appropriate command to stop the motors in time before they reach their limits and start clicking. Since version 1.4, there are duration limits in the software is you are sending timed commands via script. For example the Grip motor will not be allowed to run for longer than 2.7 seconds.
+If you write scripts to control it, you have to send the appropriate command to stop the motors in time before they reach their limits and start clicking. Since version 1.4, there are duration limits in the software if you are sending timed commands via script. For example the Grip motor will not be allowed to run for longer than 2.7 seconds.
 
 If you are having USB driver issues, install the libusb-win32 driver explicitly via Device Manager.
 
