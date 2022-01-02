@@ -21,7 +21,19 @@ namespace RoboticArm535Library
             wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
         CancellationTokenSource tokenSource;
 
-        #region
+        /// <summary>
+        /// Contains the duration limits for each of the motors, beyond which 
+        /// script duration requests will be capped. Properties are settable.
+        /// Feel free to modify caps as required.
+        /// </summary>
+        public MotorLimits MotorLimits { get; set; } = new();
+
+        /// <summary>
+        /// True to cap durations when running scripts.
+        /// </summary>
+        public bool CheckMotorLimits { get; set; } = true;
+
+        #region Connection methods
         /// <summary>
         /// Connects to USB device.
         /// </summary>
@@ -131,6 +143,11 @@ namespace RoboticArm535Library
             if (durationSecs == 0)
                 return;
 
+            Debug.Write($"Duration: uncapped: {durationSecs} s,");
+            if (CheckMotorLimits)
+                durationSecs = MotorLimits.CapDuration(opCode, durationSecs);
+            Debug.WriteLine($"capped: {durationSecs} s");
+
             Thread.Sleep((int)(durationSecs * 1000));
 
             // turn off everything
@@ -157,8 +174,7 @@ namespace RoboticArm535Library
 
                     progress.Report(lineIndex);
                     var action = timedActions[lineIndex];
-                    Cmd(action.OpCode, action.DurationSecs);
-                    
+                    Cmd(action.OpCode, action.DurationSecs);                    
                 }
             }, tokenSource.Token);
 
