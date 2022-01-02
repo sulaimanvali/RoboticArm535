@@ -30,11 +30,13 @@ namespace RoboticArm535
 
         private void button_OK_Click(object sender, EventArgs e)
         {
-            MotorLimits.MaxTimeGrip  = (float)numericUpDown_Grip.Value;
-            MotorLimits.MaxTimeWrist = (float)numericUpDown_Wrist.Value;
-            MotorLimits.MaxTimeElbow = (float)numericUpDown_Elbow.Value;
-            MotorLimits.MaxTimeStem  = (float)numericUpDown_Stem.Value;
-            MotorLimits.MaxTimeBase  = (float)numericUpDown_Base.Value;
+            var settings = Properties.Settings.Default;
+            settings.MotorDurationLimitGrip = MotorLimits.MaxTimeGrip   = (float)numericUpDown_Grip.Value;
+            settings.MotorDurationLimitWrist = MotorLimits.MaxTimeWrist = (float)numericUpDown_Wrist.Value;
+            settings.MotorDurationLimitElbow = MotorLimits.MaxTimeElbow = (float)numericUpDown_Elbow.Value;
+            settings.MotorDurationLimitStem = MotorLimits.MaxTimeStem   = (float)numericUpDown_Stem.Value;
+            settings.MotorDurationLimitBase = MotorLimits.MaxTimeBase   = (float)numericUpDown_Base.Value;
+            settings.Save();
 
             this.DialogResult = DialogResult.OK;
         }

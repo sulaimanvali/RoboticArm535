@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RoboticArm535.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MotorDurationLimitBase" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="MotorDurationLimitElbow" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="MotorDurationLimitGrip" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">2.7</Value>
+    </Setting>
+    <Setting Name="MotorDurationLimitStem" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="MotorDurationLimitWrist" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">8.5</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

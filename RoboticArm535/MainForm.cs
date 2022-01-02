@@ -61,13 +61,13 @@ namespace RoboticArm535
 
         private void setMotorDurationLimits()
         {
-            var culture = CultureInfo.InvariantCulture;
             var limits = usbComms.MotorLimits;
-            limits.MaxTimeGrip  = float.Parse(Properties.Resources.MotorDurationLimitGrip, culture);
-            limits.MaxTimeWrist = float.Parse(Properties.Resources.MotorDurationLimitWrist, culture);
-            limits.MaxTimeElbow = float.Parse(Properties.Resources.MotorDurationLimitElbow, culture);
-            limits.MaxTimeStem  = float.Parse(Properties.Resources.MotorDurationLimitStem, culture);
-            limits.MaxTimeBase  = float.Parse(Properties.Resources.MotorDurationLimitBase, culture);
+            var settings = Properties.Settings.Default;
+            limits.MaxTimeGrip  = settings.MotorDurationLimitGrip;
+            limits.MaxTimeWrist = settings.MotorDurationLimitWrist;
+            limits.MaxTimeElbow = settings.MotorDurationLimitElbow;
+            limits.MaxTimeStem  = settings.MotorDurationLimitStem;
+            limits.MaxTimeBase  = settings.MotorDurationLimitBase;
         }
 
         private bool sendLedCommand(bool isOn)

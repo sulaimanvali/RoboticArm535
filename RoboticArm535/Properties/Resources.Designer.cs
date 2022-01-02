@@ -61,51 +61,6 @@ namespace RoboticArm535.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 20.
-        /// </summary>
-        internal static string MotorDurationLimitBase {
-            get {
-                return ResourceManager.GetString("MotorDurationLimitBase", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 20.
-        /// </summary>
-        internal static string MotorDurationLimitElbow {
-            get {
-                return ResourceManager.GetString("MotorDurationLimitElbow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 2.7.
-        /// </summary>
-        internal static string MotorDurationLimitGrip {
-            get {
-                return ResourceManager.GetString("MotorDurationLimitGrip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 14.
-        /// </summary>
-        internal static string MotorDurationLimitStem {
-            get {
-                return ResourceManager.GetString("MotorDurationLimitStem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 8.5.
-        /// </summary>
-        internal static string MotorDurationLimitWrist {
-            get {
-                return ResourceManager.GetString("MotorDurationLimitWrist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap OpenFolder_16x {
