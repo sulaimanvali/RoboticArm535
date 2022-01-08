@@ -50,14 +50,12 @@ namespace RoboticArm535Library
 
                 if (usbDevice == null)
                 {
-                    Debug.WriteLine($"Unable to find USB device: VID:0x{VendorId:X4} PID:0x{ProductId:X4}.");
+                    Console.Error.WriteLine($"Unable to find USB device: VID:0x{VendorId:X4} PID:0x{ProductId:X4}.");
                     errorCode = UsbConnErrorCode.DeviceNotFound;
                 }
                 else
                 {
                     usbDevice.Open();
-
-                    //Get the first config number of the interface
                     usbDevice.ClaimInterface(usbDevice.Configs[0].Interfaces[0].Number);
                 }
             }
@@ -79,10 +77,11 @@ namespace RoboticArm535Library
         /// Turns LED on or off in single press mode (all running motors will be stopped).
         /// </summary>
         /// <param name="on"></param>
+        /// <exception cref="UsbDeviceNotConnectedException"></exception>
         public void TurnLed(bool on)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
-                throw new Exception("USB device not connected.");
+                throw new UsbDeviceNotConnectedException("USB device not connected.");
 
             sendPacket(PacketGenerator.GenByOpCode(on ? OpCode.LedOn : OpCode.LedOff));
         }
@@ -93,10 +92,11 @@ namespace RoboticArm535Library
         /// This can be used for button down or up events.
         /// </summary>
         /// <param name="opCode"></param>
+        /// <exception cref="UsbDeviceNotConnectedException"></exception>
         public void MoveMotor(OpCode opCode)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
-                throw new Exception("USB device not connected.");
+                throw new UsbDeviceNotConnectedException("USB device not connected.");
             
             sendPacket(PacketGenerator.GenByOpCode(opCode));
         }
@@ -111,11 +111,12 @@ namespace RoboticArm535Library
         /// <param name="elbow"></param>
         /// <param name="stem"></param>
         /// <param name="baseMotor"></param>
+        /// <exception cref="UsbDeviceNotConnectedException"></exception>
         public void Cmd(Out.Led led, Out.Grip grip, Out.Wrist wrist,
                         Out.Elbow elbow, Out.Stem stem, Out.Base baseMotor)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
-                throw new Exception("USB device not connected.");
+                throw new UsbDeviceNotConnectedException("USB device not connected.");
 
             sendPacket(PacketGenerator.GenByOutputs(led, grip, wrist, elbow, stem, baseMotor));
         }
@@ -127,10 +128,11 @@ namespace RoboticArm535Library
         /// <param name="opCode">Enum values can be or'd together but they should make sense.</param>
         /// <param name="durationSecs">Time duration in seconds between turning on and off the given command.
         /// 0 to leave on and return immediately.</param>
+        /// <exception cref="UsbDeviceNotConnectedException"></exception>
         public void Cmd(OpCode opCode, float durationSecs)
         {
             if (usbDevice == null || !usbDevice.IsOpen)
-                throw new Exception("USB device not connected.");
+                throw new UsbDeviceNotConnectedException("USB device not connected.");
 
             if (opCode == OpCode.Wait)
             {
@@ -143,10 +145,13 @@ namespace RoboticArm535Library
             if (durationSecs == 0)
                 return;
 
-            Debug.Write($"Duration: uncapped: {durationSecs} s,");
             if (CheckMotorLimits)
+            {
+                var origDurationSecs = durationSecs;
                 durationSecs = MotorLimits.CapDuration(opCode, durationSecs);
-            Debug.WriteLine($"capped: {durationSecs} s");
+                if (durationSecs != origDurationSecs)
+                    Console.Error.WriteLine($"Duration for {opCode} capped from {origDurationSecs}s to {durationSecs}s");
+            }
 
             Thread.Sleep((int)(durationSecs * 1000));
 
@@ -158,6 +163,7 @@ namespace RoboticArm535Library
         /// Runs the given script of TimedActions.
         /// </summary>
         /// <param name="script"></param>
+        /// <param name="progress"></param>
         public async Task RunScript(string script, IProgress<int> progress)
         {
             var timedActions = TimedAction.ParseLines(script);
@@ -193,6 +199,9 @@ namespace RoboticArm535Library
             }
         }
 
+        /// <summary>
+        /// Abort currently running script. Stops any motors and turns off LED if on.
+        /// </summary>
         public void AbortScript()
         {
             tokenSource?.Cancel();
