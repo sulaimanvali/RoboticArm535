@@ -19,6 +19,7 @@ namespace RoboticArm535
     {
         private readonly string ScriptsFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Application.ProductName+"_scripts");
         private readonly UsbComms usbComms = new();
+        private readonly string MessageBoxTitle = Application.ProductName;
 
         public MainForm()
         {
@@ -80,7 +81,7 @@ namespace RoboticArm535
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to send USB command:\r\n" + ex.Message,
-                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }
@@ -98,7 +99,7 @@ namespace RoboticArm535
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to send USB command:\r\n" + ex.Message,
-                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }
@@ -110,12 +111,12 @@ namespace RoboticArm535
                 var errorCode = usbComms.Connect();
                 if (errorCode != UsbConnErrorCode.NoError)
                     MessageBox.Show("Failed to connect to USB device:\r\n" + errorCode,
-                        Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to connect to USB device:\r\n" + ex.Message,
-                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -170,7 +171,7 @@ namespace RoboticArm535
                 buttonPressTimerControl.Stop();
                 recordAction(OpCode.LedOff);
             }
-         }
+        }
 
         private void Button_MouseUp(object sender, MouseEventArgs e)
         {
@@ -206,7 +207,7 @@ namespace RoboticArm535
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error running script:\r\n" + ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Error running script:\r\n" + ex.Message, MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             setScriptRunning(false);
         }
@@ -228,7 +229,7 @@ namespace RoboticArm535
             {
                 var fileText = File.ReadAllText(openFileDialog_Script.FileName);
                 if (textBox_TimedActions.Text != "")
-                    if (MessageBox.Show("Replace existing script?", Application.ProductName, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    if (MessageBox.Show("Replace existing script?", MessageBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                         textBox_TimedActions.Text = fileText;
             }
         }
