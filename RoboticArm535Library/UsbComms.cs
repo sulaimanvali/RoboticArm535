@@ -98,7 +98,7 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new UsbDeviceNotConnectedException("USB device not connected.");
 
-            sendPacket(PacketGenerator.GenByOpCode(on ? OpCode.LedOn : OpCode.LedOff));
+            SendPacket(PacketGenerator.GenByOpCode(on ? OpCode.LedOn : OpCode.LedOff));
         }
 
         #region Motor control commands
@@ -113,7 +113,7 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new UsbDeviceNotConnectedException("USB device not connected.");
             
-            sendPacket(PacketGenerator.GenByOpCode(opCode));
+            SendPacket(PacketGenerator.GenByOpCode(opCode));
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace RoboticArm535Library
             if (usbDevice == null || !usbDevice.IsOpen)
                 throw new UsbDeviceNotConnectedException("USB device not connected.");
 
-            sendPacket(PacketGenerator.GenByOutputs(led, grip, wrist, elbow, stem, baseMotor));
+            SendPacket(PacketGenerator.GenByOutputs(led, grip, wrist, elbow, stem, baseMotor));
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace RoboticArm535Library
                 return;
             }
 
-            sendPacket(PacketGenerator.GenByOpCode(opCode));
+            SendPacket(PacketGenerator.GenByOpCode(opCode));
 
             if (durationSecs == 0)
                 return;
@@ -171,7 +171,7 @@ namespace RoboticArm535Library
             Thread.Sleep((int)(durationSecs * 1000));
 
             // turn off everything
-            sendPacket(PacketGenerator.GenByOpCode(OpCode.AllOff));
+            SendPacket(PacketGenerator.GenByOpCode(OpCode.AllOff));
         }
 
         /// <summary>
@@ -215,6 +215,16 @@ namespace RoboticArm535Library
         }
 
         /// <summary>
+        /// Sends raw packet.
+        /// </summary>
+        /// <param name="buffer"></param>
+        public void SendPacket(byte[] buffer)
+        {
+            usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
+            Debug.WriteLine(BitConverter.ToString(buffer));
+        }
+
+        /// <summary>
         /// Abort currently running script. Stops any motors and turns off LED if on.
         /// </summary>
         public void AbortScript()
@@ -222,11 +232,5 @@ namespace RoboticArm535Library
             tokenSource?.Cancel();
         }
         #endregion
-
-        private void sendPacket(byte[] buffer)
-        {
-            usbDevice.ControlTransfer(setupPacket, buffer, 0, buffer.Length);
-            Debug.WriteLine(BitConverter.ToString(buffer));
-        }
     }
 }
