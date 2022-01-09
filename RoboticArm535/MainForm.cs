@@ -141,7 +141,7 @@ namespace RoboticArm535
                 return;
 
             var timedAction = new TimedAction(opCode, buttonPressTimerControl.GetElapsedTimeSecs());
-            textBox_TimedActions.AppendText(timedAction + "\r\n");
+            insertTimedActionToTextBox(timedAction);
         }
 
         private void selectLineRunning(int lineIndex)
@@ -156,6 +156,11 @@ namespace RoboticArm535
 
             if (!scriptRunning)
                 label_CurrentLineRunning.Text = "";
+        }
+
+        private void insertTimedActionToTextBox(TimedAction timedAction)
+        {
+            textBox_TimedActions.AppendText(timedAction + "\r\n");
         }
 
         private void checkBox_LED_CheckedChanged(object sender, EventArgs e)
@@ -220,7 +225,7 @@ namespace RoboticArm535
 
         private void listBox_Commands_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBox_TimedActions.AppendText((OpCode)listBox_Commands.SelectedItem + " 1.0\r\n");
+            insertTimedActionToTextBox(new TimedAction((OpCode)listBox_Commands.SelectedItem, 1.0f));
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
