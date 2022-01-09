@@ -19,6 +19,13 @@ namespace RoboticArm535Library
             wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
         CancellationTokenSource tokenSource;
 
+        public UsbComms()
+        { }
+
+        public UsbComms(IUsbDevice usbDevice)
+        {
+            this.usbDevice = usbDevice;
+        }
 
         public UInt16 VendorId { get; private set; } = 0x1267;
         public UInt16 ProductId { get; private set; } = 0x0000;
