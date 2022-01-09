@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using RoboticArm535Library;
 
@@ -222,7 +212,7 @@ namespace RoboticArm535
             setScriptRunning(false);
             usbComms.AbortScript();
         }
-
+        
         private void listBox_Commands_SelectedIndexChanged(object sender, EventArgs e)
         {
             insertTimedActionToTextBox((OpCode)listBox_Commands.SelectedItem + " 1.0");
