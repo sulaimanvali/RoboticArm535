@@ -15,7 +15,7 @@ namespace RoboticArm535.Test
     public class TestUsbComms
     {
         [TestMethod]
-        public void UsbConn_LedOn_OK()
+        public void UsbComms_LedOn_OK()
         {
             var fakeUsbDevice = new FakeUsbDevice();
             var usb = new UsbComms(fakeUsbDevice);
@@ -25,7 +25,7 @@ namespace RoboticArm535.Test
         }
 
         [TestMethod]
-        public void UsbConn_LedOff_OK()
+        public void UsbComms_LedOff_OK()
         {
             var fakeUsbDevice = new FakeUsbDevice();
             var usb = new UsbComms(fakeUsbDevice);
@@ -35,7 +35,7 @@ namespace RoboticArm535.Test
         }
 
         [TestMethod]
-        public void UsbConn_MoveMotor_OK()
+        public void UsbComms_MoveMotor_OK()
         {
             var fakeUsbDevice = new FakeUsbDevice();
             var usb = new UsbComms(fakeUsbDevice);
@@ -46,7 +46,7 @@ namespace RoboticArm535.Test
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void UsbConn_MoveMotorWait_ExpectException()
+        public void UsbComms_MoveMotorWait_ExpectException()
         {
             var fakeUsbDevice = new FakeUsbDevice();
             var usb = new UsbComms(fakeUsbDevice);
@@ -54,7 +54,7 @@ namespace RoboticArm535.Test
         }
 
         [TestMethod]
-        public void UsbConn_Cmd_OK()
+        public void UsbComms_Cmd_OK()
         {
             var fakeUsbDevice = new FakeUsbDevice();
             var usb = new UsbComms(fakeUsbDevice);
@@ -64,7 +64,7 @@ namespace RoboticArm535.Test
         }
 
         [TestMethod]
-        public void UsbConn_CmdTimed_OK()
+        public void UsbComms_CmdTimed_OK()
         {
             var fakeUsbDevice = new FakeUsbDevice();
             var usb = new UsbComms(fakeUsbDevice);
@@ -74,16 +74,15 @@ namespace RoboticArm535.Test
         }
 
         [TestMethod]
-        public void UsbConn_CmdWait_OK()
+        public void UsbComms_CmdWait_OK()
         {
             var fakeUsbDevice = new FakeUsbDevice();
             var usb = new UsbComms(fakeUsbDevice);
-            usb.Cmd(OpCode.Wait, 0.1f);
+            usb.Cmd(OpCode.Wait, 0.1f); // no exception should be thrown
         }
 
-
         [TestMethod]
-        public void UsbConn_SendPacket_OK()
+        public void UsbComms_SendPacket_OK()
         {
             var fakeUsbDevice = new FakeUsbDevice();
             var usb = new UsbComms(fakeUsbDevice);
@@ -112,7 +111,7 @@ namespace RoboticArm535.Test
     /// <summary>
     /// Fake UsbDevice to stub out usb commands.
     /// </summary>
-    public class FakeUsbDevice : IUsbDevice
+    public sealed class FakeUsbDevice : IUsbDevice
     {
         /// <summary>
         /// List of packets sent in order.
