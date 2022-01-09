@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>Sulaiman Vali</Authors>
+    <Version>1.5.0</Version>
+    <Copyright>Sulaiman Vali</Copyright>
+    <Company>N/A</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RoboticArm535Library\RoboticArm535Library.csproj" />
+  </ItemGroup>
+
+</Project>
