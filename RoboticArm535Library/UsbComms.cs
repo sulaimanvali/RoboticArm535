@@ -15,8 +15,8 @@ namespace RoboticArm535Library
     public class UsbComms
     {
         IUsbDevice usbDevice = null;
-        private const int VendorId = 0x1267;
-        private const int ProductId = 0x0000;
+        private UInt16 VendorId = 0x1267;
+        private UInt16 ProductId = 0x0000;
         readonly UsbSetupPacket setupPacket = new(bRequestType: 0x40, bRequest: 6,
             wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
         CancellationTokenSource tokenSource;
@@ -36,6 +36,19 @@ namespace RoboticArm535Library
         #region Connection methods
         /// <summary>
         /// Connects to USB device.
+        /// </summary>
+        /// <param name="vendorId"></param>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public UsbConnErrorCode Connect(UInt16 vendorId, UInt16 productId)
+        {
+            this.VendorId = vendorId;
+            this.ProductId = productId;
+            return Connect();
+        }
+
+        /// <summary>
+        /// Connects to USB device, using default OWI-535 robotic arm Vendor and Product IDs.
         /// </summary>
         /// <returns></returns>
         public UsbConnErrorCode Connect()
