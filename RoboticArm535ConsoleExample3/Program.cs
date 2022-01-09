@@ -16,15 +16,15 @@ WristUp 0.65
 ElbowUp 1.05
 GripOpen 0.92
 GripClose 0.85
-LedOn 0
+LedOn 0.3
 GripOpen 1
-LedOff 0
+LedOn 0.3
 GripClose 1
-LedOn 0
+LedOn 0.3
 GripOpen 1
-LedOff 0
+LedOn 0.3
 GripClose 1
-LedOn 0
+LedOn 0.3
 WristDown 0.80
 ElbowDown 0.77";
 var lines = script.Split("\r\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
