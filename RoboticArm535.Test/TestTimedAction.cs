@@ -76,35 +76,35 @@ AllOff    3.5";
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void Parse_TooManyElems_ExpectException()
         {
             TimedAction.Parse("GripClose 1.2 dfjshdksjfh");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void Parse_BadOpCode_ExpectException()
         {
             TimedAction.Parse("GripClosefdfdgd 1.2");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void Parse_BadDuration_ExpectException()
         {
             TimedAction.Parse("GripClose 1.gfdgf2");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void Parse_EmptyString_ExpectException()
         {
             TimedAction.Parse("");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentException))]
         public void Parse_NegativeDuration_ExpectException()
         {
             TimedAction.Parse("LedOn -2.4");
