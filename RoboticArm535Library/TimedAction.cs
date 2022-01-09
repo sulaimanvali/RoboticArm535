@@ -49,7 +49,7 @@ namespace RoboticArm535Library
 
         public override string ToString()
         {
-            return $"{OpCode} {DurationSecs:F2}";
+            return string.Format($"{OpCode} {DurationSecs:F2}", CultureInfo.InvariantCulture);
         }
     }
 }
