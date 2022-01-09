@@ -15,11 +15,13 @@ namespace RoboticArm535Library
     public class UsbComms
     {
         IUsbDevice usbDevice = null;
-        private UInt16 VendorId = 0x1267;
-        private UInt16 ProductId = 0x0000;
         readonly UsbSetupPacket setupPacket = new(bRequestType: 0x40, bRequest: 6,
             wValue: 0x100, wIndex: 0, wlength: Packet.CommandLength);
         CancellationTokenSource tokenSource;
+
+
+        public UInt16 VendorId { get; private set; } = 0x1267;
+        public UInt16 ProductId { get; private set; } = 0x0000;
 
         /// <summary>
         /// Contains the duration limits for each of the motors, beyond which 
