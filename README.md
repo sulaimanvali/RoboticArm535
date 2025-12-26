@@ -1,5 +1,5 @@
 # RoboticArm535
-Windows software to control the OWI-535/Maplin Robotic Arm Edge via USB interface. Either use the buttons to control each of the motors manually, or write your own scripts to make the arm do crazy moves. The software will help you compose scripts, and even save/open scripts. The RoboticArm535Library is provided as a NuGet package to allow anyone to write console applications with a few lines of code. See examples.
+Windows software to control the OWI-535/Maplin Robotic Arm Edge via USB interface. Either use the buttons to control each of the motors manually, or write your own scripts to move the arm with a sequence of moves. The software will help you compose scripts, and even save/open scripts. The RoboticArm535Library is provided as a NuGet package to allow anyone to write console applications with a few lines of code. See examples.
 
 Feel free to take the code, modify it, learn from it, make the robotic arm dance, clap, flip a bird etc.
 Please be warned though, that there are no feedback sensors in the robotic arm. 
@@ -10,6 +10,7 @@ https://github.com/sulaimanvali/RoboticArm535/releases
 
 ### USB Troubleshooting
 If you are having USB driver issues, install the libusb-win32 driver explicitly via Device Manager.
+A packaged driver can be found here: https://github.com/pbatard/libwdi/releases/tag/v1.5.1
 
 ### Screenshots
 ![alt text](https://github.com/sulaimanvali/RoboticArm535/blob/master/RoboticArm535/images/Screenshot1.png)
