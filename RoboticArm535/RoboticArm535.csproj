@@ -2,27 +2,33 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>images\robotic_arm_96_i5D_icon.ico</ApplicationIcon>
     <Authors>Sulaiman Vali</Authors>
-    <Description>Controls the OWI-535 Robotic Arm Edge via USB interface.
+    <Description>
+Controls the OWI-535 Robotic Arm Edge via USB interface.
 Developed by Sulaiman.Vali@gmail.com
 https://github.com/sulaimanvali/RoboticArm535
 
+Uses the open source library: https://github.com/LibUsbDotNet/LibUsbDotNet (LGPL-3.0)
+
+If your robotic arm is not found, see Device Manager. To install the Libusb driver download from: https://github.com/pbatard/libwdi/releases/tag/v1.5.1
+		
 Disclaimer: A badly composed script could damage your robotic arm. It has no feedback switches. The motor will keep running, or attempting to run, until it is commanded to stop.</Description>
     <Copyright>Sulaiman Vali</Copyright>
     <PackageIcon>robotic_arm_96.png</PackageIcon>
     <PackageIconUrl />
     <SignAssembly>false</SignAssembly>
-    <Version>1.5.0</Version>
+    <Version>1.6.0</Version>
     <PackageProjectUrl>https://github.com/sulaimanvali/RoboticArm535</PackageProjectUrl>
     <Company>N/A</Company>
-    <AssemblyVersion>1.5.0.0</AssemblyVersion>
-    <FileVersion>1.5.0.0</FileVersion>
+    <AssemblyVersion>1.6.0.0</AssemblyVersion>
+    <FileVersion>1.6.0.0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/sulaimanvali/RoboticArm535</RepositoryUrl>
     <PackageTags>OWI-535 Robotic Arm Edge Maplin USB robotarm</PackageTags>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
